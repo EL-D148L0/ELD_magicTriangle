@@ -8,7 +8,7 @@
 
 
 
-
+//use setObjectScale to scale the boundingbox according to the largest side of the triangle
 
 
 //pos1 should be the closest to 90 degrees
