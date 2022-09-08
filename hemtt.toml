@@ -1,6 +1,6 @@
 name = "Gruppe Adler Mod Template"
-prefix = "grad_modTemplate"
-author = "Salbei"
+prefix = "ELD_magicTriangle"
+author = "EL_D148L0"
 files = [
     "mod.cpp",
     "logo.paa",
@@ -12,7 +12,7 @@ key_name = "{{prefix}}_{{version}}"
 authority = "{{prefix}}_{{version}}-{{git \"id 8\"}}"
 
 releasebuild = [
-    "@zip grad_modTemplate_{{semver.major}}.{{semver.minor}}.{{semver.patch}}.{{semver.build}}"
+    "@zip ELD_magicTriangle_{{semver.major}}.{{semver.minor}}.{{semver.patch}}.{{semver.build}}"
 ]
 
 [header_exts]

@@ -1,12 +1,12 @@
 #define MAINPREFIX x
-#define PREFIX grad_modTemplate
+#define PREFIX ELD_magicTriangle
 
 #include "script_version.hpp"
 
 #define VERSION MAJOR.MINOR.PATCHLVL-BUILD
 #define VERSION_AR MAJOR,MINOR,PATCHLVL,BUILD
 
-#define REQUIRED_VERSION 1.80
+#define REQUIRED_VERSION 2.10
 #define REQUIRED_CBA_VERSION { 3, 5, 0 }
 #define REQUIRED_ACE_VERSION { 3, 11, 0 }
 
@@ -17,5 +17,5 @@
 #define EADDON(PVAR) DOUBLES(PREFIX,PVAR)
 #define QEADDON(PVAR) QUOTE(EADDON(PVAR))
 
-#define AUTHOR { "Salbei" }
+#define AUTHOR { "EL_D148L0" }
 #define QAUTHOR QUOTE(AUTHOR)

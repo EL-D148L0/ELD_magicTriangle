@@ -1,0 +1,13 @@
+PREP(createTriangle);
+PREP(createTrianglesToHole);
+PREP(fullyInitTrenchesWithIntersect);
+PREP(getConfigInfo);
+PREP(getTerrainlines);
+PREP(linesIntersect);
+PREP(lowerterrain);
+PREP(makeManyHole);
+PREP(makeSingleHole);
+PREP(pointInTriangle);
+PREP(pointInTriangleLA);
+PREP(sameSide);
+PREP(triangleIntersect);
