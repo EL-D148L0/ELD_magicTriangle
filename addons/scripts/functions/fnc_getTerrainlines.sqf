@@ -1,4 +1,21 @@
 #include "script_component.hpp"
+/*
+ * Author: EL_D148L0
+ * get the borders of a hole that is made by lowering the passed points.
+ *
+ * Arguments:
+ * 0: array of positions of lowered points in format Position2d <ARRAY>
+ *
+ * Return Value:
+ * Array of lines <ARRAY>
+ * 		each element of this array is an array of the following structure: [<ARRAY>, <ARRAY>] 
+ * 			each element of this array is an array in format PositionASL
+ *
+ * Example:
+ * [[[1996,5564],[2000,5564]]] call ELD_magicTriangle_scripts_fnc_getTerrainLines;
+ *
+ * Public: No
+ */
 
 params ["_points"];
 // points come in as 2d points

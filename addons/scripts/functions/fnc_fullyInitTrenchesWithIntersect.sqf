@@ -1,4 +1,22 @@
 #include "script_component.hpp"
+/*
+ * Author: EL_D148L0
+ * init a trench/trench network. has to be executed in a scheduled environment.
+ *
+ * Arguments:
+ * 0: list of trench objects <ARRAY>
+ *
+ * Return Value:
+ * either "done" or "open corner" if a trench network that is not setup correctly was passed <STRING>
+ *
+ * Example:
+ * [[_tronch1]] call ELD_magicTriangle_scripts_fnc_initTrench;
+ *
+ * Public: No
+ */
+
+
+
 
 
 
@@ -332,7 +350,14 @@ private _terrainPointsForListFinal = _terrainPointsForList + _terrainPointsAdd;
 
 
 
-private _thisTrenchListEntry = [_trenches + _trenchesAdd, (_PTMForList - _PTMForListToNotLower) + _PTMForListAdd, _trianglesPositionsAndObjects + _trianglesPositionsAndObjectsAdd, _tftFromConfig + _tftFromConfigAdd, _terrainLines, _terrainPointsForListFinal, _blFromConfig + _blFromConfigAdd, _trenchPoints + _trenchPointsAdd];
+private _thisTrenchListEntry = [_trenches + _trenchesAdd,
+								(_PTMForList - _PTMForListToNotLower) + _PTMForListAdd,
+								_trianglesPositionsAndObjects + _trianglesPositionsAndObjectsAdd,
+								_tftFromConfig + _tftFromConfigAdd,
+								_terrainLines, 
+								_terrainPointsForListFinal, 
+								_blFromConfig + _blFromConfigAdd, 
+								_trenchPoints + _trenchPointsAdd];
 
 GVAR(coveredTrenchList) append [_thisTrenchListEntry];
 

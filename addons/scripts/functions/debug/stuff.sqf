@@ -89,3 +89,6 @@ private _b = getTerrainHeight [3202.5,11921.25];
 _a - _b; 
 
 //0.00120163
+
+
+ELD_magicTriangle_scripts_coveredTrenchList; //aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa

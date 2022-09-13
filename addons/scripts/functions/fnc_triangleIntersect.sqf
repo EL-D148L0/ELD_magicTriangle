@@ -1,11 +1,25 @@
 #include "script_component.hpp"
-
 /*
-*	no longer an accurate check of trinagle intersection. triangle in triangle is not checked.
-*
-*
-*
-*/
+ * Author: EL_D148L0
+ * calculates whether the sides of two triangles cross each other in 2d space.
+ * this is no longer an accurate check of trinagle intersection. triangle in triangle is not checked.
+ * coincident sides should return false iirc.
+ *
+ * Arguments:
+ * 0: array of positions of the corners of the first triangle in format Position2d or Position3d <ARRAY>
+ * 1: array of positions of the corners of the second triangle in format Position2d or Position3d <ARRAY>
+ *
+ * Return Value:
+ * whether the sides of the two triangles cross each other in 2d space <BOOLEAN>
+ *
+ * Example:
+ * [[[1,1], [1,7], [7,1]], [[2,2], [8,8], [9, 20]]] call ELD_magicTriangle_scripts_fnc_triangleIntersect;
+ *
+ * Public: No
+ */
+
+
+
 // _deb1 = false;
 
 params ["_t1", "_t2"];

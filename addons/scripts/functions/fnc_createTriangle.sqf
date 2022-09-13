@@ -1,17 +1,33 @@
 #include "script_component.hpp"
-//create a triangle from array of 3 points in format PositionASL
+/*
+ * Author: EL_D148L0
+ * create a triangle filler object from an array of 3 points.
+ *
+ * Arguments:
+ * 0: Position of corner in format PositionASL <ARRAY>
+ * 1: Position of corner in format PositionASL <ARRAY>
+ * 2: Position of corner in format PositionASL <ARRAY>
+ *
+ * Return Value:
+ * triangle filler object <OBJECT>
+ *
+ * Example:
+ * [[1991.94,5567.88,6.89202],[1994.63,5571.75,6.89802],[1995.49,5567,6.89769]] call ELD_magicTriangle_scripts_fnc_createTriangle;
+ *
+ * Public: No
+ */
 
-//_this = [getPosASL a, getPosASL b, getPosASL c];
-
-
-//pos1 should be highest y (if multiple highest x)
 
 
 
-//use setObjectScale to scale the boundingbox according to the largest side of the triangle
+//TODO when reworking this function use setObjectScale to scale the boundingbox according to the largest side of the triangle 
 
 
-//pos1 should be the closest to 90 degrees
+
+
+
+
+//this procedure sorts the points so the object doesn't get turned inside out
 private _posAVG = ((_this # 0) vectorAdd ((_this # 1) vectorAdd (_this # 2))) vectorMultiply (1/3);
 
 
@@ -20,6 +36,7 @@ _this = [_this, [_posAVG], {
 	private _diff = _x vectorDiff _input0;
 	_diff # 1 atan2 _diff # 0
 }, "DESCEND"] call BIS_fnc_sortBy;
+
 
 
 

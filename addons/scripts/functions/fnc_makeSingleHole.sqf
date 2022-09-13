@@ -1,4 +1,21 @@
 #include "script_component.hpp"
+/*
+ * Author: EL_D148L0
+ * finds terrain points that need to be lowered for the passed object to fit into the hole
+ *
+ * Arguments:
+ * 0: trench object <OBJECT>
+ *
+ * Return Value:
+ * array of positions of points to be lowered in format Position2d <ARRAY>
+ *
+ * Example:
+ * [_tronch1] call ELD_magicTriangle_scripts_fnc_makeSingleHole;
+ *
+ * Public: No
+ */
+
+
 params ["_trenchObject"];
 
 
