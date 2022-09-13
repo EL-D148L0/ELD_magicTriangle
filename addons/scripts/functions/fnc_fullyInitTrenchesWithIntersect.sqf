@@ -25,19 +25,20 @@ params ["_trenches"];
 ([_trenches] call FUNC(getConfigInfo)) params ["_blFromConfig", "_tftFromConfig", "_ocFromConfig"];
 
 //oc stands for open corner
-_analysingOC = ((count _ocFromConfig) > 0);
-_maxOCdistance = 0.4; //maximum distance at which corners will be merged
-_maxOCdistanceSquared = _maxOCdistance ^ 2;
-_errorEndScript = false;
+private _analysingOC = ((count _ocFromConfig) > 0);
+//MAX_OC_DISTANCE = 0.4; //maximum distance at which corners will be merged
+#define MAX_OC_DISTANCE 0.4
+// _maxOCdistanceSquared = MAX_OC_DISTANCE ^ 2;
+private _errorEndScript = false;
 while {_analysingOC} do {
-	_thisOC = _ocFromConfig # 0;
-	_ocListCompare = + _ocFromConfig;
+	private _thisOC = _ocFromConfig # 0;
+	private _ocListCompare = + _ocFromConfig;
 	_ocListCompare deleteAt 0;
-	_found = false;
-	_matchingOC = [];
+	private _found = false;
+	private _matchingOC = [];
 	for "_i" from 0 to ((count _ocListCompare) - 1) do {
-		_compOC = _ocListCompare # _i;
-		if ((_thisOC vectorDistance _compOC) < _maxOCdistance) then { //i assume using distanceSqr is cheaper
+		private _compOC = _ocListCompare # _i;
+		if ((_thisOC vectorDistance _compOC) < MAX_OC_DISTANCE) then { //i assume using distanceSqr is cheaper
 			_found = true;
 			_matchingOC = _compOC;
 			_ocListCompare deleteAt _i;
@@ -46,15 +47,15 @@ while {_analysingOC} do {
 	};
 	
 	if (!_found) then {
-		errorOC = _thisOC;
+		GVAR(errorOC) = _thisOC;
 		hint "Open corner detected" + str _thisOC;
 		_errorEndScript = true;
 		break;
 	} else {
-		_newPos = ((_thisOC vectorAdd _matchingOC) vectormultiply 0.5);
+		private _newPos = ((_thisOC vectorAdd _matchingOC) vectormultiply 0.5);
 		
 		for "_i" from 0 to ((count _blFromConfig) - 1) do {
-			_thisElement = _blFromConfig # _i;
+			private _thisElement = _blFromConfig # _i;
 			for "_k" from 0 to ((count _thisElement) - 1) do {
 				if (((_thisElement # _k) isEqualTo _thisOC) || ((_thisElement # _k) isEqualTo _matchingOC)) then {
 					_thisElement set [_k, _newPos];
@@ -64,7 +65,7 @@ while {_analysingOC} do {
 		};
 		
 		for "_i" from 0 to ((count _tftFromConfig) - 1) do {
-			_thisElement = _tftFromConfig # _i;
+			private _thisElement = _tftFromConfig # _i;
 			for "_k" from 0 to ((count _thisElement) - 1) do {
 				if (((_thisElement # _k) isEqualTo _thisOC) || ((_thisElement # _k) isEqualTo _matchingOC)) then {
 					_thisElement set [_k, _newPos];
@@ -82,34 +83,34 @@ if (_errorEndScript) exitwith {"open corner"}; // stop if open corner
 
 
 
-_pointsToModify = [_trenches] call FUNC(makeManyHole);
-_terrainLines = [_pointsToModify] call FUNC(getTerrainlines);
+private _pointsToModify = [_trenches] call FUNC(makeManyHole);
+private _terrainLines = [_pointsToModify] call FUNC(getTerrainlines);
 //d = _terrainLines;
 
 
 
 
 
-_terrainPoints = [];
+private _terrainPoints = [];
 
 {
 	_terrainPoints pushBackUnique ((_x # 0) select [0,2]);
 	_terrainPoints pushBackUnique ((_x # 1) select [0,2]);
 } foreach _terrainLines;
 
-_PTMForList = [];
+private _PTMForList = [];
 {
 	_PTMForList pushBackUnique (_x select [0,2]);
 } foreach _pointsToModify;
 
-_allAffectedTP = (_terrainPoints + _PTMForList);//bad var name
+private _allAffectedTP = (_terrainPoints + _PTMForList);//bad var name
 
 
-_clashingCoveredTrenches = [];
+private _clashingCoveredTrenches = [];
 
-_len = count GVAR(coveredTrenchList);
 
-for "_i" from 0 to ((_len) - 1) do {
+
+for "_i" from 0 to ((count GVAR(coveredTrenchList)) - 1) do {
 	if ((count (_PTMForList arrayIntersect ((GVAR(coveredTrenchList) # _i # 5) + (GVAR(coveredTrenchList) # _i # 1)))) > 0) then {
 		_clashingCoveredTrenches append [_i];
 	};
@@ -130,7 +131,7 @@ private _terrainPointsForList = + _terrainPoints;
 private _PTMForListToNotLower = [];
 
 // this is all done assuming that the trench objects do not intersect or get too close to each other or anything
-_trianglesToDelete = [];
+private _trianglesToDelete = [];
 {
 	private _thisCTLEntry = (GVAR(coveredTrenchList) # _x);
 	
@@ -214,7 +215,7 @@ _trianglesToDelete = [];
 	} foreach _deletedTriangles;
 	
 	{
-		_thisDTL = _x;
+		private _thisDTL = _x;
 		private _cnt = {_thisDTL isEqualTo _x} count _deletedTrianglesLines;
 		if (_cnt == 1) then {
 			// if the line in question does not connect to any clash points
@@ -286,16 +287,15 @@ _trianglesToDelete = [];
 
 //remember to redo below this point EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE is done
 	
-//deb_msg4 = _positionsAndHeights;
 
 
-_positionsAndHeights = [];
+private _positionsAndHeights = [];
 
 private _cellsize = getTerrainInfo#2;
 
 {
-	_height = getTerrainHeight _x;
-	_newPosAndHeight = + _x;
+	private _height = getTerrainHeight _x;
+	private _newPosAndHeight = + _x;
 	_newPosAndHeight set [2, _height - _cellsize];
 	_positionsAndHeights append [_newPosAndHeight];
 } foreach (_PTMForList - _PTMForListToNotLower);
@@ -303,12 +303,12 @@ private _cellsize = getTerrainInfo#2;
 
 
 
-_trianglesPositionsAndObjects = [_blFromConfig, _terrainLines, _tftFromConfig] call FUNC(createTrianglesToHole);
+private _trianglesPositionsAndObjects = [_blFromConfig, _terrainLines, _tftFromConfig] call FUNC(createTrianglesToHole);
 setTerrainHeight [_positionsAndHeights, false];
 
 {deleteVehicle _x;} foreach _trianglesToDelete;
 
-_trenchPoints = [];
+private _trenchPoints = [];
 {
 	_trenchPoints pushBackUnique (_x # 0);
 	_trenchPoints pushBackUnique (_x # 1);
@@ -316,7 +316,7 @@ _trenchPoints = [];
 
 // recalculate terrainlines by finding all triangle lines that connect to two terrain points
 _terrainLines = [];
-_terrainPointsForListFinal = _terrainPointsForList + _terrainPointsAdd;
+private _terrainPointsForListFinal = _terrainPointsForList + _terrainPointsAdd;
 //_allLines = [];
 {
 	private _lines = [[_x # 0 # 0, _x # 0 # 1], [_x # 0 # 1, _x # 0 # 2], [_x # 0 # 2, _x # 0 # 0]];
@@ -332,10 +332,10 @@ _terrainPointsForListFinal = _terrainPointsForList + _terrainPointsAdd;
 
 
 
-_thisTrenchListEntry = [_trenches + _trenchesAdd, (_PTMForList - _PTMForListToNotLower) + _PTMForListAdd, _trianglesPositionsAndObjects + _trianglesPositionsAndObjectsAdd, _tftFromConfig + _tftFromConfigAdd, _terrainLines, _terrainPointsForListFinal, _blFromConfig + _blFromConfigAdd, _trenchPoints + _trenchPointsAdd];
+private _thisTrenchListEntry = [_trenches + _trenchesAdd, (_PTMForList - _PTMForListToNotLower) + _PTMForListAdd, _trianglesPositionsAndObjects + _trianglesPositionsAndObjectsAdd, _tftFromConfig + _tftFromConfigAdd, _terrainLines, _terrainPointsForListFinal, _blFromConfig + _blFromConfigAdd, _trenchPoints + _trenchPointsAdd];
 
 GVAR(coveredTrenchList) append [_thisTrenchListEntry];
 
-"done"
+"done" //is this still necessary?
 
 

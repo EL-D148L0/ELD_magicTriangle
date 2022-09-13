@@ -4,7 +4,6 @@ PREP(fullyInitTrenchesWithIntersect);
 PREP(getConfigInfo);
 PREP(getTerrainlines);
 PREP(linesIntersect);
-PREP(lowerterrain);
 PREP(makeManyHole);
 PREP(makeSingleHole);
 PREP(pointInTriangle);

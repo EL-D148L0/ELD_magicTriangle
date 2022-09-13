@@ -14,14 +14,14 @@ private _ocFromConfig = [];
 	} foreach _blNames;
 	
 	private _tftNames = getArray ((configOf _thisTrench) >> "trench_fillingTriangles");
-	_tftPositions = [];
+	private _tftPositions = [];
 	{
 		private _thistftCoords = [_thisTrench modelToWorldWorld (_thisTrench selectionPosition [_x # 0, "Memory"]), _thisTrench modelToWorldWorld (_thisTrench selectionPosition [_x # 1, "Memory"]), _thisTrench modelToWorldWorld (_thisTrench selectionPosition [_x # 2, "Memory"])];
 		_tftPositions append [_thistftCoords];
 	} foreach _tftNames;
 	
 	private _ocNames = getArray ((configOf _thisTrench) >> "trench_openCorners");
-	_ocPositions = [];
+	private _ocPositions = [];
 	{
 		private _thisocCoords = (_thisTrench modelToWorldWorld (_thisTrench selectionPosition [_x, "Memory"]));
 		_ocPositions append [_thisocCoords];

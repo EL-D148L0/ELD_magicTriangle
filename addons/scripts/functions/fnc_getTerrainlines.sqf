@@ -1,15 +1,16 @@
+#include "script_component.hpp"
 
 params ["_points"];
 // points come in as 2d points
 
-_pointsComp = + _points;
+private _pointsComp = + _points;
 for "_i" from 0 to ((count _pointsComp) - 1) do {(_pointsComp # _i) deleteAt 2;};
 
-_cellsize = getTerrainInfo#2;
+private _cellsize = getTerrainInfo#2;
 
-_borderpoints = [];
+private _borderpoints = [];
 {	
-	_tests = [[_x # 0, _x # 1 + _cellsize], [_x # 0 + _cellsize, _x # 1], [_x # 0 + _cellsize, _x # 1 - _cellsize], [_x # 0, _x # 1 - _cellsize], [_x # 0 - _cellsize, _x # 1], [_x # 0 - _cellsize, _x # 1 + _cellsize]];
+	private _tests = [[_x # 0, _x # 1 + _cellsize], [_x # 0 + _cellsize, _x # 1], [_x # 0 + _cellsize, _x # 1 - _cellsize], [_x # 0, _x # 1 - _cellsize], [_x # 0 - _cellsize, _x # 1], [_x # 0 - _cellsize, _x # 1 + _cellsize]];
 	{
 		//{
 		//	
@@ -21,21 +22,20 @@ _borderpoints = [];
 	
 } foreach _points;
 
-f = + _borderpoints;
-s = + _points;
+// f = + _borderpoints;
+// s = + _points;
 
 //_borderpoints = _borderpoints - _points;
 
-#include "script_component.hpp"
-_borderLines = [];
-_borderpointsCompare = + _borderpoints;
+private _borderLines = [];
+private _borderpointsCompare = + _borderpoints;
 {	
-	_thisBP = _x;
-	_heightThis = getTerrainHeight _x;
-	_tests = [[_x # 0, _x # 1 + _cellsize], [_x # 0 + _cellsize, _x # 1], [_x # 0 + _cellsize, _x # 1 - _cellsize], [_x # 0, _x # 1 - _cellsize], [_x # 0 - _cellsize, _x # 1], [_x # 0 - _cellsize, _x # 1 + _cellsize]];
+	private _thisBP = _x;
+	private _heightThis = getTerrainHeight _x;
+	private _tests = [[_x # 0, _x # 1 + _cellsize], [_x # 0 + _cellsize, _x # 1], [_x # 0 + _cellsize, _x # 1 - _cellsize], [_x # 0, _x # 1 - _cellsize], [_x # 0 - _cellsize, _x # 1], [_x # 0 - _cellsize, _x # 1 + _cellsize]];
 	{
 		if ((_x in _borderpointsCompare)) then {
-			_height = getTerrainHeight _x;
+			private _height = getTerrainHeight _x;
 			_borderLines pushback [(_x + [_height]), (_thisBP + [_heightThis])];
 		};
 	} foreach _tests;

@@ -17,14 +17,14 @@ _p2 set [2, _p1 # 2];
 
 //experimental
 // works for now
-_padding = 0.3 * _cellsize;
+private _padding = 0.3 * _cellsize;
 _p1 = _p1 vectordiff [_padding, _padding, 0];
 _p2 = _p2 vectoradd [_padding, _padding, 0];
 
 //experimental end
 
-_xWidth = (_p2 # 0) - (_p1 # 0);
-_yWidth = (_p2 # 1) - (_p1 # 1);
+private _xWidth = (_p2 # 0) - (_p1 # 0);
+private _yWidth = (_p2 # 1) - (_p1 # 1);
 
 
 
@@ -42,27 +42,27 @@ if (_yWidth < (_minBBoxSize * _cellsize)) then {
 	_p2 set [1, _p2 # 1 + _diff];
 };
 
-_bbxCenter  = ((_p1) vectoradd (_p2)) vectorMultiply 0.5;
-_bbxCenterWorld = _trenchObject modelToWorldWorld _bbxCenter;
+private _bbxCenter  = ((_p1) vectoradd (_p2)) vectorMultiply 0.5;
+private _bbxCenterWorld = _trenchObject modelToWorldWorld _bbxCenter;
 
 //_p1r = _trenchObject modelToWorldWorld _p1;
 //_p2r = _trenchObject modelToWorldWorld _p2;
 
 
-_area = [_bbxCenterWorld, abs (_p1 # 0 - _bbxCenter # 0), abs (_p1 # 1 - _bbxCenter # 1), getdir _trenchObject, true, -1];
+private _area = [_bbxCenterWorld, abs (_p1 # 0 - _bbxCenter # 0), abs (_p1 # 1 - _bbxCenter # 1), getdir _trenchObject, true, -1];
 
 
 
 
-_bbsr = _bbx # 2;
+private _bbsr = _bbx # 2;
 
 
 
 _bbxCenterWorld apply {round (_x / _cellsize)} params ["_x0", "_y0"];
-_step = ceil(_bbsr / _cellsize) + 1;
+private _step = ceil(_bbsr / _cellsize) + 1;
 
 
-_pointsToModify = [];
+private _pointsToModify = [];
 //hint "BOING!!";
 
 for "_x" from (_x0 - _step) to (_x0 + _step) do {
