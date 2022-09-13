@@ -1,4 +1,4 @@
-name = "GRAD Mod Template";
+name = "Magic Triangle CBA";
 author = "Gruppe Adler";
 picture = "logo.paa";
 actionName = "Website";
