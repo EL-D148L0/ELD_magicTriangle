@@ -1,5 +1,7 @@
+PREP(analyseOC);
 PREP(createTriangle);
 PREP(createTrianglesToHole);
+PREP(expandTrench);
 PREP(fullyInitTrenchesWithIntersect);
 PREP(getConfigInfo);
 PREP(getTerrainlines);

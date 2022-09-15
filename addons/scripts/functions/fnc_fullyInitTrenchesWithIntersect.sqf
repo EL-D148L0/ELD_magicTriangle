@@ -40,63 +40,10 @@ params ["_trenches"];
 
 
 
-([_trenches] call FUNC(getConfigInfo)) params ["_blFromConfig", "_tftFromConfig", "_ocFromConfig"];
+(([_trenches] call FUNC(getConfigInfo)) call FUNC(analyseOC)) params ["_blFromConfig", "_tftFromConfig", "_leftOverOC"];
 
-//oc stands for open corner
-private _analysingOC = ((count _ocFromConfig) > 0);
-//MAX_OC_DISTANCE = 0.4; //maximum distance at which corners will be merged
-#define MAX_OC_DISTANCE 0.4
-// _maxOCdistanceSquared = MAX_OC_DISTANCE ^ 2;
-private _errorEndScript = false;
-while {_analysingOC} do {
-	private _thisOC = _ocFromConfig # 0;
-	private _ocListCompare = + _ocFromConfig;
-	_ocListCompare deleteAt 0;
-	private _found = false;
-	private _matchingOC = [];
-	for "_i" from 0 to ((count _ocListCompare) - 1) do {
-		private _compOC = _ocListCompare # _i;
-		if ((_thisOC vectorDistance _compOC) < MAX_OC_DISTANCE) then { //i assume using distanceSqr is cheaper
-			_found = true;
-			_matchingOC = _compOC;
-			_ocListCompare deleteAt _i;
-			break;
-		};
-	};
-	
-	if (!_found) then {
-		GVAR(errorOC) = _thisOC;
-		hint "Open corner detected" + str _thisOC;
-		_errorEndScript = true;
-		break;
-	} else {
-		private _newPos = ((_thisOC vectorAdd _matchingOC) vectormultiply 0.5);
-		
-		for "_i" from 0 to ((count _blFromConfig) - 1) do {
-			private _thisElement = _blFromConfig # _i;
-			for "_k" from 0 to ((count _thisElement) - 1) do {
-				if (((_thisElement # _k) isEqualTo _thisOC) || ((_thisElement # _k) isEqualTo _matchingOC)) then {
-					_thisElement set [_k, _newPos];
-					_blFromConfig set [_i, _thisElement];
-				}; 
-			};
-		};
-		
-		for "_i" from 0 to ((count _tftFromConfig) - 1) do {
-			private _thisElement = _tftFromConfig # _i;
-			for "_k" from 0 to ((count _thisElement) - 1) do {
-				if (((_thisElement # _k) isEqualTo _thisOC) || ((_thisElement # _k) isEqualTo _matchingOC)) then {
-					_thisElement set [_k, _newPos];
-					_tftFromConfig set [_i, _thisElement];
-				}; 
-			};
-		};
-		
-		_ocFromConfig = + _ocListCompare;
-	};
-	_analysingOC = ((count _ocFromConfig) > 0); 
-};
-if (_errorEndScript) exitwith {"open corner"}; // stop if open corner 
+
+if ((count _leftOverOC) > 0) exitwith {"open corner"}; // stop if open corner 
 
 
 
