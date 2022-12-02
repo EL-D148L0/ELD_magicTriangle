@@ -169,15 +169,15 @@ while {_running} do {
 	// repeatable block start
 	private _newPossibleStartSides = [];
 	{
-		private _possibleTriangles = [];
+		
 		private _thisPSS = + _x;
 		private _line = _thisPSS # 0;
 		private _extraPoint = _thisPSS # 1;
 
 		private _startPointsSorted = (_terrainPoints + _trenchPoints);
 
-		private _startPointsSorted = [_startPointsSorted, [_line], {
-			private _sa = (_input0 # 0) distance2D (_input0 # 1);
+		private _startPointsSorted = [_startPointsSorted, [_line, (_line # 0) distance2D (_line # 1)], {
+			private _sa = _input1;
 			private _sb = (_input0 # 1) distance2D (_x);
 			private _sc = (_x) distance2D (_input0 # 0);
 			if (_sa == 0 || _sb == 0 || _sc == 0) then {
@@ -187,6 +187,7 @@ while {_running} do {
 			};
 		}, "DESCEND"] call BIS_fnc_sortBy;
 		
+		private _finaltriangle = [];
 
 		{
 			//timing thing
@@ -324,28 +325,19 @@ while {_running} do {
 			
 			
 			if (_allowed) then {
-				_possibleTriangles append [_thisPT];
+				_finaltriangle = _thisPT;
 				break;
 			};
 			
 		} foreach _startPointsSorted; //experimental thing here --------------------------------------------------------------------------------------------------------------------------------------------------
 		
-		if ((count _possibleTriangles) == 0) then {
+		if (_finaltriangle isEqualTo []) then {
 			continue;
 		};
 		
 		//s = _possibleTriangles;
 		
 		
-		private _possibleTrianglesSorted = [_possibleTriangles, [], {
-			private _sa = (_x # 0) distance2D (_x # 1);
-			private _sb = (_x # 1) distance2D (_x # 2);
-			private _sc = (_x # 2) distance2D (_x # 0);
-			selectMin [acos (((_sb ^ 2) + (_sc ^ 2) - (_sa ^ 2)) / (2 * _sb * _sc)), acos (((_sa ^ 2) + (_sc ^ 2) - (_sb ^ 2)) / (2 * _sa * _sc)), acos (((_sa ^ 2) + (_sb ^ 2) - (_sc ^ 2)) / (2 * _sa * _sb))];
-		}, "DESCEND"] call BIS_fnc_sortBy;
-		
-		
-		private _finaltriangle = _possibleTrianglesSorted # 0;
 		//_finaltrianglestill in format [_line #0, _line #1, thirdpoint];
 		
 		private _sides = [[_finalTriangle # 0, _finalTriangle # 1], [_finalTriangle # 1, _finalTriangle # 2], [_finalTriangle # 2, _finalTriangle # 0]];
