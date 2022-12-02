@@ -1,7 +1,7 @@
 #include "script_component.hpp"
 /*
  * Author: EL_D148L0
- * init a trench/trench network. has to be executed in a scheduled environment.
+ * if this works, it will replace fullyInitTrenchesWithIntersect
  *
  * Arguments:
  * 0: list of trench objects <ARRAY>
@@ -10,7 +10,7 @@
  * either "done" or "open corner" if a trench network that is not setup correctly was passed <STRING>
  *
  * Example:
- * [[_tronch1]] call ELD_magicTriangle_scripts_fnc_fullyInitTrenchesWithIntersect;
+ * [[_tronch1]] call ELD_magicTriangle_scripts_fnc_initTrench;
  *
  * Public: No
  */
@@ -35,15 +35,19 @@
 
 if (!canSuspend) exitWith {};
 
-params ["_trenches"];
+params ["_trenches", ["_trenchesToRemove", []]];
 
 
+
+scopename "expandTrench2";
 
 
 (([_trenches] call FUNC(getConfigInfo)) call FUNC(analyseOC)) params ["_blFromConfig", "_tftFromConfig", "_leftOverOC"];
 
+private _expanding = (count _trenchesToRemove) > 0;
 
-if ((count _leftOverOC) > 0) exitwith {"open corner"}; // stop if open corner 
+
+if (((count _leftOverOC) > 0) && (!_expanding)) exitwith {"open corner"}; // stop if open corner 
 
 
 
@@ -74,13 +78,11 @@ private _allAffectedTP = (_terrainPoints + _PTMForList);//bad var name
 private _clashingCoveredTrenches = [];
 
 
-
 for "_i" from 0 to ((count GVAR(coveredTrenchList)) - 1) do {
 	if ((count (_PTMForList arrayIntersect ((GVAR(coveredTrenchList) # _i # 5) + (GVAR(coveredTrenchList) # _i # 1)))) > 0) then {
 		_clashingCoveredTrenches append [_i];
 	};
 };
-
 
 //setup for data storage 
 private _trenchesAdd = [];
@@ -95,16 +97,83 @@ private _terrainPointsForList = + _terrainPoints;
 
 private _PTMForListToNotLower = [];
 
-// this is all done assuming that the trench objects do not intersect or get too close to each other or anything
 private _trianglesToDelete = [];
+
+private _oldBP = [];
+
+private _expansionOriginIndex = -1;
+private _newOCMergePointsPairs = 0;//declaration, type doesn't matter
+if (_expanding) then {
+	for "_i" from 0 to ((count GVAR(coveredTrenchList)) - 1) do {
+		if ((count (_trenchesToRemove arrayIntersect (GVAR(coveredTrenchList) # _i # 0))) > 0) then {
+			_expansionOriginIndex = _i;
+		};
+	};
+	private _thisCTLEntry = (GVAR(coveredTrenchList) # _expansionOriginIndex);// keeping this varname for ease of copying code
+	_clashingCoveredTrenches = _clashingCoveredTrenches - [_expansionOriginIndex];
+	_clashingCoveredTrenches = _clashingCoveredTrenches + [_expansionOriginIndex];// leave it in
+	
+
+	private _tempa = [(_thisCTLEntry # 0), _trenchesToRemove, _trenches] call FUNC(getAssociatedBP);
+	_oldBP = + (_tempa#0);
+	private _remainingTrenchOC = _tempa#1;
+	_newOCMergePointsPairs =  + (_tempa#2);
+	deb_msg4 = _tempa;
+	{
+		for "_i" from 0 to ((count _blFromConfig) - 1) do {
+			private _thisElement = _blFromConfig # _i;
+			for "_k" from 0 to ((count _thisElement) - 1) do {
+				if ((_thisElement # _k) isEqualTo (_x#0)) then {
+					_thisElement set [_k, (_x#1)];
+					_blFromConfig set [_i, _thisElement];
+				}; 
+			};
+		};
+		
+		for "_i" from 0 to ((count _tftFromConfig) - 1) do {
+			private _thisElement = _tftFromConfig # _i;
+			for "_k" from 0 to ((count _thisElement) - 1) do {
+				if (((_thisElement # _k) isEqualTo (_x#0))) then {
+					_thisElement set [_k, (_x#1)];
+					_tftFromConfig set [_i, _thisElement];
+				}; 
+			};
+		};
+	} forEach _newOCMergePointsPairs;
+	//private _temp2 = [_blFromConfig, _tftFromConfig, _leftOverOC + _remainingTrenchOC] call FUNC(analyseOC);
+	//_blFromConfig = _temp2#0;
+	//_tftFromConfig = _temp2#1;
+
+	// these probably will mess with continuity when replacing a replaced trench, or maybe not, gotta try.
+
+
+	
+	//GVAR(coveredTrenchList) set [_expansionOriginIndex, [[], [], [], [], [], [], [], []]]; // at the very end of the if expanding
+};
+
+
+
+
 {
 	private _thisCTLEntry = (GVAR(coveredTrenchList) # _x);
+	private _expandingThisIteration = _x == _expansionOriginIndex;
+	if (_expandingThisIteration) then {
+		(([((_thisCTLEntry # 0) - _trenchesToRemove) + _trenches] call FUNC(getConfigInfo)) call FUNC(analyseOC)) params ["_blFromConfigNN", "_tftFromConfigNN", "_leftOverOCNN"];//NN stands for new network
+		if ((count _leftOverOCNN) > 0) then {"open corner on new network" breakOut "expandTrench2";}; // idk if this works
+		
+		_trenchesAdd append (((_thisCTLEntry # 0) - _trenchesToRemove) + _trenches);
+		_tftFromConfigAdd append (_tftFromConfigNN);
+		_blFromConfigAdd append (_blFromConfigNN); //redo this stuff it makes no sense as it is
+
+	} else {
+		_trenchesAdd append (_thisCTLEntry # 0);
+		_tftFromConfigAdd append (_thisCTLEntry # 3);
+		_blFromConfigAdd append (_thisCTLEntry # 6);
+		
+	};
 	
-	_trenchesAdd append (_thisCTLEntry # 0);
 	_PTMForListAdd append (_thisCTLEntry # 1);
-	_tftFromConfigAdd append (_thisCTLEntry # 3);
-	_blFromConfigAdd append (_thisCTLEntry # 6);
-	_trenchPointsAdd append (_thisCTLEntry # 7);
+	//_trenchPointsAdd append (_thisCTLEntry # 7);// never used, will no longer add
 	
 	_terrainPointsAdd append ((_thisCTLEntry # 5) - _PTMForList);
 	
@@ -128,6 +197,12 @@ private _trianglesToDelete = [];
 		{
 			_deleteThisTriangle = _deleteThisTriangle || (_x inPolygon _thisTrianglePos);
 		} forEach _bpFromConfig3d;
+
+		if (_expandingThisIteration && (!_deleteThisTriangle)) then {
+			deb_msg5 = _oldBP;
+			deb_msg6 = _thisTrianglePos2d;
+			_deleteThisTriangle = _deleteThisTriangle || ((count ((_oldBP apply {_x select [0,2]}) arrayIntersect _thisTrianglePos2d)) > 0);
+		};
 		
 		
 		if (!_deleteThisTriangle) then {
@@ -183,8 +258,24 @@ private _trianglesToDelete = [];
 		private _thisDTL = _x;
 		private _cnt = {_thisDTL isEqualTo _x} count _deletedTrianglesLines;
 		if (_cnt == 1) then {
+			// if expanding and line contains two of oldBp do not add it, if one point in oldBP change according to change list 
 			// if the line in question does not connect to any clash points
-			if (!((((_x # 0) select [0,2]) in _clashTP) || (((_x # 1) select [0,2]) in _clashTP))) then {
+			private _notCondition = ((((_x # 0) select [0,2]) in _clashTP) || (((_x # 1) select [0,2]) in _clashTP));
+			if (_expandingThisIteration) then {
+				_notCondition = _notCondition || ((count (_thisDTL arrayIntersect _oldBP)) == 2);
+			};
+			if (!_notCondition) then {
+				if (_expandingThisIteration) then {
+					{
+						if (_thisDTL#0 isEqualTo _x#0) then {
+							_thisDTL set [0, _x#1];
+						};
+						
+						if (_thisDTL#1 isEqualTo _x#0) then {
+							_thisDTL set [1, _x#1];
+						};
+					} forEach _newOCMergePointsPairs;
+				};
 				_openLines append [_thisDTL];
 			};
 		};
@@ -303,7 +394,7 @@ private _thisTrenchListEntry = [_trenches + _trenchesAdd,
 								_tftFromConfig + _tftFromConfigAdd,
 								_terrainLines, 
 								_terrainPointsForListFinal, 
-								_blFromConfig + _blFromConfigAdd, 
+								_blFromConfig + _blFromConfigAdd, // figure out the continuity of this
 								_trenchPoints + _trenchPointsAdd];
 
 GVAR(coveredTrenchList) append [_thisTrenchListEntry];

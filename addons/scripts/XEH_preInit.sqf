@@ -14,5 +14,5 @@ ADDON = true;
 
 GVAR(coveredTrenchList) = [];
 
-functionname = QFUNC(fullyInitTrenchesWithIntersect);
+//functionname = QFUNC(fullyInitTrenchesWithIntersect);
 // functionname2 = "asadasfasf";

@@ -25,7 +25,7 @@ testloop = [] spawn {
 			_newpos = (getposWorld laserTarget desi);
 			isnull (laserTarget desi);
 		};
-		[[_tronch1]] call ELD_magicTriangle_scripts_fnc_initTrench;
+		[[_tronch1]] call ELD_magicTriangle_scripts_fnc_fullyInitTrenchesWithIntersect;
 	};
 };
 

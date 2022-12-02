@@ -31,7 +31,7 @@
 
 params ["_blFromConfig", "_tftFromConfig", "_ocFromConfig"];
 
-#define MAX_OC_DISTANCE 0.4//maximum distance at which corners will be merged
+//#define MAX_OC_DISTANCE 0.4//maximum distance at which corners will be merged
 
 //oc stands for open corner
 private _analysingOC = ((count _ocFromConfig) > 0);

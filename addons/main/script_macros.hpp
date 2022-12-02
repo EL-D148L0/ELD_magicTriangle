@@ -23,3 +23,6 @@
     #define PREP(fncName) [QPATHTOF(functions\DOUBLES(fnc,fncName).sqf), QFUNC(fncName)] call CBA_fnc_compileFunction
 #endif
 
+
+
+#define MAX_OC_DISTANCE 0.4//maximum distance at which corners will be merged
