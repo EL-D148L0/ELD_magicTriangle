@@ -173,6 +173,21 @@ while {_running} do {
 		private _thisPSS = + _x;
 		private _line = _thisPSS # 0;
 		private _extraPoint = _thisPSS # 1;
+
+		private _startPointsSorted = (_terrainPoints + _trenchPoints);
+
+		private _startPointsSorted = [_startPointsSorted, [_line], {
+			private _sa = (_input0 # 0) distance2D (_input0 # 1);
+			private _sb = (_input0 # 1) distance2D (_x);
+			private _sc = (_x) distance2D (_input0 # 0);
+			if (_sa == 0 || _sb == 0 || _sc == 0) then {
+				0;
+			} else {
+				selectMin [acos (((_sb ^ 2) + (_sc ^ 2) - (_sa ^ 2)) / (2 * _sb * _sc)), acos (((_sa ^ 2) + (_sc ^ 2) - (_sb ^ 2)) / (2 * _sa * _sc)), acos (((_sa ^ 2) + (_sb ^ 2) - (_sc ^ 2)) / (2 * _sa * _sb))];
+			};
+		}, "DESCEND"] call BIS_fnc_sortBy;
+		
+
 		{
 			//timing thing
 			// g = g + 1;
@@ -310,9 +325,10 @@ while {_running} do {
 			
 			if (_allowed) then {
 				_possibleTriangles append [_thisPT];
+				break;
 			};
 			
-		} foreach (_terrainPoints + _trenchPoints); //experimental thing here --------------------------------------------------------------------------------------------------------------------------------------------------
+		} foreach _startPointsSorted; //experimental thing here --------------------------------------------------------------------------------------------------------------------------------------------------
 		
 		if ((count _possibleTriangles) == 0) then {
 			continue;
