@@ -3,6 +3,8 @@
  * Author: EL_D148L0
  * fill the area around a trench up to the provided outer border with fillers
  *
+ * it's not designed to this (so this might not be fully reliable) but it can also fill the area if the borderlines and terrainlines form a loop.
+ *
  * Arguments:
  * 0: borderLines of the trench. positions in format PositionASL <ARRAY>
  * 1: list of lines that form the outer border of the hole. positions in format PositionASL <ARRAY>

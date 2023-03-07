@@ -189,7 +189,7 @@ private _trianglesToDelete = [];
 			};
 		};
 	} foreach _deletedTrianglesLines;
-	
+	//at this point _openLines contains the lines around the deleted triangles
 	
 	
 	// this part removes all terrain lines that lie in the affected area

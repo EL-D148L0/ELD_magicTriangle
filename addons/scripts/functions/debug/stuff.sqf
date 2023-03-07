@@ -92,3 +92,6 @@ _a - _b;
 
 
 ELD_magicTriangle_scripts_coveredTrenchList; //aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+
+
+ELD_magicTriangle_scripts_endTime - ELD_magicTriangle_scripts_startTime
