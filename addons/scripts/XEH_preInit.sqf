@@ -14,5 +14,10 @@ ADDON = true;
 
 GVAR(coveredTrenchList) = [];
 
+
+
+GVAR(trenchRankCounter) = 0;
+GVAR(trenchObjectList) = [];
+
 //functionname = QFUNC(fullyInitTrenchesWithIntersect);
 // functionname2 = "asadasfasf";

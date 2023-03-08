@@ -1,3 +1,10 @@
 {
-    "C_Cpp.errorSquiggles": "Disabled"
+    "C_Cpp.errorSquiggles": "Disabled",
+    "sqflint.warnings": false
+    /*"sqflint.indexWorkspace": false,
+    "sqflint.indexWorkspaceTwice": false,
+    "sqflint.exclude": ["/*"]*/
+    //"sqflint.ignoredVariables": ["GVAR"],
+    //"sqflint.indexWorkspace": false,
+    //"sqflint.exclude": ["addons/**/*"]
 }
