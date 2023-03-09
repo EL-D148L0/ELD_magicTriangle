@@ -38,6 +38,7 @@ private _newTrenchRelDir = ((getArray ((configOf _trench) >> "trench_sides_dig_n
 
 private _replacementTrenchClass = ((getArray ((configOf _trench) >> "trench_sides_dig_replacement")) # _direction);
 private _replacementTrenchRelDir = ((getArray ((configOf _trench) >> "trench_sides_dig_replacement_vector_dir")) # _direction);
+private _replacementTrenchSideSwitchingIndices = ((getArray ((configOf _trench) >> "trench_sides_dig_replacement_side_switching")) # _direction);
 
 
 
@@ -54,7 +55,7 @@ _newTrench setVectorDir (_trench vectorModelToWorld _newTrenchRelDir);
 
 
 
-private _replacementTrenchCorners = _trench getVariable "corners";
+private _replacementTrenchCorners = [_replacementTrench] call FUNC(getTrenchCornersFromConfig);
 private _replacementTrenchSides = _trench getVariable "sides";
 {
 	if (isNull _x) then {continue;};
@@ -63,6 +64,11 @@ private _replacementTrenchSides = _trench getVariable "sides";
 	(_x getVariable "sides") set [_index, _replacementTrench];
 } forEach _replacementTrenchSides;
 _replacementTrenchSides set [_direction, _newTrench];
+private _replacementTrenchSidesNew = [];
+{
+	_replacementTrenchSidesNew pushBack (_replacementTrenchSides # _x);
+} forEach _replacementTrenchSideSwitchingIndices;
+_replacementTrenchSides = _replacementTrenchSidesNew;
 private _replacementTrenchRank = _trench getVariable "rank";
 private _replacementTrenchTerrainPoints = _trench getVariable "terrainPoints";
 
@@ -104,8 +110,7 @@ _newTrench setVariable ["sides", _newTrenchSides];
 _newTrench setVariable ["terrainPoints", _newTrenchTerrainPoints];
 
 
-
-GVAR(trenchObjectList) deleteAt (GVAR(trenchObjectL_trenchist) find _trench);
+GVAR(trenchObjectList) deleteAt (GVAR(trenchObjectList) find _trench);
 //GVAR(trenchObjectList) =  GVAR(trenchObjectL_trenchist) - [_trench];
 
 GVAR(trenchObjectList) pushBack _replacementTrench;

@@ -13,7 +13,7 @@
  *		if the initialization succeeded
  *
  * Example:
- * [_tronch1] call ELD_magicTriangle_scripts_fnc_initCoreTrench;
+ * [tr] call ELD_magicTriangle_scripts_fnc_initCoreTrench;
  *
  * Public: No
  */

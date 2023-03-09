@@ -1,7 +1,5 @@
 PREP(createTriangle);
 PREP(expandTrenchGraph);
-PREP(getConfigInfo);
-PREP(getTerrainlines);
 PREP(getTrenchCornersFromConfig);
 PREP(getTrenchPolygon);
 PREP(initCoreTrench);
