@@ -43,7 +43,8 @@ _this = [_this, [_posAVG], {
 params ["_pos1", "_pos2", "_pos3"];
 
 
-private _triangleClass = "Triangle";
+//private _triangleClass = "Triangle";
+private _triangleClass = "TriangleLarge";
 
 private _cellsize = getTerrainInfo#2;
 if (_cellsize > 5) then {

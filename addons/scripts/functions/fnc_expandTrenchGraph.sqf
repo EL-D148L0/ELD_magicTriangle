@@ -52,6 +52,7 @@ _replacementTrench setVectorDirAndUp [_trench vectorModelToWorld _replacementTre
 private _newTrench = createVehicle [_newTrenchClass, _trench, [], 0, "CAN_COLLIDE"];
 _newTrench setPosASL (_trench modelToWorldWorld _newTrenchRelPos);
 _newTrench setVectorDir (_trench vectorModelToWorld _newTrenchRelDir);
+_newTrench setVectorUp (vectorUp _trench);
 
 
 
@@ -86,7 +87,7 @@ private _newTrenchSides = [];
 {
 	_newTrenchSides append [objNull];
 } forEach _newTrenchCorners;
-private _newToOldSide = ((getArray ((configOf _trench) >> "trench_sides_open")) find 1);// the open side of the new trench
+private _newToOldSide = ((getArray ((configOf _newTrench) >> "trench_sides_open")) find 1);// the open side of the new trench
 _newTrenchSides set [_newToOldSide, _replacementTrench];
 
 private _newTrenchTerrainPoints = [_newTrench] call FUNC(makeSingleHole);
