@@ -8,6 +8,7 @@ PREP(linesIntersect);
 PREP(makeManyHole);
 PREP(makeNewTrenchForExpansion);
 PREP(makeSingleHole);
+PREP(pointInList2d);
 PREP(pointInTriangle);
 PREP(pointInTriangleLA);
 PREP(sameSide);
