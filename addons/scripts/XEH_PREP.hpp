@@ -1,5 +1,6 @@
 PREP(createTriangle);
 PREP(expandTrenchGraph);
+PREP(getTerrainHoleIslands);
 PREP(getTerrainPolygon);
 PREP(getTrenchCornersFromConfig);
 PREP(getTrenchPolygon);
