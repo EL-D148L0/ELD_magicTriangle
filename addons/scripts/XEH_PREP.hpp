@@ -6,6 +6,7 @@ PREP(getTrenchPolygon);
 PREP(initCoreTrench);
 PREP(linesIntersect);
 PREP(makeManyHole);
+PREP(makeNewTrenchForExpansion);
 PREP(makeSingleHole);
 PREP(pointInTriangle);
 PREP(pointInTriangleLA);

@@ -65,7 +65,8 @@ player addEventHandler ["Fired", {
 			_dir = player getRelDir ((_positions#0 vectorAdd _positions #1) vectorMultiply 0.5);
 			_dir = 360 -_dir; 
 			//ar setPos (_trench modelToWorld (_trench selectionPosition (getArray ((configOf _trench) >> "trench_corners_clockwise")) # ((round (_dir / 90)) % 4)));
-			[_trench, (round (_dir / 90)) %4] call ELD_magicTriangle_scripts_fnc_expandTrenchGraph;
+			private _trDir = (round (_dir / 90)) %4;
+			[_trench, _trDir, [_trench, _trDir] call ELD_magicTriangle_scripts_fnc_makeNewTrenchForExpansion] call ELD_magicTriangle_scripts_fnc_expandTrenchGraph;
 			
 
 	{

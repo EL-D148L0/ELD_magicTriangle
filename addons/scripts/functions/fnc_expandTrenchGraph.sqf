@@ -10,31 +10,32 @@
  * 		trench to expand from
  *	1: direction <NUMBER>
  * 		direction to expand in (according to trench config)
- *	0: option <NUMBER> (optional, default 0)
- * 		option number of expanded trench from original trench config
+ *	0: newTrench <OBJECT> 
+ * 		the new trench to add into the graph
  *
  * Return Value:
  * success <BOOLEAN>
  *		if the initialization succeeded
  *
  * Example:
- * [_tronch1, 1 , 0] call ELD_magicTriangle_scripts_fnc_expandTrenchGraph;
+ * [_tronch1, 1 , _trench2] call ELD_magicTriangle_scripts_fnc_expandTrenchGraph;
  *
  * Public: No
  */
 
 
 
-params ["_trench", "_direction", ["_option", 0]];
+params ["_trench", "_direction", "_newTrench"];
 
 //if (!isNull (_trench getVariable "sides") # _direction) exitWith {false};// if the trench has no space in that direction return false
 
-if (((getArray ((configOf _trench) >> trench_sides_diggable)) # _direction) == 0) exitWith {diag_log "bad trench expansion request"; false;};//if the trench cant be dug in the requested direction
+if (((getArray ((configOf _trench) >> "trench_sides_diggable")) # _direction) == 0) exitWith {diag_log "bad trench expansion request"; false;};//if the trench cant be dug in the requested direction
 
 
-private _newTrenchClass = ((getArray ((configOf _trench) >> "trench_sides_dig_new_trench_options")) # _direction # _option);
-private _newTrenchRelPos = ((getArray ((configOf _trench) >> "trench_sides_dig_new_trench_options_pos")) # _direction # _option);
-private _newTrenchRelDir = ((getArray ((configOf _trench) >> "trench_sides_dig_new_trench_options_dir")) # _direction # _option);
+private _newTrenchClasses = ((getArray ((configOf _trench) >> "trench_sides_dig_new_trench_options")) # _direction);
+if (!((typeOf _newTrench) in _newTrenchClasses)) throw "expansion request used illegal trench";
+//private _newTrenchRelPos = ((getArray ((configOf _trench) >> "trench_sides_dig_new_trench_options_pos")) # _direction # _option);
+//private _newTrenchRelDir = ((getArray ((configOf _trench) >> "trench_sides_dig_new_trench_options_dir")) # _direction # _option);
 
 private _replacementTrenchClass = ((getArray ((configOf _trench) >> "trench_sides_dig_replacement")) # _direction);
 private _replacementTrenchRelDir = ((getArray ((configOf _trench) >> "trench_sides_dig_replacement_vector_dir")) # _direction);
@@ -47,12 +48,6 @@ private _replacementTrench = createVehicle [_replacementTrenchClass, _trench, []
 _replacementTrench setPosASL (_trench modelToWorldWorld [0,0,0]);
 _replacementTrench setVectorDirAndUp [_trench vectorModelToWorld _replacementTrenchRelDir, vectorUp _trench];
 
-
-
-private _newTrench = createVehicle [_newTrenchClass, _trench, [], 0, "CAN_COLLIDE"];
-_newTrench setPosASL (_trench modelToWorldWorld _newTrenchRelPos);
-_newTrench setVectorDir (_trench vectorModelToWorld _newTrenchRelDir);
-_newTrench setVectorUp (vectorUp _trench);
 
 
 
