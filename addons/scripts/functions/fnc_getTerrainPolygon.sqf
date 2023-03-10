@@ -75,6 +75,7 @@ while {true} do {
 	};
 };
 
+private _startDir = (_iteratingDir + 1) % 6;
 
 _iteratingDir = _currentDir;
 // iterate forwards
@@ -83,11 +84,11 @@ while {true} do {
 	_currentCheckedPos = _currentPoint vectorAdd _directions#_iteratingDir;
 	if ([_currentCheckedPos, _positions] call FUNC(pointInList2d)) then {
 		_currentPoint = _currentCheckedPos;
-		if ([_currentPoint, [_startPoint]] call FUNC(pointInList2d)) then {
-			break;
-		};
 		_currentDir = (_iteratingDir + 4) % 6; // set the starting dir
 		_iteratingDir = _currentDir;
+		if (([_currentPoint, [_startPoint]] call FUNC(pointInList2d))&& _iteratingDir == _startdir) then {
+			break;
+		};
 	} else {
 		_polygon pushBack _currentCheckedPos;
 	};
