@@ -51,7 +51,6 @@ for [{ _i = 0 }, { _i < count _order }, { _i = _i + 3 }] do {
 	};
 	_obj = (_triangleCorners call ELD_magicTriangle_scripts_fnc_createTriangle);
 	triangles pushBack _obj;
-	_obj setObjectTextureGlobal [0, surfaceTexture getpos _obj];
 };
 
 
@@ -114,7 +113,6 @@ player addEventHandler ["Fired", {
 		};
 		_obj = (_triangleCorners call ELD_magicTriangle_scripts_fnc_createTriangle);
 		triangles pushBack _obj;
-		_obj setObjectTextureGlobal [0, surfaceTexture getpos _obj];
 	};
 
 

@@ -7,6 +7,10 @@
  * 0: Position of corner in format PositionASL <ARRAY>
  * 1: Position of corner in format PositionASL <ARRAY>
  * 2: Position of corner in format PositionASL <ARRAY>
+ * 3: which texture and material to use <NUMBER> (optional, default 1) //TODO change the default
+ * 		0: ground texture at the center point and zemlia.rvmat
+ * 		1: random debug color
+ * 		2: default triangle object
  *
  * Return Value:
  * triangle filler object <OBJECT>
@@ -23,24 +27,23 @@
 //TODO when reworking this function use setObjectScale to scale the boundingbox according to the largest side of the triangle 
 
 
-
+//omg this function is pain
 
 
 
 //this procedure sorts the points so the object doesn't get turned inside out
-private _posAVG = ((_this # 0) vectorAdd ((_this # 1) vectorAdd (_this # 2))) vectorMultiply (1/3);
+
+
+params ["_pos1", "_pos2", "_pos3", ["_texture", 1]];
+
+private _posAVG = ((_pos1) vectorAdd ((_pos2) vectorAdd (_pos3))) vectorMultiply (1/3);
 
 
 
-_this = [_this, [_posAVG], {
+([[_pos1, _pos2, _pos3], [_posAVG], {
 	private _diff = _x vectorDiff _input0;
 	_diff # 1 atan2 _diff # 0
-}, "DESCEND"] call BIS_fnc_sortBy;
-
-
-
-
-params ["_pos1", "_pos2", "_pos3"];
+}, "DESCEND"] call BIS_fnc_sortBy) params ["_pos1", "_pos2", "_pos3"];
 
 
 //private _triangleClass = "Triangle";
@@ -65,6 +68,16 @@ private _pos3Diff = _pos3 vectorDiff (_triangleObject modelToWorldWorld (_triang
 _triangleObject animate ["Corner_3_LR", _pos3Diff # 0, true];
 _triangleObject animate ["Corner_3_FB", _pos3Diff # 1, true];
 _triangleObject animate ["Corner_3_UD", _pos3Diff # 2, true];
+
+
+if (_texture == 0) then {
+	_triangleObject setObjectTextureGlobal [0, surfaceTexture _posAVG];
+} else {
+	if (_texture == 1) then {
+		_triangleObject setObjectTexture [0, call FUNC(randomColor)];
+		_triangleObject setObjectMaterial [0, "a3\structures_f_bootcamp\vr\coverobjects\data\vr_coverobject_basic.rvmat"]; 
+	};
+};
 
 
 _triangleObject;

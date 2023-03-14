@@ -14,5 +14,6 @@ PREP(makeSingleHole);
 PREP(pointInList2d);
 PREP(pointInTriangle);
 PREP(pointInTriangleLA);
+PREP(randomColor);
 PREP(sameSide);
 PREP(triangleIntersect);
