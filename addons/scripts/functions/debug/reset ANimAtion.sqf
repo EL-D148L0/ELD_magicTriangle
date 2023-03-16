@@ -32,3 +32,32 @@ th animate ["Move_1", 10, true];
  _x setposasl ((getposasl _x) vectoradd [0,0,2]) 
 } forEach triangles;
 
+
+
+
+
+
+arrow = "Sign_Arrow_F" createVehicle [0,0,0];
+onEachFrame {
+	_ins = lineIntersectsSurfaces [
+		AGLToASL positionCameraToWorld [0,0,0],
+		AGLToASL positionCameraToWorld [0,0,1000],
+		player,
+		objNull,
+		true,
+		1,
+		"PHYSX",
+		"NONE"
+	];
+	if (count _ins == 0) exitWith { arrow setPosASL [0,0,0] };
+	arrow setPosASL (_ins select 0 select 0);
+	arrow setVectorUp (_ins select 0 select 1);
+	hintSilent str _ins;
+};
+
+
+
+
+
+
+man = "O_Survivor_F" createVehicle position player;

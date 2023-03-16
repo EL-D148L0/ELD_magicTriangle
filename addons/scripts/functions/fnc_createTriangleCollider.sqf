@@ -99,7 +99,19 @@ private _vectorAC = _pointC vectorDiff _pointA;
 
 _pointP = _pointA vectoradd (_vectorAC vectorMultiply (((_pointA vectorDiff _pointB) vectorDotProduct _vectorAC)/_vectorAC vectorDotProduct _vectorAC));
 
+private _vectorAP = _pointP vectorDiff _pointA;
+private _vectorAB = _pointB vectorDiff _pointA;
+private _triangle1Angle = acos (_vectorAB vectorCos _vectorAP);// round down
 
-private _triangle1Angle = 
+private _triangle1Scale = vectorMagnitude _vectorAP;
 
+private _vectorBP = _pointP vectorDiff _pointB;
+private _vectorBC = _pointC vectorDiff _pointB;
+private _triangle2Angle = acos (_vectorBP vectorCos _vectorBC);// round up
 
+private _triangle2Scale = vectorMagnitude _vectorBP;
+
+private _files = addonFiles ["magicTriangle\colliderGen0\", ".p3d"];
+
+private _triangle1Model = [_triangle1Angle, false] call FUNC(getTriangleColliderModel);
+private _triangle1Model = [_triangle2Angle, true] call FUNC(getTriangleColliderModel);

@@ -1,4 +1,5 @@
 PREP(createTriangle);
+PREP(createTriangleCollider);
 PREP(expandTrenchGraph);
 PREP(getIslandPolygon);
 PREP(getTerrainHoleIslands);
@@ -6,6 +7,7 @@ PREP(getTerrainPolygon);
 PREP(getTerrainPolygonsWithIslands);
 PREP(getTrenchCornersFromConfig);
 PREP(getTrenchPolygon);
+PREP(getTriangleColliderModel);
 PREP(initCoreTrench);
 PREP(linesIntersect);
 PREP(makeManyHole);
