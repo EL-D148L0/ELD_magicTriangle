@@ -30,7 +30,7 @@
 //this procedure sorts the points so the object doesn't get turned inside out
 
 
-params ["_pos1", "_pos2", "_pos3", ["_texture", 1]];
+params ["_pos1", "_pos2", "_pos3"];
 
 private _posAVG = ((_pos1) vectorAdd ((_pos2) vectorAdd (_pos3))) vectorMultiply (1/3);
 
@@ -97,16 +97,18 @@ if (_length0 >= _length1 && _length0 >= _length2) then {
 
 private _vectorAC = _pointC vectorDiff _pointA;
 
-_pointP = _pointA vectoradd (_vectorAC vectorMultiply (((_pointA vectorDiff _pointB) vectorDotProduct _vectorAC)/_vectorAC vectorDotProduct _vectorAC));
+
+_pointP = _pointA vectordiff (_vectorAC vectorMultiply (((_pointA vectorDiff _pointB) vectorDotProduct _vectorAC)/(_vectorAC vectorDotProduct _vectorAC))); 
 
 private _vectorAP = _pointP vectorDiff _pointA;
 private _vectorAB = _pointB vectorDiff _pointA;
 private _triangle1Angle = acos (_vectorAB vectorCos _vectorAP);// round down
 
-private _triangle1Scale = vectorMagnitude _vectorAP;
+//private _triangle1Scale = vectorMagnitude _vectorAP;
 
 private _vectorBP = _pointP vectorDiff _pointB;
 private _vectorBC = _pointC vectorDiff _pointB;
+private _vectorBA = _pointA vectorDiff _pointB;
 private _triangle2Angle = acos (_vectorBP vectorCos _vectorBC);// round up
 
 private _triangle2Scale = vectorMagnitude _vectorBP;
@@ -114,4 +116,23 @@ private _triangle2Scale = vectorMagnitude _vectorBP;
 private _files = addonFiles ["magicTriangle\colliderGen0\", ".p3d"];
 
 private _triangle1Model = [_triangle1Angle, false] call FUNC(getTriangleColliderModel);
-private _triangle1Model = [_triangle2Angle, true] call FUNC(getTriangleColliderModel);
+private _triangle2Model = [_triangle2Angle, true] call FUNC(getTriangleColliderModel);
+private _vectorUp = vectorNormalized ((_vectorBC vectorCrossProduct _vectorBA) vectormultiply -1);
+
+
+private _vectorDir1 = vectorNormalized (_pointA vectorDiff _pointP);
+private _vectorDir2 = vectorNormalized (_pointB vectorDiff _pointP);
+
+private _triangle1 = createSimpleObject  [_triangle1Model, _pointP];
+private _triangle2 = createSimpleObject  [_triangle2Model, _pointP];
+_triangle1 setvectordirandup [_vectorDir1, _vectorUp];
+_triangle2 setvectordirandup [_vectorDir2, _vectorUp];
+
+private _triangle1Scale = _triangle2Scale/((_triangle1 selectionPosition ["corner_3", "Memory"]) # 0);
+
+_triangle1 setobjectscale _triangle1Scale;
+_triangle2 setobjectscale _triangle2Scale;
+
+[_triangle1, _triangle2];
+
+
