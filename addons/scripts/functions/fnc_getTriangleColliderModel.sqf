@@ -21,48 +21,37 @@
 
 
 
-params ["_angle", "_roundUp"];
+params ["_angle"];
 scopeName "getTriangleColliderModel";
 
 private _files = addonFiles ["magicTriangle\", ".p3d"];
 
 private _colliderModels = [];
 {
-	if (_x regexMatch ".*collidergen0\\c[0-9]+\..*") then {
+	if (_x regexMatch ".*collidergen3\\c[0-9,]+\..*") then {
 		_colliderModels pushBack _x;
 	};
 } forEach _files;
 private _angles = _colliderModels apply {
-	parseNumber (((_x regexFind ["(?<=c)[0-9]+(?=\.)",0])# 0)#0#0);
+	parseNumber (((_x regexFind ["(?<=c)[0-9,]+(?=\.)",0])# 0#0#0) regexreplace [",","."]);
 };
 private _fileList = _angles createHashMapFromArray _colliderModels;
 private _found = false;
 private _return = "";
-if (_roundUp) then {
-	private _iteratingAngle = ceil _angle;
-	while {_iteratingAngle < 90} do {
-		if (_iteratingAngle in _fileList) then {
-			(_fileList get _iteratingAngle) breakOut "getTriangleColliderModel";
-		}; 
-		_iteratingAngle = _iteratingAngle + 1;
-	};
-	
-};
+private _searchNumber = (round (_angle * 100))/100;
 
-_iteratingAngle = floor _angle;
-while {_iteratingAngle > 0} do {
-	if (_iteratingAngle in _fileList) then {
-		(_fileList get _iteratingAngle) breakOut "getTriangleColliderModel";
-	}; 
-	_iteratingAngle = _iteratingAngle - 1;
+
+if (_searchNumber < 0.01) then {
+	_searchNumber = 0.01;
+};
+if (_searchNumber > 89) then {
+	_searchNumber = 89;
 };
 
 
-_iteratingAngle = ceil _angle;
-while {_iteratingAngle < 90} do {
-	if (_iteratingAngle in _fileList) then {
-		(_fileList get _iteratingAngle) breakOut "getTriangleColliderModel";
-	}; 
-	_iteratingAngle = _iteratingAngle + 1;
-};
+if (_searchNumber in _fileList) then {
+	(_fileList get _searchNumber) breakOut "getTriangleColliderModel";
+}; 
+
+
 throw "couldn't find any triangleColliderModel";

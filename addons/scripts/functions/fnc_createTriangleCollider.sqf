@@ -115,8 +115,8 @@ private _triangle2Scale = vectorMagnitude _vectorBP;
 
 private _files = addonFiles ["magicTriangle\colliderGen0\", ".p3d"];
 
-private _triangle1Model = [_triangle1Angle, false] call FUNC(getTriangleColliderModel);
-private _triangle2Model = [_triangle2Angle, true] call FUNC(getTriangleColliderModel);
+private _triangle1Model = [_triangle1Angle] call FUNC(getTriangleColliderModel);
+private _triangle2Model = [_triangle2Angle] call FUNC(getTriangleColliderModel);
 private _vectorUp = vectorNormalized ((_vectorBC vectorCrossProduct _vectorBA) vectormultiply -1);
 
 
