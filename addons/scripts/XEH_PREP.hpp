@@ -19,4 +19,6 @@ PREP(pointInTriangle);
 PREP(pointInTriangleLA);
 PREP(randomColor);
 PREP(sameSide);
+PREP(sortTriangleCorners);
+PREP(splitTriangle);
 PREP(triangleIntersect);
