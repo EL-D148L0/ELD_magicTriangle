@@ -19,5 +19,9 @@ GVAR(coveredTrenchList) = [];
 GVAR(trenchRankCounter) = 0;
 GVAR(trenchObjectList) = [];
 
+
+
+GVAR(colliderModelMap) = call FUNC(getTriangleColliderModelMap);
+
 //functionname = QFUNC(fullyInitTrenchesWithIntersect);
 // functionname2 = "asadasfasf";

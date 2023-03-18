@@ -111,7 +111,6 @@ private _vectorBC = _pointC vectorDiff _pointB;
 private _vectorBA = _pointA vectorDiff _pointB;
 private _triangle2Angle = acos (_vectorBP vectorCos _vectorBC);// round up
 
-private _triangle2Scale = vectorMagnitude _vectorBP;
 
 private _files = addonFiles ["magicTriangle\colliderGen0\", ".p3d"];
 
@@ -128,7 +127,8 @@ private _triangle2 = createSimpleObject  [_triangle2Model, _pointP];
 _triangle1 setvectordirandup [_vectorDir1, _vectorUp];
 _triangle2 setvectordirandup [_vectorDir2, _vectorUp];
 
-private _triangle1Scale = _triangle2Scale/((_triangle1 selectionPosition ["corner_3", "Memory"]) # 0);
+private _triangle1Scale = (vectorMagnitude _vectorAP) max ((vectorMagnitude _vectorBP)/((_triangle1 selectionPosition ["corner_3", "Memory"]) # 0));
+private _triangle2Scale = (vectorMagnitude _vectorBP) max ((vectorMagnitude (_pointC vectorDiff _pointP))/((_triangle2 selectionPosition ["corner_3", "Memory"]) # 0));
 
 _triangle1 setobjectscale _triangle1Scale;
 _triangle2 setobjectscale _triangle2Scale;
