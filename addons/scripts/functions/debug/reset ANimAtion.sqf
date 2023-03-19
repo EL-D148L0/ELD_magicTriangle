@@ -18,6 +18,7 @@
 
 
 vehicle player setpos getpos cp;
+vehicle player setdamage 0;
 vehicle player setVectorDirAndUp [vectorDir cp, vectorUp cp];
 
 

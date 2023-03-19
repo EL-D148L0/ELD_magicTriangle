@@ -21,7 +21,7 @@
 
 
 
-private _files = addonFiles ["magicTriangle\", ".p3d"];
+private _files = addonFiles ["magicTriangleCollider\", ".p3d"];
 
 private _colliderModels = [];
 {

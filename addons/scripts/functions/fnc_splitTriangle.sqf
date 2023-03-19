@@ -1,7 +1,7 @@
 #include "script_component.hpp"
 /*
  * Author: EL_D148L0
- * create a triangle filler object from an array of 3 points.
+ * split a triangle into two along the longest side
  * if the input triangle is clockwise, outputs will also be clockwise
  *
  * Arguments:
