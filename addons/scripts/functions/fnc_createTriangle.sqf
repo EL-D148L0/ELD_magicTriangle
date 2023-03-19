@@ -96,4 +96,14 @@ if (_texture == 0) then {
 };
 
 
+private _colliders = [_pos1, _pos2, _pos3] call FUNC(createTriangleCollider);
+_triangleObject setVariable ["colliders", _colliders];
+
+_triangleObject addEventHandler ["Deleted", {
+	params ["_entity"];
+	{
+		deleteVehicle _x;
+	} forEach (_entity getVariable "colliders");
+}];
+
 [_triangleObject];
