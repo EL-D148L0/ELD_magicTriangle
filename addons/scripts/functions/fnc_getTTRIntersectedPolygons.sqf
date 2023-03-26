@@ -45,7 +45,7 @@ _newout = [];
 	{
 		// Current result is saved in variable _x
 		private _x2 = ((_n#0 * (_x#0 - _p#0) + _n#1 * (_x#1 - _p#1))/(-(_n#2))) + _p#2;
-		_list pushback [_x#0, _x#1, 8];
+		_list pushback [_x#0, _x#1, _x2];
 	} forEach _x;
 	reverse _list;
 	_newout pushBack _list;

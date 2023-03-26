@@ -22,6 +22,7 @@ PREP(pointInList2d);
 PREP(pointInTriangle);
 PREP(pointInTriangleLA);
 PREP(randomColor);
+PREP(replaceTrenchTTR);
 PREP(sameSide);
 PREP(setTerrainPointHeight);
 PREP(sortTriangleCorners);

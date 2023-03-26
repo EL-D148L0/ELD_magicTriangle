@@ -2,10 +2,11 @@
 
 /*
  * Author: EL_D148L0
- * fixes TTR info and filler
+ * replaces the references to the old trench with references to the new trench
  *
  * Arguments:
- *	0: trench to fix TTR for
+ *	0: old trench
+ *	1: new trench
  * 
  *
  * Return Value:
@@ -13,21 +14,22 @@
  *		
  *
  * Example:
- * [_trench] call ELD_magicTriangle_scripts_fnc_fixTTR;
+ * [_trench] call ELD_magicTriangle_scripts_fnc_replaceTrenchTTR;
  *
  * Public: No
  */
 
 
 
-params ["_trench"];
+params ["_oldTrench", "_newTrench"];
 
 
-private _ttrList = [_trench getvariable "terrainPoints"] call ELD_magicTriangle_scripts_fnc_getTerrainTrianglesFromLoweredPoints;
+private _ttrList = [_oldTrench getvariable "terrainPoints"] call ELD_magicTriangle_scripts_fnc_getTerrainTrianglesFromLoweredPoints;
 
 {
 	private _key = _x;
-	//private _isNew = !(_key in GVAR(terrainTriangleMap));
+	private _isNew = !(_key in GVAR(terrainTriangleMap));
+	if (_isNew) throw "original trench was not correctly registered";
 	private _entry = GVAR(terrainTriangleMap) getordefault [_key, []];
 	_entry params [
 			["_originalCornerPositions", [_key] call FUNC(TTRKeyToTriangle)], 
@@ -37,18 +39,9 @@ private _ttrList = [_trench getvariable "terrainPoints"] call ELD_magicTriangle_
 	if ((count _normal) == 0) then {
 		_normal = vectornormalized (((_originalCornerPositions#0) vectordiff (_originalCornerPositions#2)) vectorCrossProduct ((_originalCornerPositions#0) vectordiff (_originalCornerPositions#1)));
 	};
-	_associatedTrenches pushBack _trench;
+	_associatedTrenches = (_associatedTrenches - [_oldTrench]) + [_newTrench];
 
 	
-	 GVAR(terrainTriangleMap) set [_key, [_originalCornerPositions, _normal, _fillerObjects, _associatedTrenches]];
-	// do fix ground
-	private _triangles = [[_key] call FUNC(getTTRIntersectedPolygons)] call FUNC(fillPolygons);
-	
-	{
-		// Current result is saved in variable _x
-		deletevehicle _x;
-	} forEach _fillerObjects;
-	_fillerObjects = _triangles;
 	 GVAR(terrainTriangleMap) set [_key, [_originalCornerPositions, _normal, _fillerObjects, _associatedTrenches]];
 	
 } forEach _ttrList;

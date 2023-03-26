@@ -113,6 +113,9 @@ GVAR(trenchObjectList) pushBack _replacementTrench;
 GVAR(trenchObjectList) pushBack _newTrench;
 
 
+[_trench, _replacementTrench] call FUNC(replaceTrenchTTR);
+[_newTrench] call FUNC(fixTTR);
+
 deleteVehicle _trench;
 
 
