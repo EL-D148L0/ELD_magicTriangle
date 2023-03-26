@@ -44,6 +44,8 @@ _trench setVariable ["corners", _cornerPositions];
 _trench setVariable ["sides", _sides];
 _trench setVariable ["terrainPoints", _terrainPoints];
 
+[_trench] call FUNC(fixTTR);
+
 GVAR(trenchObjectList) pushBack _trench;
 
 true;
