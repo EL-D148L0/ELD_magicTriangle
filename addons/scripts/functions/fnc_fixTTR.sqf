@@ -23,7 +23,7 @@
 params ["_trench"];
 
 
-private _ttrList = _trench getvariable "terrainPoints";
+private _ttrList = [_trench getvariable "terrainPoints"] call ELD_magicTriangle_scripts_fnc_getTerrainTrianglesFromLoweredPoints;
 
 {
 	private _key = _x;

@@ -30,9 +30,9 @@ private _ttr = GVAR(terrainTriangleMap) get _key;
 
  private _trenchoutline = ([_ttr # 3 # 0] call FUNC(getTrenchPolygon)) apply {[_x # 0, _x # 1]};
 
- private _ttrOutline = (_key # 0) apply {[_x # 0, _x # 1]};
+ private _ttrOutline = (_ttr # 0) apply {[_x # 0, _x # 1]};
 
- private _out = clipPolygon [[_trenchoutline], [_ttrOutline]];
+ private _out = clipPolygon [[_ttrOutline], [_trenchoutline]];
 
 private _n = _ttr # 1;
 private _p = _ttr # 0 # 0;
@@ -44,8 +44,8 @@ _newout = [];
 	private _list = [];
 	{
 		// Current result is saved in variable _x
-		private _x2 = ((_n#0 * (_x#0 - _p#0) + _n#1 * (_x#1 - _p#1))/(-_n#2)) + _p#2;
-		_list pushback [_x#0, _x#1, _x2];
+		private _x2 = ((_n#0 * (_x#0 - _p#0) + _n#1 * (_x#1 - _p#1))/(-(_n#2))) + _p#2;
+		_list pushback [_x#0, _x#1, 8];
 	} forEach _x;
 	reverse _list;
 	_newout pushBack _list;

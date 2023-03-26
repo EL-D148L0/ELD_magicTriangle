@@ -56,9 +56,6 @@ private _triangles = [];
 				private _index = (_order#(_i + _j) - _countCounter);
 				if (_index < count _x) then {
 					private _position = _x # _index;
-					if (_foreachindex == 0) then {
-						_position set [2, getTerrainHeight _position];
-					};
 					_triangleCorners pushBack _position;
 					break;
 				} else {
