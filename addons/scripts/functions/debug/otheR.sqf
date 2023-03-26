@@ -75,7 +75,8 @@ _a = (tt selectionPosition ["Corner_1_Pos", "Memory"]) vectorDistance (tt select
 _b = (tt selectionPosition ["Corner_1_Pos", "Memory"]) vectorDistance (tt selectionPosition ["Corner_3_Pos", "Memory"]);
 _c = (tt selectionPosition ["Corner_2_Pos", "Memory"]) vectorDistance (tt selectionPosition ["Corner_3_Pos", "Memory"]);
 
-_area = 0.25* (sqrt (( (_a + _b + _c) * (-_a + _b + _c) * (_a - _b + _c) * (_a + _b - _c) )))
+_area = 0.25* (sqrt (( (_a + _b + _c) * (-_a + _b + _c) * (_a - _b + _c) * (_a + _b - _c) )));
+_area
 
 
 

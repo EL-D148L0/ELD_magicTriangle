@@ -1,5 +1,6 @@
 
-[[1918.08,5537.92,8.35002],[1920,5536,8.59],[1916,5536,8.74]] params ["_pos1", "_pos2", "_pos3"];
+[(tt modeltoworldworld (tt selectionPosition ["Corner_1_Pos", "Memory"])), (tt modeltoworldworld (tt selectionPosition ["Corner_2_Pos", "Memory"])), (tt modeltoworldworld (tt selectionPosition ["Corner_3_Pos", "Memory"]))]
+ params ["_pos1", "_pos2", "_pos3"];
 
 private _posAVG = ((_pos1) vectorAdd ((_pos2) vectorAdd (_pos3))) vectorMultiply (1/3);
 
@@ -42,3 +43,9 @@ if (_length0 >= _length1 && _length0 >= _length2) then {
 		_pointB = _pos2;
 	};
 };
+
+private _vectorAC = _pointC vectorDiff _pointA;
+
+
+_pointP = _pointA vectordiff (_vectorAC vectorMultiply (((_pointA vectorDiff _pointB) vectorDotProduct _vectorAC)/(_vectorAC vectorDotProduct _vectorAC))); 
+
