@@ -48,7 +48,11 @@ private _length0 = _pos1 vectorDistance _pos2;
 private _length1 = _pos2 vectorDistance _pos3;
 private _length2 = _pos3 vectorDistance _pos1;
 
-
+_area = 0.25* (sqrt (( (_length1 + _length0 + _length2) * (-_length0 + _length1 + _length2) * (_length0 - _length1 + _length2) * (_length0 + _length1 - _length2) )));
+if (_area < 0.0008 || !finite _area) exitWith {
+	// if small area triangles not having colliders causes issues, remove that condition. only triangles with NaN area have caused issues so far
+	[];
+};
 
 /*
 			A
