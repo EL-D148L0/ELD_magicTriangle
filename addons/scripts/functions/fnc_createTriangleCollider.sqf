@@ -20,11 +20,6 @@
 
 
 
-//TODO when reworking this function use setObjectScale to scale the boundingbox according to the largest side of the triangle 
-
-
-//omg this function is pain
-
 
 
 //this procedure sorts the points so the object doesn't get turned inside out
@@ -49,9 +44,9 @@ private _posAVG = ((_pos1) vectorAdd ((_pos2) vectorAdd (_pos3))) vectorMultiply
 	2: 3-1
 */
 private _longestSide = 0;
-private _length0 = _pos1 distance _pos2;
-private _length1 = _pos2 distance _pos3;
-private _length2 = _pos3 distance _pos1;
+private _length0 = _pos1 vectorDistance _pos2;
+private _length1 = _pos2 vectorDistance _pos3;
+private _length2 = _pos3 vectorDistance _pos1;
 
 
 

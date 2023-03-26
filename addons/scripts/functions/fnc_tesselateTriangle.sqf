@@ -31,9 +31,9 @@ params ["_pos1", "_pos2", "_pos3", ["_size", 24]];
 
 
 private _longestSide = 0;
-private _length0 = _pos1 distance _pos2;
-private _length1 = _pos2 distance _pos3;
-private _length2 = _pos3 distance _pos1;
+private _length0 = _pos1 vectorDistance _pos2;
+private _length1 = _pos2 vectorDistance _pos3;
+private _length2 = _pos3 vectorDistance _pos1;
 
 
 private _pointA = [];
