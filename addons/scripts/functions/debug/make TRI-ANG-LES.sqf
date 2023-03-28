@@ -1,7 +1,4 @@
 
-
-
-
 {
 	// Current result is saved in variable _x
 	deleteVehicle _x;
@@ -10,17 +7,8 @@
 triangles = [];
 
 
-private _positionsT = [];
-{
-	{
-		_positionsT pushBackUnique _x;
-	} foreach (_x getvariable "terrainPoints");
-	
-} foreach ELD_magicTriangle_scripts_trenchObjectList;
+_allPos = [[[1,1], [1,9],[9,9], [9,1]], [[3,3], [7,3],[7,7], [3,7]], [[0,0], [0,10],[10,10], [10,0]]];
 
-private _gtpwi = ([_positionsT] call ELD_magicTriangle_scripts_fnc_getTerrainPolygonsWithIslands);
-_allPos = [(_gtpwi # 0 # 0)] + (_gtpwi # 0 # 1) + [([ELD_magicTriangle_scripts_trenchObjectList # 0] call ELD_magicTriangle_scripts_fnc_getTrenchPolygon)];
-_allPos;
 _order = getTrianglesOrder _allPos;
 
 for [{ _i = 0 }, { _i < count _order }, { _i = _i + 3 }] do {
@@ -31,9 +19,7 @@ for [{ _i = 0 }, { _i < count _order }, { _i = _i + 3 }] do {
 			private _index = (_order#(_i + _j) - _countCounter);
 			if (_index < count _x) then {
 				_position = _x # _index;
-				if (count _position == 2) then {
-					_position set [2, getTerrainHeight _position];
-				};
+				_position set [2, 2];
 				_triangleCorners pushBack _position;
 				break;
 			} else {
@@ -44,6 +30,6 @@ for [{ _i = 0 }, { _i < count _order }, { _i = _i + 3 }] do {
 		
 		
 	};
-	triangles pushBack (_triangleCorners call ELD_magicTriangle_scripts_fnc_createTriangle);
+	_obj = (_triangleCorners call ELD_magicTriangle_scripts_fnc_createTriangle);
+	triangles append _obj;
 };
-

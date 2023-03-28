@@ -8,8 +8,11 @@
  * Arguments:
  *	0: trench <OBJECT>
  * 		trench to analyze
- *	0: startCornerIndex (optional, default 0)<NUMBER>
+ *	1: startCornerIndex (optional, default 0) <NUMBER>
  * 		starting corner index
+ *	1: trenchList (optional, default []) <ARRAY>
+ * 		if passed, trenches that are not in the list will be ignored.
+ * 		if passed, visited flags will be set to visited. (not resetting)
  *
  * Return Value:
  * array of corner positions in format positionASL <ARRAY>
@@ -23,10 +26,10 @@
 
 
 
-params ["_startTrench", ["_startCornerIndex", 0]];
+params ["_startTrench", ["_startCornerIndex", 0], ["_trenchList", []]];
 
 
-
+private _usingList = (count _trenchList) != 0;
 
 private _polygon = [];
 
@@ -37,7 +40,12 @@ private _currentCornerRank = _currentTrench getVariable "rank";
 
 private _reachedStart = false;
 while {true} do {
-	if (isnull ((_currentTrench getVariable "sides") # _currentCornerIndex)) then {
+	if (_usingList) then {
+		(_currentTrench getVariable "visitedCorners") set [_currentCornerIndex, true];
+	};
+	private _nextTrench = ((_currentTrench getVariable "sides") # _currentCornerIndex);
+	private _continueSameTrench = (isnull _nextTrench) || {_usingList && {!(_nextTrench in _trenchList)}}; 
+	if (_continueSameTrench) then {
 		if (_reachedStart) then {
 			break;
 		};
@@ -48,7 +56,6 @@ while {true} do {
 			_reachedStart = true;
 		};
 	} else {
-		private _nextTrench = ((_currentTrench getVariable "sides") # _currentCornerIndex);
 		private _nextIndex = (((_nextTrench getVariable "sides") find _currentTrench) + 1) % (count (_nextTrench getVariable "sides"));
 		if (_currentCornerRank > (_nextTrench getVariable "rank")) then {
 			_polygon set [-1, (_nextTrench getVariable "corners") # _nextIndex];

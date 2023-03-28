@@ -23,20 +23,14 @@
 params ["_positionLists"];
 
 private _positionListsForTriangulation = [];
+private _positionListsHoles = [];
+private _positionListsOutlines = [];
 
 {
-	private _thisPosList = _x;
-	private _add = -1;// bad var name
-	{
-		if ((_thisPosList#0) inpolygon (_x#0)) then {
-			_add = _foreachindex;
-			break;
-		};
-	} forEach _positionListsForTriangulation;
-	if (_add != -1) then {
-		(_positionListsForTriangulation#_add) pushback _thisPosList;
+	if (_x#1) then {
+		_positionListsOutlines pushBack (_x#0);
 	} else {
-		_positionListsForTriangulation pushback [_thisPosList];
+		_positionListsHoles pushBack (_x#0);
 	};
 } forEach _positionLists;
 
@@ -69,7 +63,7 @@ private _triangles = [];
 		private _obj = (_triangleCorners call FUNC(createTriangle));
 		_triangles append _obj;
 	};
-} forEach _positionListsForTriangulation;
+} forEach (_positionListsOutlines apply {[_x] + _positionListsHoles});
 
 
 _triangles;
