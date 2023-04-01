@@ -3,6 +3,7 @@ PREP(createTriangleCollider);
 PREP(expandTrenchGraph);
 PREP(fillPolygons);
 PREP(fixTTR);
+PREP(getBorderPosDirUp);
 PREP(getIslandPolygon);
 PREP(getTerrainHoleIslands);
 PREP(getTerrainPolygon);
