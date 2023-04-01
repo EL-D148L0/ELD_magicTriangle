@@ -24,7 +24,6 @@ params ["_trenchObject", ["_paddingFactor", 0.3]];
 private _minBBoxSize = 1.5;
 
 
-private _cellsize = getTerrainInfo#2;
 private _bbx = boundingBoxReal _trenchObject;
 private _p1 = _bbx # 0;
 private _p2 = _bbx # 1;
@@ -36,7 +35,7 @@ _p2 set [2, _p1 # 2];
 
 //experimental
 // works for now
-private _padding = _paddingFactor * _cellsize;
+private _padding = _paddingFactor * GVAR(cellSize);
 _p1 = _p1 vectordiff [_padding, _padding, 0];
 _p2 = _p2 vectoradd [_padding, _padding, 0];
 
@@ -49,14 +48,14 @@ private _yWidth = (_p2 # 1) - (_p1 # 1);
 
 
 
-if (_xWidth < (_minBBoxSize * _cellsize)) then {
-	_diff = ((_minBBoxSize * _cellsize) - _xWidth) / 2;
+if (_xWidth < (_minBBoxSize * GVAR(cellSize))) then {
+	_diff = ((_minBBoxSize * GVAR(cellSize)) - _xWidth) / 2;
 	_p1 set [0, _p1 # 0 - _diff];
 	_p2 set [0, _p2 # 0 + _diff];
 };
 
-if (_yWidth < (_minBBoxSize * _cellsize)) then {
-	_diff = ((_minBBoxSize * _cellsize) - _yWidth) / 2;
+if (_yWidth < (_minBBoxSize * GVAR(cellSize))) then {
+	_diff = ((_minBBoxSize * GVAR(cellSize)) - _yWidth) / 2;
 	_p1 set [1, _p1 # 1 - _diff];
 	_p2 set [1, _p2 # 1 + _diff];
 };
@@ -77,8 +76,8 @@ private _bbsr = _bbx # 2;
 
 
 
-_bbxCenterWorld apply {round (_x / _cellsize)} params ["_x0", "_y0"];
-private _step = ceil(_bbsr / _cellsize) + 1;
+_bbxCenterWorld apply {round (_x / GVAR(cellSize))} params ["_x0", "_y0"];
+private _step = ceil(_bbsr / GVAR(cellSize)) + 1;
 
 
 private _pointsToModify = [];
@@ -86,7 +85,7 @@ private _pointsToModify = [];
 
 for "_x" from (_x0 - _step) to (_x0 + _step) do {
 	for "_y" from (_y0 - _step) to (_y0 + _step) do {
-		private _pos1 = [_x, _y] vectorMultiply _cellsize;	
+		private _pos1 = [_x, _y] vectorMultiply GVAR(cellSize);	
 		if (_pos1 inArea _area) then {
 			_pointsToModify append [ + _pos1];
 		};

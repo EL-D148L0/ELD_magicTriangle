@@ -28,9 +28,8 @@ params ["_key"];
 
 
 
-private _cellsize = getTerrainInfo#2;
 // N, E, SE, S, W, NW
-private _directions = [[0,_cellsize], [_cellsize, 0], [_cellsize,-_cellsize], [0,-_cellsize],[-_cellsize,0],[-_cellsize,_cellsize]];
+private _directions = [[0,GVAR(cellSize)], [GVAR(cellSize), 0], [GVAR(cellSize),-GVAR(cellSize)], [0,-GVAR(cellSize)],[-GVAR(cellSize),0],[-GVAR(cellSize),GVAR(cellSize)]];
 
 
 

@@ -36,9 +36,8 @@ _positions sort true;
 
 _outlinePolygon = _outlinePolygon apply {[_x # 0, _x # 1, 0]};
 
-private _cellsize = getTerrainInfo#2;
 // N, E, SE, S, W, NW
-private _directions = [[0,_cellsize], [_cellsize, 0], [_cellsize,-_cellsize], [0,-_cellsize],[-_cellsize,0],[-_cellsize,_cellsize]];
+private _directions = [[0,GVAR(cellSize)], [GVAR(cellSize), 0], [GVAR(cellSize),-GVAR(cellSize)], [0,-GVAR(cellSize)],[-GVAR(cellSize),0],[-GVAR(cellSize),GVAR(cellSize)]];
 
 private _maxX = _positions#0#0;
 private _maxY = _positions#0#1;
@@ -56,8 +55,8 @@ private _outOfBorderPositions = [];
 
 private _inside = [_minX, _minY, 0] inPolygon _outlinePolygon;
 private _currentindex = 0;
-for [{_posX = _minX}, {_posX <= _maxX + 0.01}, {_posX = _posX + _cellsize}] do {
-	for [{_posY = _minY}, {_posY <= _maxY + 0.01}, {_posY = _posY + _cellsize}] do {
+for [{_posX = _minX}, {_posX <= _maxX + 0.01}, {_posX = _posX + GVAR(cellSize)}] do {
+	for [{_posY = _minY}, {_posY <= _maxY + 0.01}, {_posY = _posY + GVAR(cellSize)}] do {
 		_inside = [_posX, _posY, 0] inPolygon _outlinePolygon;
 		if ([_positions # _currentindex, [[_posX, _posY]]] call FUNC(pointInList2d)) then {
 			if (!_inside) then {

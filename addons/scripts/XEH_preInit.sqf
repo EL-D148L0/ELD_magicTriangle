@@ -10,7 +10,7 @@ PREP_RECOMPILE_END;
 
 ADDON = true;
 
-
+GVAR(cellSize) = getTerrainInfo#2;
 
 GVAR(coveredTrenchList) = [];
 
