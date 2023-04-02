@@ -39,7 +39,7 @@ _tpList = _tpList arrayIntersect _tpList;
 	};
 } forEach _tpList;
 
-private _ttrList = [_tpList] call ELD_magicTriangle_scripts_fnc_getTerrainTrianglesFromLoweredPoints;
+private _ttrList = [_tpList] call FUNC(getTerrainTrianglesFromLoweredPoints);
 
 
 {
