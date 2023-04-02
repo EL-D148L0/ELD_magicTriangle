@@ -2,6 +2,7 @@
 /*
  * Author: EL_D148L0
  * finds terrain points that need to be lowered for the passed object to fit into the hole
+ * TODO find out of this returns 2d or 3d positions
  *
  * Arguments:
  * 0: trench object <OBJECT>

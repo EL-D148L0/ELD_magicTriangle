@@ -23,7 +23,7 @@
 params ["_trench"];
 
 
-private _tpList = _trench getvariable "terrainPoints";
+private _tpList = (_trench getvariable "terrainPoints") apply {[_x#0, _x#1]};
 
 {
 	private _key = _x;

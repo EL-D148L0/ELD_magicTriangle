@@ -44,8 +44,8 @@ _trench setVariable ["corners", _cornerPositions];
 _trench setVariable ["sides", _sides];
 _trench setVariable ["terrainPoints", _terrainPoints];
 
-//private _tp = [_trench] call FUNC(TPAddTrench);
-//_tp call FUNC(TPUpdate);
+private _tp = [_trench] call FUNC(TPAddTrench);
+[_tp] call FUNC(TPUpdate);
 
 
 GVAR(trenchObjectList) pushBack _trench;

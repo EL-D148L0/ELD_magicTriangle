@@ -21,6 +21,23 @@
 
 params ["_tpList"];
 
+_tpList = _tpList arrayIntersect _tpList;
+
+{
+	// Current result is saved in variable _x 
+	private _thisTP = (GVAR(terrainPointMap) get _x);
+	private _originalTerrainPosition = _thisTP # 0;
+	private _hasTrenches = (count (_thisTP # 1)) != 0;
+	if ((abs ((_originalTerrainPosition # 2) - (getTerrainHeight _x))) < 0.005) then {
+		if (_hasTrenches) then {
+			[_originalTerrainPosition vectorAdd [0,0,- GVAR(cellSize) * 1.5]] call FUNC(setTerrainPointHeight);
+		};
+	} else {
+		if (!_hasTrenches) then {
+			[_originalTerrainPosition] call FUNC(setTerrainPointHeight);
+		};
+	};
+} forEach _tpList;
 
 private _ttrList = [_tpList] call ELD_magicTriangle_scripts_fnc_getTerrainTrianglesFromLoweredPoints;
 
@@ -59,11 +76,24 @@ private _ttrList = [_tpList] call ELD_magicTriangle_scripts_fnc_getTerrainTriang
 		_trenches append (_temp # 1);
 		_pointC = _temp # 0;
 	};
+	if ((count _trenches) == 0) then {
+		continue;
+	};
 	
 	private _triangles = [[[_pointA, _pointB, _pointC], _trenches] call FUNC(getTTRIntersectedPolygons)] call FUNC(fillPolygons);
+	
+	private _key =  [_ttrKey#0, _ttrKey#1];
+	private _entry = GVAR(terrainPointMap) getordefault [_key, []];
+	_entry params [
+			["_originalTerrainPosition", _key + [getTerrainHeight _key]], 
+			["_associatedTrenches", []], 
+			["_fillerObjects", [[],[]]]
+			];
 	{
 		deletevehicle _x;
-	} forEach ((GVAR(terrainPointMap) get [_ttrKey#0, _ttrKey#1]) # 2 # (_ttrKey#2));
-	((GVAR(terrainPointMap) get [_ttrKey#0, _ttrKey#1]) # 2) set [(_ttrKey#2), _triangles];
+	} forEach (_fillerObjects# (_ttrKey#2));
+	_fillerObjects set [(_ttrKey#2), _triangles];
+
+	GVAR(terrainPointMap) set [_key, [_originalTerrainPosition, _associatedTrenches, _fillerObjects]];
 	
 } forEach _ttrList;
