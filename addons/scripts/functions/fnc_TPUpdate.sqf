@@ -76,11 +76,12 @@ private _ttrList = [_tpList] call FUNC(getTerrainTrianglesFromLoweredPoints);
 		_trenches append (_temp # 1);
 		_pointC = _temp # 0;
 	};
-	if ((count _trenches) == 0) then {
-		continue;
+
+	private _triangles = [];
+	if ((count _trenches) != 0) then {
+		_triangles = [[[_pointA, _pointB, _pointC], _trenches] call FUNC(getTTRIntersectedPolygons)] call FUNC(fillPolygons);
 	};
 	
-	private _triangles = [[[_pointA, _pointB, _pointC], _trenches] call FUNC(getTTRIntersectedPolygons)] call FUNC(fillPolygons);
 	
 	private _key =  [_ttrKey#0, _ttrKey#1];
 	private _entry = GVAR(terrainPointMap) getordefault [_key, []];
