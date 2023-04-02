@@ -22,7 +22,7 @@
  */
 
 
-params ["_pos1", "_pos2", "_pos3", ["_texture", 1]];
+params ["_pos1", "_pos2", "_pos3", ["_texture", GVAR(defaultTriangleColor)]];
 
 ([_pos1, _pos2, _pos3] call FUNC(sortTriangleCorners)) params ["_pos1", "_pos2", "_pos3"];
 
