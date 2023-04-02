@@ -24,8 +24,7 @@ params ["_trench"];
 
 if (1 in (getArray ((configOf _trench) >> "trench_sides_open"))) exitWith {false};//if the trench is not a core trench return false
 
-private _rank = GVAR(trenchRankCounter);
-GVAR(trenchRankCounter) = GVAR(trenchRankCounter) + 1;
+private _rank = call FUNC(getNewRank);
 
 
 private _cornerPositions = [_trench] call FUNC(getTrenchCornersFromConfig);

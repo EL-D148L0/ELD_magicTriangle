@@ -73,9 +73,8 @@ private _replacementTrenchTerrainPoints = _trench getVariable "terrainPoints";
 
 
 
+private _newTrenchRank = call FUNC(getNewRank);
 
-private _newTrenchRank = GVAR(trenchRankCounter);
-GVAR(trenchRankCounter) = GVAR(trenchRankCounter) + 1;
 
 private _newTrenchCorners = [_newTrench] call FUNC(getTrenchCornersFromConfig);
 private _newTrenchSides = [];

@@ -3,6 +3,7 @@ PREP(createTriangleCollider);
 PREP(expandTrenchGraph);
 PREP(fillPolygons);
 PREP(getBorderPosDirUp);
+PREP(getNewRank);
 PREP(getTerrainPolygon);
 PREP(getTerrainTrianglesFromLoweredPoints);
 PREP(getTrenchCornersFromConfig);
