@@ -1,4 +1,12 @@
 
+// get all layers
+all3DENEntities # 6
+
+// layer transform allowed
+myLayer get3DENAttribute "Transformation"
+
+
+
 
 
 
