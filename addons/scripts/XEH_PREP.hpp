@@ -29,5 +29,8 @@ PREP(setTerrainPointHeight);
 PREP(sortTriangleCorners);
 PREP(splitTriangle);
 PREP(tesselateTriangle);
+PREP(TPAddTrench);
+PREP(TPRemoveTrench);
+PREP(TPUpdate);
 PREP(triangleIntersect);
 PREP(TTRKeyToTriangle);

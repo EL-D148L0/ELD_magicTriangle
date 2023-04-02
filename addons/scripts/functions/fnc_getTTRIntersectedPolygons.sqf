@@ -5,7 +5,8 @@
  * calculates the polygons inside passed TTR that need to be filled to not intersect trenches
  *
  * Arguments:
- *	0: array in format TTRKey <ARRAY>
+ *	0: array of 3 triangle corners in positionASL <ARRAY>
+ *	0: array of trenches <ARRAY>
  * 
  *
  * Return Value:
@@ -20,14 +21,11 @@
 
 
 
-params ["_key"];
-
-
-private _ttr = GVAR(terrainTriangleMap) get _key;
+params ["_triangle", "_trenchlist"];
 
 
 
-private _trenchlist = _ttr # 3;
+
 {
 	private _vc = [];
 	{
@@ -60,12 +58,12 @@ while {true} do {
 
 
 
- private _ttrOutline = (_ttr # 0) apply {[_x # 0, _x # 1]};
+private _ttrOutline = _triangle apply {[_x # 0, _x # 1]};
 
- private _out = clippolygonWindOrder [[_ttrOutline], _outlines];
+private _out = clippolygonWindOrder [[_ttrOutline], _outlines];
 
-private _n = _ttr # 1;
-private _p = _ttr # 0 # 0;
+private _normal = vectornormalized (((_triangle#0) vectordiff (_triangle#2)) vectorCrossProduct ((_triangle#0) vectordiff (_triangle#1)));;
+private _p = _triangle # 0;
 
 
 _newout = [];
@@ -75,7 +73,7 @@ _newout = [];
 	private _order = _x#1;
 	{
 		// Current result is saved in variable _x
-		private _x2 = ((_n#0 * (_x#0 - _p#0) + _n#1 * (_x#1 - _p#1))/(-(_n#2))) + _p#2;
+		private _x2 = ((_normal#0 * (_x#0 - _p#0) + _normal#1 * (_x#1 - _p#1))/(-(_normal#2))) + _p#2;
 		_list pushback [_x#0, _x#1, _x2];
 	} forEach (_x#0);
 	_newout pushBack [_list, _order];

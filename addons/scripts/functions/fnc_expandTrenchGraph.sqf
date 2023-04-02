@@ -112,9 +112,11 @@ GVAR(trenchObjectList) deleteAt (GVAR(trenchObjectList) find _trench);
 GVAR(trenchObjectList) pushBack _replacementTrench;
 GVAR(trenchObjectList) pushBack _newTrench;
 
+[_trench] call FUNC(TPRemoveTrench);
+[_replacementTrench] call FUNC(TPAddTrench);
 
-[_trench, _replacementTrench] call FUNC(replaceTrenchTTR);
-[_newTrench] call FUNC(fixTTR);
+private _tp = [_newTrench] call FUNC(TPAddTrench);
+_tp call FUNC(TPUpdate);
 
 deleteVehicle _trench;
 
