@@ -23,15 +23,6 @@ player addEventHandler ["Fired", {
 			[_trench, _trDir, [_trench, _trDir] call ELD_magicTriangle_scripts_fnc_makeNewTrenchForExpansion] call ELD_magicTriangle_scripts_fnc_expandTrenchGraph;
 			
 			
-			private _positionsT = [];
-			{
-				{
-					_positionsT pushBackUnique _x;
-				} foreach (_x getvariable "terrainPoints");
-				
-			} foreach ELD_magicTriangle_scripts_trenchObjectList;
-			
-			setTerrainHeight [_positionsT apply {[_x # 0, _x#1, 0]}, false];
 
 		} else {
 			hint "uninitialized trench is closest to player"
