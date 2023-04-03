@@ -1,3 +1,6 @@
+PREP(3DENInitTrench);
+PREP(3DENUpdateAttributes);
+PREP(3DENUpdateTrench);
 PREP(createTriangle);
 PREP(createTriangleCollider);
 PREP(expandTrenchGraph);

@@ -1,6 +1,21 @@
+#include "script_component.hpp"
+/*
+ * Author: EL_D148L0
+ * function that is called inside the dragged3den EH by trenches
+ * Arguments:
+ * 0: trench to update
+ *
+ * Return Value:
+ * none
+ *
+ * Example:
+ * [_trench] call ELD_magicTriangle_scripts_fnc_3DENInitTrench;
+ *
+ * Public: No
+ */
 
 
-(get3DENSelected "object") params ["_trench"];
+params ["_trench"];
 if (!is3DEN) exitWith {};
 _trench setVariable ["initialized3DEN", true];
 _openSides = (getArray ((configOf _trench) >> "trench_sides_open"));
@@ -10,7 +25,7 @@ _arrows = [];
 	// Current result is saved in variable _x
 	private _item = objNull;
 	if (_x == 1) then {
-		private _posInfo = [_trench, _forEachIndex] call ELD_magicTriangle_scripts_fnc_getBorderPosDirUp;
+		private _posInfo = [_trench, _forEachIndex] call FUNC(getBorderPosDirUp);
 		_item = "Sign_Arrow_Direction_F" createVehicle [0,0,0];
 		_item setPosASL (_posInfo#0);
 		_item setVectorDirAndUp [_posInfo#1, _posInfo#2];
@@ -22,7 +37,7 @@ _arrows = [];
 			params ["_trench"];
 			{
 				if (!isNull _x) then {
-					private _posInfo = [_trench, _forEachIndex] call ELD_magicTriangle_scripts_fnc_getBorderPosDirUp;
+					private _posInfo = [_trench, _forEachIndex] call FUNC(getBorderPosDirUp);
 					_x setPosASL (_posInfo#0);
 					_x setVectorDirAndUp [_posInfo#1, _posInfo#2];
 				};
@@ -33,8 +48,8 @@ _arrows = [];
 } forEach _openSides;
 
 _trench setVariable ["arrows", _arrows];
-private _rank = call ELD_magicTriangle_scripts_fnc_getNewRank;
+private _rank = call FUNC(getNewRank);
 _trench setVariable ["rank", _rank];
 _neighbors = _arrows apply {objNull};
 _trench setVariable ["sides", _neighbors];
-[_trench] call ELD_magicTriangle_scripts_fnc_3DENUpdateAttributes;
+[_trench] call FUNC(3DENUpdateAttributes);

@@ -11,7 +11,7 @@
 
 player addEventHandler ["Fired", {
 	params ["_unit", "_weapon", "_muzzle", "_mode", "_ammo", "_magazine", "_projectile", "_gunner"];
-	_objs = nearestObjects [player, ["Tronch_center"], 3];
+	_objs = nearestObjects [player, ["Trench_base"], 3];
 	if(count _objs > 0) then {
 		_trench = _objs#0;
 		if (_trench in ELD_magicTriangle_scripts_trenchObjectList) then {
