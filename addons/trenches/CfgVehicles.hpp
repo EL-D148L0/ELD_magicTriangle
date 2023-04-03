@@ -25,7 +25,7 @@ class CfgVehicles
 				// Entity is passed as _this, value is passed as _value
 				// %s is replaced by attribute config name. It can be used only once in the expression
 				// In MP scenario, the expression is called only on server.
-				expression = "_this setVariable ['rank',_value];";
+				expression = "_this setVariable ['rank',_value]; _value call ELD_magicTriangle_scripts_fnc_discoverRank";
 
 				// Expression called when custom property is undefined yet (i.e., when setting the attribute for the first time)
 				// Entity (unit, group, marker, comment etc.) is passed as _this
@@ -46,7 +46,7 @@ class CfgVehicles
 				property = "neighborRanks"; // Unique config property name saved in SQM
 				control = "Edit"; // UI control base class displayed in Edit Attributes window, points to Cfg3DEN >> Attributes
 
-				expression = "_this setVariable ['neighborRanks',_value];";
+				expression = "_this setVariable ['%s',_value];";
 
 				defaultValue = "[]";
 
@@ -55,11 +55,11 @@ class CfgVehicles
 				typeName = "STRING"; // Defines data type of saved value, can be STRING, NUMBER or BOOL. Used only when control is "Combo", "Edit" or their variants
 			};
 		};
-		/*
+		
 		class EventHandlers;
 		class EventHandlers: EventHandlers {
-			init = "systemchat 'init'";
-		};*/
+			init = "";
+		};
 
 		
 		

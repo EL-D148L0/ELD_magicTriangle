@@ -13,7 +13,6 @@ ADDON = true;
 GVAR(cellSize) = getTerrainInfo#2;
 GVAR(defaultTriangleColor) = 1;
 
-GVAR(coveredTrenchList) = [];
 
 
 

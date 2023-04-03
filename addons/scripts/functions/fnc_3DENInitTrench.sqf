@@ -48,8 +48,13 @@ _arrows = [];
 } forEach _openSides;
 
 _trench setVariable ["arrows", _arrows];
-private _rank = call FUNC(getNewRank);
-_trench setVariable ["rank", _rank];
-_neighbors = _arrows apply {objNull};
-_trench setVariable ["sides", _neighbors];
-[_trench] call FUNC(3DENUpdateAttributes);
+
+if ((_trench getVariable ["rank", -1]) == -1) then {
+	private _rank = call FUNC(getNewRank);
+	_trench setVariable ["rank", _rank];
+	_neighbors = _arrows apply {objNull};
+	_trench setVariable ["sides", _neighbors];
+	[_trench] call FUNC(3DENUpdateAttributes);
+};
+
+//TODO fix arrow mates
