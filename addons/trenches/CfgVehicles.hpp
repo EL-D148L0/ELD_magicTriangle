@@ -25,7 +25,7 @@ class CfgVehicles
 				// Entity is passed as _this, value is passed as _value
 				// %s is replaced by attribute config name. It can be used only once in the expression
 				// In MP scenario, the expression is called only on server.
-				expression = "_this setVariable ['rank',_value]; _value call ELD_magicTriangle_scripts_fnc_discoverRank";
+				expression = "_this setVariable ['rank',_value]; _value call ELD_magicTriangle_scripts_fnc_discoverRank; systemChat 'rank attribute init called'";
 
 				// Expression called when custom property is undefined yet (i.e., when setting the attribute for the first time)
 				// Entity (unit, group, marker, comment etc.) is passed as _this
@@ -35,7 +35,7 @@ class CfgVehicles
 				defaultValue = "-1";
 
 				//--- Optional properties
-				unique = 1; // When 1, only one entity of the type can have the value in the mission (used for example for variable names or player control)
+				unique = 0; // When 1, only one entity of the type can have the value in the mission (used for example for variable names or player control)
 				typeName = "NUMBER"; // Defines data type of saved value, can be STRING, NUMBER or BOOL. Used only when control is "Combo", "Edit" or their variants
 			};
 			class Neighbors
@@ -58,7 +58,8 @@ class CfgVehicles
 		
 		class EventHandlers;
 		class EventHandlers: EventHandlers {
-			init = "";
+			init = "params ['_trench']; [_trench] call ELD_magicTriangle_scripts_fnc_3DENInitTrench;";
+			dragged3DEN = "_this call ELD_magicTriangle_scripts_fnc_3DENUpdateTrench;";
 		};
 
 		

@@ -14,7 +14,7 @@
  * Public: No
  */
 
-//TODO rework this without mates
+
 params ["_trench"];
 {
 	if (!isNull _x) then {
@@ -33,7 +33,7 @@ params ["_trench"];
 				_angleDir = acos ((vectordir _originArrow) vectorCos ((vectordir _x) vectorMultiply -1));
 				_angleUp = acos ((vectorUp _originArrow) vectorCos (vectorUp _x));
 				if (_angleDir < _maxAngleDiff && _angleUp < _maxAngleDiff) then {
-					if ((isNull ((_x getVariable "trench") getVariable "sides" # (_x getVariable "sideNumber") # 0)) || [(_x getVariable "trench"), (_x getVariable "sideNumber")] isEqualTo _oldMatingInfo) then {
+					if ((isNull (((_x getVariable "trench") getVariable "sides") # (_x getVariable "sideNumber") # 0)) || [(_x getVariable "trench"), (_x getVariable "sideNumber")] isEqualTo _oldMatingInfo) then {
 						_mate = _x;
 						break;
 					};

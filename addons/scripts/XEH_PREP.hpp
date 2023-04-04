@@ -1,4 +1,5 @@
 PREP(3DENInitTrench);
+PREP(3DENSyncVarsFromAttributes);
 PREP(3DENUpdateAttributes);
 PREP(3DENUpdateTrench);
 PREP(createTriangle);
@@ -23,7 +24,6 @@ PREP(randomColor);
 PREP(setTerrainPointHeight);
 PREP(sortTriangleCorners);
 PREP(splitTriangle);
-PREP(syncVarsFromAttributes);
 PREP(TPAddTrench);
 PREP(TPRemoveTrench);
 PREP(TPUpdate);

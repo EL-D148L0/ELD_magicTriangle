@@ -14,7 +14,7 @@ GVAR(cellSize) = getTerrainInfo#2;
 GVAR(defaultTriangleColor) = 1;
 
 
-
+systemchat "preinit";
 
 GVAR(trenchRankCounter) = 0;
 GVAR(trenchObjectList) = [];

@@ -20,6 +20,8 @@ if (!is3DEN) exitWith {};
 _trench setVariable ["initialized3DEN", true];
 _openSides = (getArray ((configOf _trench) >> "trench_sides_open"));
 
+GVAR(trenchObjectList) pushBack _trench;
+
 _arrows = [];
 {
 	// Current result is saved in variable _x
