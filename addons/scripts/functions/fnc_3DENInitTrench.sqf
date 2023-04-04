@@ -31,7 +31,7 @@ _arrows = [];
 		_item setVectorDirAndUp [_posInfo#1, _posInfo#2];
 		_item setVariable ["trench", _trench];
 		_item setVariable ["sideNumber", _forEachIndex];
-		_item setVariable ["mate", objNull];
+		//_item setVariable ["mate", objNull];
 		//attachto doesnt work in 3den
 		_trench addEventHandler ["Dragged3DEN", {
 			params ["_trench"];
@@ -52,18 +52,17 @@ _trench setVariable ["arrows", _arrows];
 if ((_trench getVariable ["rank", -1]) == -1) then {
 	private _rank = call FUNC(getNewRank);
 	_trench setVariable ["rank", _rank];
-	_neighbors = _arrows apply {objNull};
+	_neighbors = _arrows apply {[objNull, -1]};
 	_trench setVariable ["sides", _neighbors];
 	[_trench] call FUNC(3DENUpdateAttributes);
 } else {
 	[_trench] call FUNC(3DENSyncVarsFromAttributes);
 };
 
-//TODO fix arrow mates
 
 //all variables should be fixed at this point
 {
-	if (!isNull _x) then {
-		
+	if (!isNull (_x#0)) then {
+		((_trench getVariable "arrows") # _foreachindex) setObjectTexture [0, "#(argb,8,8,3)color(0,1,0,0.75,ca)"];
 	};
 } forEach (_trench getVariable "sides");

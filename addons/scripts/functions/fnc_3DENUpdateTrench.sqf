@@ -14,7 +14,7 @@
  * Public: No
  */
 
-
+//TODO rework this without mates
 params ["_trench"];
 {
 	if (!isNull _x) then {
@@ -22,7 +22,7 @@ params ["_trench"];
 		_x setPosASL (_posInfo#0);
 		_x setVectorDirAndUp [_posInfo#1, _posInfo#2];
 		
-
+		private _oldMatingInfo = (_trench getVariable "sides") # _foreachindex;
 		private _nearArrows = nearestObjects [_x, ["Sign_Arrow_Direction_F"], 0.4];
 		private _originArrow = _x;
 		private _mate = objNull;
@@ -33,44 +33,45 @@ params ["_trench"];
 				_angleDir = acos ((vectordir _originArrow) vectorCos ((vectordir _x) vectorMultiply -1));
 				_angleUp = acos ((vectorUp _originArrow) vectorCos (vectorUp _x));
 				if (_angleDir < _maxAngleDiff && _angleUp < _maxAngleDiff) then {
-					if ((isNull (_x getVariable "mate")) || (_x getVariable "mate") == _originArrow) then {
+					if ((isNull ((_x getVariable "trench") getVariable "sides" # (_x getVariable "sideNumber") # 0)) || [(_x getVariable "trench"), (_x getVariable "sideNumber")] isEqualTo _oldMatingInfo) then {
 						_mate = _x;
 						break;
 					};
 				};
 			}; 
 		} forEach _nearArrows;
-		private _oldMate = _originArrow getVariable "mate";
-		
-		if ((!isNull _oldMate) && _oldMate != _mate) then {
-			_oldMate setVariable ["mate", objNull];
-			_oldMate setObjectTexture [0, "#(argb,8,8,3)color(1,0,0,0.75,ca)"];
-			((_oldMate getVariable "trench") getVariable "sides") set [(_oldMate getVariable "sideNumber"), objNull];
-			[(_oldMate getVariable "trench")] call FUNC(3DENUpdateAttributes);
-		};
-		if (isNull _mate) then {
-			if (!isNull _oldMate) then {
-				//no mate, yes oldmate:
-				_originArrow setObjectTexture [0, "#(argb,8,8,3)color(1,0,0,0.75,ca)"];
-				_originArrow setVariable ["mate", objNull];
-				(_trench getVariable "sides") set [_originArrow getVariable "sideNumber", objNull];
-				[_trench] call FUNC(3DENUpdateAttributes);
-			};
-				//no mate, no oldmate: do nothing
+		//private _oldMate = _originArrow getVariable "mate";
+		private _nochange = false;
+		if (!isNull _mate) then {
+			_nochange = _nochange || ([(_mate getVariable "trench"), (_mate getVariable "sideNumber")] isEqualTo _oldMatingInfo);
 		} else {
-			if (_oldMate != _mate) then {
-				//yes mate, maybe different oldmate:
+			_nochange = _nochange || isNull (_oldMatingInfo#0);
+		};
+
+
+
+
+
+
+		if (!_nochange) then {
+			if (!isNull (_oldMatingInfo#0)) then {
+				((_oldMatingInfo#0) getVariable "sides") set [_oldMatingInfo#1, [objNull, -1]];
+				(((_oldMatingInfo#0) getVariable "arrows") # (_oldMatingInfo#1)) setObjectTexture [0, "#(argb,8,8,3)color(1,0,0,0.75,ca)"];
+				[(_oldMatingInfo#0)] call FUNC(3DENUpdateAttributes);
+			};
+			if (isNull _mate) then {
+				_originArrow setObjectTexture [0, "#(argb,8,8,3)color(1,0,0,0.75,ca)"];
+				(_trench getVariable "sides") set [_originArrow getVariable "sideNumber", [objNull, -1]];
+
+			} else {
 				_originArrow setObjectTexture [0, "#(argb,8,8,3)color(0,1,0,0.75,ca)"];
 				_mate setObjectTexture [0, "#(argb,8,8,3)color(0,1,0,0.75,ca)"];
-				_originArrow setVariable ["mate", _mate];
-				_mate setVariable ["mate", _originArrow];
 
-				(_trench getVariable "sides") set [_originArrow getVariable "sideNumber", (_mate getVariable "trench")];
-				[_trench] call FUNC(3DENUpdateAttributes);
-				((_mate getVariable "trench") getVariable "sides") set [(_mate getVariable "sideNumber"), _trench];
+				(_trench getVariable "sides") set [_originArrow getVariable "sideNumber", [_mate getVariable "trench", _mate getVariable "sideNumber"]];
+				((_mate getVariable "trench") getVariable "sides") set [(_mate getVariable "sideNumber"), [_trench, _originArrow getVariable "sideNumber"]];
 				[(_mate getVariable "trench")] call FUNC(3DENUpdateAttributes);
 			};
-			//yes mate, same oldmate: do nothing
+			[_trench] call FUNC(3DENUpdateAttributes);
 		};
 	};
 } forEach (_trench getVariable ["arrows", []]);

@@ -20,7 +20,7 @@ params ["_trench"];
 _trench setVariable ["rank", _trench get3DENAttribute "trenchRank"];
 
 
-private _sides = _trench get3DENAttribute "neighborRanks" apply {
+private _sides = (parseSimpleArray (_trench get3DENAttribute "neighborRanks")) apply {
 	private _rank = _x;
 	if (_rank = -1) exitWith {
 		objNull;

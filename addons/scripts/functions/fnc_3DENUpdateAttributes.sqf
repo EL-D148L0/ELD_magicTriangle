@@ -18,4 +18,4 @@
 params ["_trench"];
 
 _trench set3DENAttribute ["trenchRank", _trench getVariable ["rank", -1]];
-_trench set3DENAttribute ["neighborRanks", str ((_trench getVariable ["sides", []]) apply {_x getVariable ["rank", -1]})];
+_trench set3DENAttribute ["neighborRanks", str ((_trench getVariable ["sides", []]) apply {[(_x#0) getVariable ["rank", -1], _x#1]})];
