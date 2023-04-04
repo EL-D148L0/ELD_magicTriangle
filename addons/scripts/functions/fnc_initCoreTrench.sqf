@@ -32,7 +32,7 @@ private _cornerPositions = [_trench] call FUNC(getTrenchCornersFromConfig);
 
 private _sides = [];
 {
-	_sides append [objNull];
+	_sides append [[objNull, -1]];
 } forEach _cornerPositions;
 
 private _terrainPoints = [_trench] call FUNC(makeSingleHole);

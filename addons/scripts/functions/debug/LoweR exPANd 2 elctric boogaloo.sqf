@@ -3,7 +3,7 @@
 
 
 
-[tr_1] call ELD_magicTriangle_scripts_fnc_initCoreTrench;
+[tr] call ELD_magicTriangle_scripts_fnc_initCoreTrench;
 
 
 

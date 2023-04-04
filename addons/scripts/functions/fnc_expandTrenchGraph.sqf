@@ -51,20 +51,32 @@ _replacementTrench setVectorDirAndUp [_trench vectorModelToWorld _replacementTre
 
 
 
+private _newTrenchCorners = [_newTrench] call FUNC(getTrenchCornersFromConfig);
+private _newTrenchSides = [];
+{
+	_newTrenchSides append [[objNull, -1]];
+} forEach _newTrenchCorners;
+//_newTrenchSides set [_newToOldSide, [_replacementTrench, -1]];
+_newTrench setVariable ["sides", _newTrenchSides];
+
+
+
+private _newToOldSide = ((getArray ((configOf _newTrench) >> "trench_sides_open")) find 1);// the open side of the new trench
+
 private _replacementTrenchCorners = [_replacementTrench] call FUNC(getTrenchCornersFromConfig);
 private _replacementTrenchSides = _trench getVariable "sides";
-{
-	if (isNull _x) then {continue;};
-	private _index = ((_x getVariable "sides") find _trench);
-	if (_index == -1) throw "trench graph is broken: neighbor trench has no reference back";
-	(_x getVariable "sides") set [_index, _replacementTrench];
-} forEach _replacementTrenchSides;
-_replacementTrenchSides set [_direction, _newTrench];
+_replacementTrenchSides set [_direction, [_newTrench, _newToOldSide]];
 private _replacementTrenchSidesNew = [];
 {
 	_replacementTrenchSidesNew pushBack (_replacementTrenchSides # _x);
 } forEach _replacementTrenchSideSwitchingIndices;
 _replacementTrenchSides = _replacementTrenchSidesNew;
+{
+	if (isNull (_x # 0)) then {continue;};
+	private _index = (_x # 1);
+	if (_index == -1) throw "trench graph is broken: some reference got set wrongly";
+	((_x # 0) getVariable "sides") set [_index, [_replacementTrench, _foreachindex]];
+} forEach _replacementTrenchSides;
 private _replacementTrenchRank = _trench getVariable "rank";
 private _replacementTrenchTerrainPoints = _trench getVariable "terrainPoints";
 
@@ -76,13 +88,6 @@ private _replacementTrenchTerrainPoints = _trench getVariable "terrainPoints";
 private _newTrenchRank = call FUNC(getNewRank);
 
 
-private _newTrenchCorners = [_newTrench] call FUNC(getTrenchCornersFromConfig);
-private _newTrenchSides = [];
-{
-	_newTrenchSides append [objNull];
-} forEach _newTrenchCorners;
-private _newToOldSide = ((getArray ((configOf _newTrench) >> "trench_sides_open")) find 1);// the open side of the new trench
-_newTrenchSides set [_newToOldSide, _replacementTrench];
 
 private _newTrenchTerrainPoints = [_newTrench] call FUNC(makeSingleHole);
 
@@ -101,7 +106,6 @@ _replacementTrench setVariable ["terrainPoints", _replacementTrenchTerrainPoints
 
 _newTrench setVariable ["rank", _newTrenchRank];
 _newTrench setVariable ["corners", _newTrenchCorners];
-_newTrench setVariable ["sides", _newTrenchSides];
 _newTrench setVariable ["terrainPoints", _newTrenchTerrainPoints];
 
 
