@@ -35,7 +35,7 @@ class CfgVehicles
 				defaultValue = "-1";
 
 				//--- Optional properties
-				unique = 0; // When 1, only one entity of the type can have the value in the mission (used for example for variable names or player control)
+				unique = 1; // When 1, only one entity of the type can have the value in the mission (used for example for variable names or player control)
 				typeName = "NUMBER"; // Defines data type of saved value, can be STRING, NUMBER or BOOL. Used only when control is "Combo", "Edit" or their variants
 			};
 			class Neighbors

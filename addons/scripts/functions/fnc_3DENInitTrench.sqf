@@ -55,6 +55,15 @@ if ((_trench getVariable ["rank", -1]) == -1) then {
 	_neighbors = _arrows apply {objNull};
 	_trench setVariable ["sides", _neighbors];
 	[_trench] call FUNC(3DENUpdateAttributes);
+} else {
+	[_trench] call FUNC(3DENSyncVarsFromAttributes);
 };
 
 //TODO fix arrow mates
+
+//all variables should be fixed at this point
+{
+	if (!isNull _x) then {
+		
+	};
+} forEach (_trench getVariable "sides");
