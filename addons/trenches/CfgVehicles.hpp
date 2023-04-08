@@ -47,7 +47,7 @@ class CfgVehicles
 
 				expression = "_this setVariable ['%s',_value];";
 
-				defaultValue = "str ((_this getVariable ['sides', []]) apply {[-1, -1]})";
+				defaultValue = "str ((getArray ((configOf _trench) >> 'trench_sides_open')) apply {[-1, -1]})";
 
 				//--- Optional properties
 				unique = 0; // When 1, only one entity of the type can have the value in the mission (used for example for variable names or player control)

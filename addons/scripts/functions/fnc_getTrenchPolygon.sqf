@@ -43,6 +43,18 @@ while {true} do {
 	if (_usingList) then {
 		(_currentTrench getVariable "visitedCorners") set [_currentCornerIndex, true];
 	};
+	//temp debug thing start
+	try {
+		//_trench getVariable "sides"
+		if ((_currentTrench getVariable "sides") isEqualTo []) throw "adasd";
+	} catch {
+		// this stays to prevent hang
+		diag_log (_currentTrench getVariable 'sides');
+		diag_log (_currentTrench);
+		diag_log ("uninitialized sides in trench in getTrenchPolygon");
+		break;
+	};
+	//temp debug thing end
 	private _nextTrench = ((_currentTrench getVariable "sides") # _currentCornerIndex # 0);
 	private _continueSameTrench = (isnull _nextTrench) || {_usingList && {!(_nextTrench in _trenchList)}}; 
 	if (_continueSameTrench) then {
