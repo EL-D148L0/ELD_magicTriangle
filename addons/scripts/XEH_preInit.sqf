@@ -53,7 +53,13 @@ if (is3DEN) then {
 	{
 		[_x] call FUNC(3DENInitTrench);
 	} forEach GVAR(uninitializedTrenches);
-
+	
+	private _tp = [];
+	{
+		_tp append ([_x] call FUNC(registerTrenchPosition));
+	} forEach GVAR(trenchObjectList);
+	[_tp] call FUNC(TPUpdate);
+	
 	GVAR(initState) = INITIALISED_3DEN; 
 	
 } else {

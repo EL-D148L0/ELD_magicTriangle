@@ -75,3 +75,9 @@ params ["_trench"];
 		};
 	};
 } forEach (_trench getVariable ["arrows", []]);
+
+
+if (current3DENOperation isEqualTo "") then {
+	private _tp = [_trench] call FUNC(registerTrenchPosition);
+	[_tp] call FUNC(TPUpdate);
+};

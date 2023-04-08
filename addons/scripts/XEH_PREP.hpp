@@ -22,6 +22,7 @@ PREP(makeNewTrenchForExpansion);
 PREP(makeSingleHole);
 PREP(pointInList2d);
 PREP(randomColor);
+PREP(registerTrenchPosition);
 PREP(setTerrainPointHeight);
 PREP(sortTriangleCorners);
 PREP(splitTriangle);
