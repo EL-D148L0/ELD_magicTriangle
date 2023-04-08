@@ -37,16 +37,6 @@ _arrows = [];
 		_item setVariable ["sideNumber", _forEachIndex];
 		//_item setVariable ["mate", objNull];
 		//attachto doesnt work in 3den
-		_trench addEventHandler ["Dragged3DEN", {
-			params ["_trench"];
-			{
-				if (!isNull _x) then {
-					private _posInfo = [_trench, _forEachIndex] call FUNC(getBorderPosDirUp);
-					_x setPosASL (_posInfo#0);
-					_x setVectorDirAndUp [_posInfo#1, _posInfo#2];
-				};
-			} forEach (_trench getVariable ["arrows", []]);
-		}];
 	};
 	_arrows pushBack _item;
 } forEach _openSides;

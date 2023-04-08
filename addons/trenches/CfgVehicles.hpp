@@ -59,6 +59,8 @@ class CfgVehicles
 		class EventHandlers: EventHandlers {
 			init = "diag_log 'trench init'; _this call (uiNamespace getVariable 'ELD_magicTriangle_scripts_fnc_initTrench');";
 			dragged3DEN = "_this call ELD_magicTriangle_scripts_fnc_3DENUpdateTrench;";
+			unregisteredFromWorld3DEN = "_this call ELD_magicTriangle_scripts_fnc_3DENUnregisterTrench;";
+			registeredToWorld3DEN = "_this call ELD_magicTriangle_scripts_fnc_3DENReregisterTrench";
 		};
 
 		

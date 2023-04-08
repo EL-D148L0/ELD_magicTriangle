@@ -1,5 +1,7 @@
 PREP(3DENInitTrench);
+PREP(3DENReregisterTrench);
 PREP(3DENSyncVarsFromAttributes);
+PREP(3DENUnregisterTrench);
 PREP(3DENUpdateAttributes);
 PREP(3DENUpdateTrench);
 PREP(createTriangle);

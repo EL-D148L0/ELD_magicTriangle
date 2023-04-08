@@ -18,7 +18,7 @@
 params ["_trench"];
 {
 	if (!isNull _x) then {
-		private _posInfo = [_trench, _forEachIndex] call ELD_magicTriangle_scripts_fnc_getBorderPosDirUp;
+		private _posInfo = [_trench, _forEachIndex] call FUNC(getBorderPosDirUp);
 		_x setPosASL (_posInfo#0);
 		_x setVectorDirAndUp [_posInfo#1, _posInfo#2];
 		
