@@ -30,7 +30,9 @@ _tpList = _tpList arrayIntersect _tpList;
 	private _hasTrenches = (count (_thisTP # 1)) != 0;
 	if ((abs ((_originalTerrainPosition # 2) - (getTerrainHeight _x))) < 0.005) then {
 		if (_hasTrenches) then {
-			[_originalTerrainPosition vectorAdd [0,0,- GVAR(cellSize) * 1.5]] call FUNC(setTerrainPointHeight);
+			if (!GVAR(hideTerrainMods)) then {
+				[_originalTerrainPosition vectorAdd [0,0,- GVAR(cellSize) * 1.5]] call FUNC(setTerrainPointHeight);
+			};
 		};
 	} else {
 		if (!_hasTrenches) then {
@@ -81,6 +83,13 @@ private _ttrList = [_tpList] call FUNC(getTerrainTrianglesFromLoweredPoints);
 	if ((count _trenches) != 0) then {
 		_triangles = [[[_pointA, _pointB, _pointC], _trenches] call FUNC(getTTRIntersectedPolygons)] call FUNC(fillPolygons);
 	};
+	
+	{
+		_x hideObject GVAR(hideTerrainMods);
+		{
+			_x hideObject GVAR(hideTerrainMods);
+		} forEach (_x getVariable "colliders");
+	} forEach (_triangles);
 	
 	
 	private _key =  [_ttrKey#0, _ttrKey#1];

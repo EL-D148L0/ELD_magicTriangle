@@ -1,3 +1,5 @@
+PREP(3DENHideButtonReact);
+PREP(3DENHideTerrainModifications);
 PREP(3DENInitTrench);
 PREP(3DENReregisterTrench);
 PREP(3DENSyncVarsFromAttributes);

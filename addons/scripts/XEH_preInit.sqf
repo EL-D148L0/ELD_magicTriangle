@@ -7,12 +7,13 @@ PREP_RECOMPILE_START;
 #include "XEH_PREP.hpp"
 PREP_RECOMPILE_END;
 
-
-
 ADDON = true;
 
+
+
+GVAR(hideTerrainMods) = false;
 GVAR(cellSize) = getTerrainInfo#2;
-GVAR(defaultTriangleColor) = 1;
+GVAR(defaultTriangleColor) = 0;//0 for ground, 1 for debug
 
 GVAR(colliderModelMap) = call FUNC(getTriangleColliderModelMap);
 
@@ -25,6 +26,7 @@ GVAR(trenchObjectList) = [];
 systemchat "preinit";
 
 GVAR(terrainPointMap) = createHashMap; //contains all terrain points that have been modified
+
 /* format of the keys: <ARRAY>
  * 		keys are the position of the lower left corner of the square the triangle is contained in.
  *			0: position X <NUMBER>
@@ -35,7 +37,7 @@ GVAR(terrainPointMap) = createHashMap; //contains all terrain points that have b
  * TTR (TerrainTRiangle) is an array that contains information about a triangle of the terrain that has been modified and filled
  * array format TTR:
  * 		0: original corner position of this terrain point <ARRAY>
- *		3: associated trench objects. <ARRAY>
+ *		1: associated trench objects. <ARRAY>
  * 			a trench object is associated when the triangle is affected by terrain modifications of that trench.
  *		2: array of 2 arrays <ARRAY>
  * 			0: filler objects that occupy the triangle northeast of the key point<ARRAY>

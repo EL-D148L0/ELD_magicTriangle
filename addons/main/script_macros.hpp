@@ -35,3 +35,5 @@
 
 // pulling function from uiNamespace. necessary when operating before XEH_preInit
 #define UIFUNC(name) (uiNamespace getVariable QFUNC(name))
+
+#define HIDE_TOGGLE_IDC 10172

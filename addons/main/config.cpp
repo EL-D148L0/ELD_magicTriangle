@@ -10,10 +10,10 @@ class CfgPatches
 		};
 		weapons[] = {};
 		requiredVersion = REQUIRED_VERSION;
-		requiredAddons[] = {};
+		requiredAddons[] = {"A3_Data_F_AoW_Loadorder"};
 		authors[] = AUTHOR;
         VERSION_CONFIG;
 	};
 };
 
-
+#include <Display3DEN.hpp>
