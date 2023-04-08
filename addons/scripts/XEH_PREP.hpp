@@ -17,6 +17,7 @@ PREP(getTriangleColliderModel);
 PREP(getTriangleColliderModelMap);
 PREP(getTTRIntersectedPolygons);
 PREP(initCoreTrench);
+PREP(initTrench);
 PREP(makeNewTrenchForExpansion);
 PREP(makeSingleHole);
 PREP(pointInList2d);

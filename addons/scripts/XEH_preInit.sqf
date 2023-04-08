@@ -1,3 +1,4 @@
+diag_log "line 1 cba preInit";
 #include "script_component.hpp"
 
 ADDON = false;
@@ -13,16 +14,21 @@ ADDON = true;
 GVAR(cellSize) = getTerrainInfo#2;
 GVAR(defaultTriangleColor) = 1;
 
+GVAR(colliderModelMap) = call FUNC(getTriangleColliderModelMap);
+
+if (!isNil QGVAR(trenchObjectList)) then {
+	systemChat "trenchObjectList was initialized before cba preInit";
+};
+GVAR(trenchObjectList) = [];
+
 
 systemchat "preinit";
 
-GVAR(trenchRankCounter) = 0;
-GVAR(trenchObjectList) = [];
 GVAR(terrainPointMap) = createHashMap; //contains all terrain points that have been modified
 /* format of the keys: <ARRAY>
  * 		keys are the position of the lower left corner of the square the triangle is contained in.
-*			0: position X <NUMBER>
-*			1: position Y <NUMBER>
+ *			0: position X <NUMBER>
+ *			1: position Y <NUMBER>
  * format of values: array in format TTR
  *
  *
@@ -38,7 +44,34 @@ GVAR(terrainPointMap) = createHashMap; //contains all terrain points that have b
 
 
 
-GVAR(colliderModelMap) = call FUNC(getTriangleColliderModelMap);
 
-//functionname = QFUNC(fullyInitTrenchesWithIntersect);
-// functionname2 = "asadasfasf";
+
+
+if (is3DEN) then {
+	DEFINE_VAR(uninitializedTrenches, [])
+	GVAR(initState) = INITIALISING_3DEN; 
+	{
+		[_x] call FUNC(3DENInitTrench);
+	} forEach GVAR(uninitializedTrenches);
+
+	GVAR(initState) = INITIALISED_3DEN; 
+	
+} else {
+	
+	GVAR(initState) = INITIALISING_GAME; 
+	
+	GVAR(initState) = INITIALISED_GAME; 
+};
+
+
+/*  in 3den, CBA preinit runs after object init and after attribute setting
+3den init order AFAIK:
+
+1. per object:
+	init EH
+	attribute script
+2. CBA preInit
+
+
+normal preinit and postinit don't run.
+*/

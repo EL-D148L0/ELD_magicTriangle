@@ -25,4 +25,13 @@
 
 
 
-#define MAX_OC_DISTANCE 0.4//maximum distance at which corners will be merged
+
+#define INITIALISING_3DEN 1
+#define INITIALISED_3DEN 2
+#define INITIALISING_GAME 3
+#define INITIALISED_GAME 4
+
+#define DEFINE_VAR(var, default) if (isNil QGVAR(var)) then {GVAR(var) = default;};
+
+// pulling function from uiNamespace. necessary when operating before XEH_preInit
+#define UIFUNC(name) (uiNamespace getVariable QFUNC(name))

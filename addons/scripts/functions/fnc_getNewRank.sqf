@@ -19,6 +19,10 @@
 
 
 
+DEFINE_VAR(trenchRankCounter, 0)
+
 private _rank = GVAR(trenchRankCounter);
 GVAR(trenchRankCounter) = GVAR(trenchRankCounter) + 1;
+// if (isNil {_rank}) throw "AJSFAKJSFJGHFAS";
+// systemChat "getNewRank called";
 _rank;

@@ -17,14 +17,26 @@
 
 params ["_trench"];
 
-_trench setVariable ["rank", _trench get3DENAttribute "trenchRank"];
+_thisTrenchRank = (_trench get3DENAttribute "trenchRank") # 0;
+_trench setVariable ["rank", _thisTrenchRank];
+_thisTrenchRank call FUNC(discoverRank);
 
-
-private _sides = (parseSimpleArray (_trench get3DENAttribute "neighborRanks")) apply {
-	private _rank = _x;
-	if (_rank = -1) exitWith {
-		objNull;
+private _attributeArray = (parseSimpleArray ((_trench get3DENAttribute "neighborRanks")#0));
+diag_log _attributeArray;
+private _sides = _attributeArray apply {
+	private _rank = _x # 0;
+	if (_rank == -1) then {
+		[objNull, -1];
+	} else {
+		private _index = GVAR(trenchObjectList) findIf {_x getVariable "rank" == _rank};
+		if (_index == -1) then {
+			_index = GVAR(uninitializedTrenches) findIf {_x getVariable "rank" == _rank};
+			if (_index == -1) throw "unregistered ID found in neighbor attributes";
+			[GVAR(uninitializedTrenches) # _index, _x # 1];
+		} else {
+			[GVAR(trenchObjectList) # _index, _x # 1];
+		};
 	};
-	GVAR(trenchObjectList) findIf {_x getVariable "rank" == _rank};
 };
+diag_log _sides;
 _trench setVariable ["sides", _sides];

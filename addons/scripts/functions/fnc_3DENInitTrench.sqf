@@ -1,7 +1,7 @@
 #include "script_component.hpp"
 /*
  * Author: EL_D148L0
- * function that is called inside the dragged3den EH by trenches
+ * function that is called to initialise trenches in 3den
  * Arguments:
  * 0: trench to update
  *
@@ -16,8 +16,10 @@
 
 
 params ["_trench"];
-if (!is3DEN) exitWith {};
+
+if (!is3DEN) throw "3den init called outside of 3den";
 _trench setVariable ["initialized3DEN", true];
+
 _openSides = (getArray ((configOf _trench) >> "trench_sides_open"));
 
 GVAR(trenchObjectList) pushBack _trench;
@@ -50,16 +52,22 @@ _arrows = [];
 } forEach _openSides;
 
 _trench setVariable ["arrows", _arrows];
-
-if ((_trench getVariable ["rank", -1]) == -1) then {
+if (GVAR(initState) == INITIALISED_3DEN) then { // condition is true if 3den attributes are not yet initialised
 	private _rank = call FUNC(getNewRank);
 	_trench setVariable ["rank", _rank];
 	_neighbors = _arrows apply {[objNull, -1]};
 	_trench setVariable ["sides", _neighbors];
-	[_trench] call FUNC(3DENUpdateAttributes);
+	[_trench] spawn {
+		params ["_trench"];
+		waitUntil {systemChat"waitloop"; (_trench get3DENAttribute "trenchRank") isNotEqualTo [];};
+		[_trench] call FUNC(3DENUpdateAttributes);
+	};
+	//[_trench] call FUNC(3DENUpdateAttributes);// they will get updated later
 } else {
 	[_trench] call FUNC(3DENSyncVarsFromAttributes);
 };
+diag_log ((_trench get3DENAttribute "trenchRank") isEqualTo []);
+diag_log (_trench getVariable "sides");
 
 
 //all variables should be fixed at this point

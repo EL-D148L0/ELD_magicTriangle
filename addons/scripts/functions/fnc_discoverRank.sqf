@@ -18,6 +18,6 @@
  * Public: No
  */
 
-
+DEFINE_VAR(trenchRankCounter, 0)
 
 GVAR(trenchRankCounter) = GVAR(trenchRankCounter) max (_this + 1);
