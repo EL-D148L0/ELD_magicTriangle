@@ -12,6 +12,7 @@ ADDON = true;
 
 
 GVAR(hideTerrainMods) = false;
+((findDisplay 313) displayCtrl HIDE_TOGGLE_IDC) cbSetChecked !GVAR(hideTerrainMods);
 GVAR(cellSize) = getTerrainInfo#2;
 GVAR(defaultTriangleColor) = 0;//0 for ground, 1 for debug
 
