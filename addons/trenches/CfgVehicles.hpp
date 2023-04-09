@@ -16,6 +16,7 @@ class CfgVehicles
 			dragged3DEN = "_this call ELD_magicTriangle_scripts_fnc_3DENUpdateTrench;";
 			unregisteredFromWorld3DEN = "_this call ELD_magicTriangle_scripts_fnc_3DENUnregisterTrench;";
 			registeredToWorld3DEN = "_this call ELD_magicTriangle_scripts_fnc_3DENReregisterTrench";
+			AttributesChanged3DEN = "[_this#0, true] call ELD_magicTriangle_scripts_fnc_3DENUpdateTrench;";
 		};
 
 		

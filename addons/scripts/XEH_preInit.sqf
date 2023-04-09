@@ -48,8 +48,8 @@ GVAR(terrainPointMap) = createHashMap; //contains all terrain points that have b
 
 
 if (is3DEN) then {
-	private _data = loadfile "trenchData.txt";
-	if (_data == "") then {_data = "[]"};
+	private _data = "[]";
+	if (fileExists "trenchData.txt") then {_data = loadfile "trenchData.txt";};
 	uiNamespace setVariable [QGVAR(trenchData), parseSimpleArray _data];
 	call FUNC(3DENLoadData);
 };

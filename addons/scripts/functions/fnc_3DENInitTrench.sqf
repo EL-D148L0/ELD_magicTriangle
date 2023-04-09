@@ -47,9 +47,11 @@ if (GVAR(initState) == INITIALISED_3DEN) then { // condition is true if 3den att
 	_trench setVariable ["rank", _rank];
 	_neighbors = _arrows apply {[objNull, -1]};
 	_trench setVariable ["sides", _neighbors];
-	private _tp = [_trench] call FUNC(registerTrenchPosition);
-	[_tp] call FUNC(TPUpdate);
-	call FUNC(3DENUpdateData);
+	
+	// [_trench] call FUNC(3DENUpdateTrench);
+	// private _tp = [_trench] call FUNC(registerTrenchPosition);
+	// [_tp] call FUNC(TPUpdate);
+	// call FUNC(3DENUpdateData);
 } else {
 	if ((isnil {_trench getVariable "rank"}) || (isnil {_trench getVariable "sides"})) then {
 		diag_log "trench without data during 3den load cycle";

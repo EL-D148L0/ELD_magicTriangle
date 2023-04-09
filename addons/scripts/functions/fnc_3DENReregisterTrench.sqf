@@ -41,4 +41,5 @@ _arrows = [];
 	_arrows pushBack _item;
 } forEach _openSides;
 
+_trench setVariable ["arrows", _arrows];
 [_trench] call FUNC(3DENUpdateTrench);

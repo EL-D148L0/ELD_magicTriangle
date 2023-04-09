@@ -4,6 +4,7 @@
  * function that is called inside the dragged3den EH by trenches
  * Arguments:
  * 0: trench to update
+ * 1: whether to update saved data and TOP aswell (optional, default false)
  *
  * Return Value:
  * none
@@ -15,7 +16,8 @@
  */
 
 
-params ["_trench"];
+params ["_trench", ["_updateTP", false]];
+if (GVAR(initState) != INITIALISED_3DEN) exitWith {};
 {
 	if (!isNull _x) then {
 		private _posInfo = [_trench, _forEachIndex] call FUNC(getBorderPosDirUp);
@@ -73,8 +75,9 @@ params ["_trench"];
 	};
 } forEach (_trench getVariable ["arrows", []]);
 
-
-if (current3DENOperation isEqualTo "") then {
+//diag_log current3DENOperation;
+if (current3DENOperation isEqualTo "" && _updateTP) then {
+	
 	private _tp = [_trench] call FUNC(registerTrenchPosition);
 	[_tp] call FUNC(TPUpdate);
 	call FUNC(3DENUpdateData);
