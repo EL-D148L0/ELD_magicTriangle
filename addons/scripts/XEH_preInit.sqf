@@ -10,8 +10,7 @@ PREP_RECOMPILE_END;
 ADDON = true;
 
 
-
-GVAR(hideTerrainMods) = false;
+GVAR(hideTerrainMods) = true;
 ((findDisplay 313) displayCtrl HIDE_TOGGLE_IDC) cbSetChecked !GVAR(hideTerrainMods);
 GVAR(cellSize) = getTerrainInfo#2;
 GVAR(defaultTriangleColor) = 0;//0 for ground, 1 for debug
@@ -48,6 +47,12 @@ GVAR(terrainPointMap) = createHashMap; //contains all terrain points that have b
 
 
 
+if (is3DEN) then {
+	private _data = loadfile "trenchData.txt";
+	if (_data == "") then {_data = "[]"};
+	uiNamespace setVariable [QGVAR(trenchData), parseSimpleArray _data];
+	call FUNC(3DENLoadData);
+};
 
 
 if (is3DEN) then {

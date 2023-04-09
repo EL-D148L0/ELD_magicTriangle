@@ -47,19 +47,15 @@ if (GVAR(initState) == INITIALISED_3DEN) then { // condition is true if 3den att
 	_trench setVariable ["rank", _rank];
 	_neighbors = _arrows apply {[objNull, -1]};
 	_trench setVariable ["sides", _neighbors];
-	[_trench] spawn {
-		params ["_trench"];
-		waitUntil {systemChat"waitloop"; (_trench get3DENAttribute "trenchRank") isNotEqualTo [];};
-		[_trench] call FUNC(3DENUpdateAttributes);
-	};
 	private _tp = [_trench] call FUNC(registerTrenchPosition);
 	[_tp] call FUNC(TPUpdate);
-	//[_trench] call FUNC(3DENUpdateAttributes);// they will get updated later
+	call FUNC(3DENUpdateData);
 } else {
-	[_trench] call FUNC(3DENSyncVarsFromAttributes);
+	if ((isnil {_trench getVariable "rank"}) || (isnil {_trench getVariable "sides"})) then {
+		diag_log "trench without data during 3den load cycle";
+	};
 };
-diag_log ((_trench get3DENAttribute "trenchRank") isEqualTo []);
-diag_log (_trench getVariable "sides");
+
 
 
 //all variables should be fixed at this point

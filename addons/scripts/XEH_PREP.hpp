@@ -1,10 +1,11 @@
 PREP(3DENHideButtonReact);
 PREP(3DENHideTerrainModifications);
 PREP(3DENInitTrench);
+PREP(3DENLoadData);
+PREP(3DENMissionSave);
 PREP(3DENReregisterTrench);
-PREP(3DENSyncVarsFromAttributes);
 PREP(3DENUnregisterTrench);
-PREP(3DENUpdateAttributes);
+PREP(3DENUpdateData);
 PREP(3DENUpdateTrench);
 PREP(createTriangle);
 PREP(createTriangleCollider);

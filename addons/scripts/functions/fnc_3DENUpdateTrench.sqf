@@ -57,7 +57,6 @@ params ["_trench"];
 			if (!isNull (_oldMatingInfo#0)) then {
 				((_oldMatingInfo#0) getVariable "sides") set [_oldMatingInfo#1, [objNull, -1]];
 				(((_oldMatingInfo#0) getVariable "arrows") # (_oldMatingInfo#1)) setObjectTexture [0, "#(argb,8,8,3)color(1,0,0,0.75,ca)"];
-				[(_oldMatingInfo#0)] call FUNC(3DENUpdateAttributes);
 			};
 			if (isNull _mate) then {
 				_originArrow setObjectTexture [0, "#(argb,8,8,3)color(1,0,0,0.75,ca)"];
@@ -69,9 +68,7 @@ params ["_trench"];
 
 				(_trench getVariable "sides") set [_originArrow getVariable "sideNumber", [_mate getVariable "trench", _mate getVariable "sideNumber"]];
 				((_mate getVariable "trench") getVariable "sides") set [(_mate getVariable "sideNumber"), [_trench, _originArrow getVariable "sideNumber"]];
-				[(_mate getVariable "trench")] call FUNC(3DENUpdateAttributes);
 			};
-			[_trench] call FUNC(3DENUpdateAttributes);
 		};
 	};
 } forEach (_trench getVariable ["arrows", []]);
@@ -80,4 +77,5 @@ params ["_trench"];
 if (current3DENOperation isEqualTo "") then {
 	private _tp = [_trench] call FUNC(registerTrenchPosition);
 	[_tp] call FUNC(TPUpdate);
+	call FUNC(3DENUpdateData);
 };

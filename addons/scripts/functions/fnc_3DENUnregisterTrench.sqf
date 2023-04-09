@@ -33,7 +33,6 @@ _trench setVariable ["arrows", []];
 	if (!isNull (_x#0)) then {
 		((_x#0) getVariable "sides") set [_x#1, [objNull, -1]];
 		(((_x#0) getVariable "arrows") # (_x#1)) setObjectTexture [0, "#(argb,8,8,3)color(1,0,0,0.75,ca)"];
-		[(_x#0)] call FUNC(3DENUpdateAttributes);
 	};
 } forEach (_trench getVariable "sides");
 
