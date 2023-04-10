@@ -2,6 +2,8 @@ PREP(3DENHideButtonReact);
 PREP(3DENHideTerrainModifications);
 PREP(3DENInitTrench);
 PREP(3DENLoadData);
+PREP(3DENMissionPreview);
+PREP(3DENMissionPreviewEnd);
 PREP(3DENMissionSave);
 PREP(3DENReregisterTrench);
 PREP(3DENUnregisterTrench);

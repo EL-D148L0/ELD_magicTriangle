@@ -3,12 +3,26 @@
 all3DENEntities # 6
 
 // layer transform allowed
-myLayer get3DENAttribute "Transformation"
+myLayer get3DENAttribute "Transformation";
 
 
 
+eh = add3DENEventHandler ["OnMissionPreview", {
+	params ["_objects", "_groups", "_waypoints", "_markers"];
+	diag_log "OnMissionPreview EH";
+	diag_log canSuspend;
+	deletevehicle (_objects # ((_objects find 122) - 1))
+}];
+
+    remove3DENEventHandler ["OnMissionPreview",3]
 
 
+4
+
+eh = add3DENEventHandler ["OnMissionPreviewEnd", {
+	diag_log "OnMissionPreviewEnd EH";
+	diag_log is3DEN;
+}];
 
 [] spawn {
 	{

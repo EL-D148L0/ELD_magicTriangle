@@ -1,4 +1,6 @@
 diag_log "line 1 cba preInit";
+diag_log ("is3den " + str is3DEN);
+diag_log ("is3DENPreview " + str is3DENPreview);
 #include "script_component.hpp"
 
 ADDON = false;
@@ -10,7 +12,10 @@ PREP_RECOMPILE_END;
 ADDON = true;
 
 
-GVAR(hideTerrainMods) = true;
+GVAR(hideTerrainMods) = true; //TODO save/load this value from missionProfileNamespace
+if (!is3DEN) then {
+	GVAR(hideTerrainMods) = false;
+};
 ((findDisplay 313) displayCtrl HIDE_TOGGLE_IDC) cbSetChecked !GVAR(hideTerrainMods);
 GVAR(cellSize) = getTerrainInfo#2;
 GVAR(defaultTriangleColor) = 0;//0 for ground, 1 for debug
@@ -20,7 +25,8 @@ GVAR(colliderModelMap) = call FUNC(getTriangleColliderModelMap);
 if (!isNil QGVAR(trenchObjectList)) then {
 	systemChat "trenchObjectList was initialized before cba preInit";
 };
-GVAR(trenchObjectList) = [];
+
+DEFINE_VAR(trenchObjectList, [])
 
 
 systemchat "preinit";
@@ -48,9 +54,17 @@ GVAR(terrainPointMap) = createHashMap; //contains all terrain points that have b
 
 
 if (is3DEN) then {
-	private _data = "[]";
-	if (fileExists "trenchData.txt") then {_data = loadfile "trenchData.txt";};
-	uiNamespace setVariable [QGVAR(trenchData), parseSimpleArray _data];
+	diag_log (missionNamespace getVariable [QGVAR(missionPreviewEnd), false]);
+	if (missionNamespace getVariable [QGVAR(missionPreviewEnd), false]) then {
+		if (isnil {uiNamespace getVariable QGVAR(trenchData)}) then {
+			uiNamespace setVariable [QGVAR(trenchData), []];
+		};
+	} else {
+		private _data = "[]";
+		if (fileExists "trenchData.txt") then {_data = loadfile "trenchData.txt";};
+		uiNamespace setVariable [QGVAR(trenchData), parseSimpleArray _data];
+		diag_log "Loaded trenchData from File";
+	};
 	call FUNC(3DENLoadData);
 };
 
@@ -71,7 +85,7 @@ if (is3DEN) then {
 	GVAR(initState) = INITIALISED_3DEN; 
 	
 } else {
-	
+	// these identifiers are wrong since initorder outside of 3den actually makes sense
 	GVAR(initState) = INITIALISING_GAME; 
 	
 	GVAR(initState) = INITIALISED_GAME; 

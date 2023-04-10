@@ -8,7 +8,7 @@
  * 
  *
  * Return Value:
- * TP that should get the TTR around them updated.
+ * TP that should get the TTR around them updated.  //TODO CHECK IF THIS IS OUTDATED
  *		
  *
  * Example:
@@ -18,9 +18,9 @@
  */
 
 
-
+//TODO this function hangs for 2-4 seconds if supplied with invalid data
 params ["_tpList"];
-
+diag_log "tpUpdate start";
 _tpList = _tpList arrayIntersect _tpList;
 
 {
@@ -107,3 +107,5 @@ private _ttrList = [_tpList] call FUNC(getTerrainTrianglesFromLoweredPoints);
 	GVAR(terrainPointMap) set [_key, [_originalTerrainPosition, _associatedTrenches, _fillerObjects]];
 	
 } forEach _ttrList;
+
+diag_log "tpUpdate finished";

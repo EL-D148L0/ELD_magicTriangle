@@ -27,3 +27,4 @@ private _newData = [];
 diag_log _newData;
 
 uiNamespace setVariable [QGVAR(trenchData), _newData];
+diag_log "update data finished";
