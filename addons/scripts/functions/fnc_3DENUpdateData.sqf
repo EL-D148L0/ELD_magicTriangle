@@ -22,7 +22,7 @@ diag_log "update data called";
 private _newData = [];
 {
 	// Current result is saved in variable _x
-	_newData pushBack [get3DENEntityID _x, _x getVariable "rank", (_x getVariable ["sides", []]) apply {[(_x#0) getVariable ["rank", -1], _x#1]}];
+	_newData pushBack [get3DENEntityID _x, _x getVariable "rank", (_x getVariable ["sides", []]) apply {[(_x#0) getVariable ["rank", -1], _x#1]}, getPosASL _x, typeOf _x];
 } forEach GVAR(trenchObjectList);
 diag_log _newData;
 

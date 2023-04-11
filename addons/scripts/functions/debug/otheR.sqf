@@ -6,6 +6,31 @@ all3DENEntities # 6
 myLayer get3DENAttribute "Transformation";
 
 
+top = "Sign_Arrow_Direction_F" createVehicle [0,1,6];
+top setPosASL [0,1,6];
+bottom = "Sign_Arrow_Direction_F" createVehicle [0,0,0];
+bottom setPosASL [0,0,0];
+nearestObject [(getPosASL bottom) vectoradd [0,0,6], "Sign_Arrow_Direction_F"];
+
+nearestObject [[1600.654, 5344.092, 206], "Sign_Arrow_Direction_F"] == (get3DENSelected "object") #0
+
+
+
+
+
+
+
+
+
+uiNamespace getVariable "ELD_magicTriangle_scripts_trenchData"
+
+
+
+
+nearestObject [[1621.01,5379.08,5.5],"Tronch_new_core"]
+
+
+
 
 eh = add3DENEventHandler ["OnMissionPreview", {
 	params ["_objects", "_groups", "_waypoints", "_markers"];

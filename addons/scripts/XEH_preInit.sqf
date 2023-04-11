@@ -87,7 +87,16 @@ if (is3DEN) then {
 } else {
 	// these identifiers are wrong since initorder outside of 3den actually makes sense
 	GVAR(initState) = INITIALISING_GAME; 
-	
+	/*
+	if (!is3DENPreview) then {
+		private _data = "[]";
+		if (fileExists "trenchData.txt") then {_data = loadfile "trenchData.txt";};
+		uiNamespace setVariable [QGVAR(trenchData), parseSimpleArray _data];
+		diag_log "Loaded trenchData from File";
+
+		diag_log "initializing trenches in preinit";
+		call FUNC(missionPlay);
+	};*/
 	GVAR(initState) = INITIALISED_GAME; 
 };
 

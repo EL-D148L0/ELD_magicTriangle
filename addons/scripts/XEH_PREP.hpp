@@ -27,6 +27,7 @@ PREP(initCoreTrench);
 PREP(initTrench);
 PREP(makeNewTrenchForExpansion);
 PREP(makeSingleHole);
+PREP(missionPlay);
 PREP(pointInList2d);
 PREP(randomColor);
 PREP(registerTrenchPosition);

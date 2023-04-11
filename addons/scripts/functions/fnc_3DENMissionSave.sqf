@@ -14,7 +14,7 @@
  * Public: No
  */
 
-
+//TODO save sometimes fails, as indicated by saveFiles return value. if it fails, try again, if it fails again notify user.
 diag_log("trenchData" saveFile (str (uiNamespace getVariable QGVAR(trenchData))));
 diag_log "trenchData";
 diag_log (str (uiNamespace getVariable QGVAR(trenchData)));
