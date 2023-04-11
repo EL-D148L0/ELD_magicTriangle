@@ -1,9 +1,9 @@
 #include "script_component.hpp"
 /*
  * Author: EL_D148L0
- * BROKEN :(
+ * 
  * function that is called in RegisteredToWorld3DEN EH 
- * TODO fix this
+ * 
  * Arguments:
  * 0: trench to update
  *
