@@ -1,0 +1,2 @@
+TODO check if roadway lods of the very large colliders fully work, https://community.bistudio.com/wiki/LOD#Roadway says they might only work to 36m
+

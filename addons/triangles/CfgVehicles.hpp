@@ -5,6 +5,12 @@ class CfgVehicles
 	
 	class Rocks_base_F;
 
+	class PathObject: Rocks_base_F {
+		displayName			= "path test object";			
+		scope				= public;
+		model				= QPATHTOF(data\path.p3d);	/// simple path to model
+
+	};
 	class Triangle_base: Rocks_base_F
 	{
 		scope				= private;										/// makes the lamp invisible in editor
