@@ -99,7 +99,7 @@ private _vectorAC = _pointC vectorDiff _pointA;
 
 _pointP = _pointA vectordiff (_vectorAC vectorMultiply (((_pointA vectorDiff _pointB) vectorDotProduct _vectorAC)/(_vectorAC vectorDotProduct _vectorAC))); 
 
-if ((_pointP vectorDistance _pointB) < 0.01) exitWith {
+if ((_pointP vectorDistance _pointB) < 0.015) exitWith {
 	// this is here to fix a bug where extremely thin triangles behaved unpredictably.
 	// if this condition is too generous, nake the number smaller. last observed problematic triangle had a distance of 0.000488281
 	[];
