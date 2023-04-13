@@ -22,7 +22,13 @@ params ["_key", "_hide"];
 
 private _thisTP = (GVAR(terrainPointMap) get _key);
 private _originalTerrainPosition = _thisTP # 0;
-private _hasTrenches = (count (_thisTP # 1)) != 0;
+private _hasTrenches = false;
+{
+	if (!isNil {_x getVariable "rank"}) then {
+		_hasTrenches = true;
+		break;
+	}
+} forEach (_thisTP # 1);
 
 if (_hide) then {
 	if ((abs ((_originalTerrainPosition # 2) - (getTerrainHeight _key))) > 0.005) then {

@@ -36,6 +36,7 @@ private _polygon = [];
 private _currentTrench = _startTrench;
 private _currentCornerIndex = _startCornerIndex;
 private _currentCornerRank = _currentTrench getVariable "rank";
+if (isNil {_currentCornerRank}) throw "rankless trench passed to getTrenchPolygon";
 
 
 private _reachedStart = false;

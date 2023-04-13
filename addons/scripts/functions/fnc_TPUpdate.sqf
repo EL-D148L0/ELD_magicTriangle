@@ -20,14 +20,20 @@
 
 //TODO this function hangs for 2-4 seconds if supplied with invalid data
 params ["_tpList"];
-diag_log "tpUpdate start";
+diag_log ((str (systemTime # 6)) + " " + "tpUpdate start");
 _tpList = _tpList arrayIntersect _tpList;
 
 {
 	// Current result is saved in variable _x 
 	private _thisTP = (GVAR(terrainPointMap) get _x);
 	private _originalTerrainPosition = _thisTP # 0;
-	private _hasTrenches = (count (_thisTP # 1)) != 0;
+	private _hasTrenches = false;
+	{
+		if (!isNil {_x getVariable "rank"}) then {
+			_hasTrenches = true;
+			break;
+		}
+	} forEach (_thisTP # 1);
 	if ((abs ((_originalTerrainPosition # 2) - (getTerrainHeight _x))) < 0.005) then {
 		if (_hasTrenches) then {
 			if (!GVAR(hideTerrainMods)) then {
@@ -80,6 +86,15 @@ private _ttrList = [_tpList] call FUNC(getTerrainTrianglesFromLoweredPoints);
 	};
 
 	private _triangles = [];
+	_newTrenches = [];
+	{
+		if (!isNil {_x getVariable "rank"}) then {
+			_newTrenches pushBack _x;
+		} else {
+			diag_log "rankless trench ignored";
+		};
+	} foreach (_trenches arrayIntersect _trenches);
+	_trenches = _newTrenches;
 	if ((count _trenches) != 0) then {
 		_triangles = [[[_pointA, _pointB, _pointC], _trenches] call FUNC(getTTRIntersectedPolygons)] call FUNC(fillPolygons);
 	};
@@ -108,4 +123,4 @@ private _ttrList = [_tpList] call FUNC(getTerrainTrianglesFromLoweredPoints);
 	
 } forEach _ttrList;
 
-diag_log "tpUpdate finished";
+diag_log ((str (systemTime # 6)) + " " + "tpUpdate finished");
