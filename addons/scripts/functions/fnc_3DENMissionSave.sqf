@@ -3,7 +3,7 @@
  * Author: EL_D148L0
  * function that is called in OnMissionSave and OnMissionAutosave EHs
  * Arguments:
- * none
+ * save attempt number <NUMBER> (optional, default 0)
  *
  * Return Value:
  * none
@@ -14,9 +14,29 @@
  * Public: No
  */
 
-//TODO save sometimes fails, as indicated by saveFiles return value. if it fails, try again, if it fails again notify user.
+
+params [["_attemptNumber", 0]];
 
 call FUNC(3DENUpdateData);
-diag_log("trenchData" saveFile (str (uiNamespace getVariable QGVAR(trenchData))));
+private _saveWorked = ("trenchData" saveFile (str (uiNamespace getVariable QGVAR(trenchData))));
+if (_saveWorked) then {
+	diag_log "save successful";
+} else {
+	// if (isNil {_attemptNumber}) then {		
+	// 	diag_log "attempt number broken";
+	// };
+	if (_attemptNumber < 3) then {
+		diag_log "save unsuccessful, trying again";
+		[_attemptNumber + 1] call FUNC(3DENMissionSave);
+	} else {
+		diag_log "save unsuccessful, max attempts reached";
+		[ 
+			"Failed to save trench data. try saving again.", 
+			"Warning", 
+			true, 
+			false, 
+			"\A3\ui_f\data\map\markers\handdrawn\warning_CA.paa"] call BIS_fnc_3DENShowMessage;
+	};
+};
 diag_log "trenchData";
 diag_log (str (uiNamespace getVariable QGVAR(trenchData)));
