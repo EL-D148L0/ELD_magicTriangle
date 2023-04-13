@@ -55,6 +55,7 @@ if (GVAR(initState) == INITIALISED_3DEN) then { // condition is true if 3den att
 } else {
 	if ((isnil {_trench getVariable "rank"}) || (isnil {_trench getVariable "sides"})) then {
 		diag_log "trench without data during 3den load cycle";
+		//TODO give this trench the data it's missing
 	};
 };
 

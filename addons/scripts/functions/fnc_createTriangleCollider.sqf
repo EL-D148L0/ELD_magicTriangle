@@ -119,24 +119,35 @@ private _triangle2Angle = acos (_vectorBP vectorCos _vectorBC);// round up
 
 private _files = addonFiles ["magicTriangle\colliderGen0\", ".p3d"];
 
-private _triangle1Model = [_triangle1Angle] call FUNC(getTriangleColliderModel);
-private _triangle2Model = [_triangle2Angle] call FUNC(getTriangleColliderModel);
+private _doTriangle1 = finite _triangle1Angle;
+private _doTriangle2 = finite _triangle2Angle;
 private _vectorUp = vectorNormalized ((_vectorBC vectorCrossProduct _vectorBA) vectormultiply -1);
+private _triangle1 = objNull;
+private _triangle2 = objNull;
+if (_doTriangle1) then {
+	private _triangle1Model = [_triangle1Angle] call FUNC(getTriangleColliderModel);
+	private _vectorDir1 = vectorNormalized (_pointA vectorDiff _pointP);
+	_triangle1 = createSimpleObject  [_triangle1Model, _pointP];
+	_triangle1 setvectordirandup [_vectorDir1, _vectorUp];
+	private _triangle1Scale = (vectorMagnitude _vectorAP) max ((vectorMagnitude _vectorBP)/((_triangle1 selectionPosition ["corner_3", "Memory"]) # 0));
+	_triangle1 setobjectscale _triangle1Scale;
 
+} else {
+	diag_log "non finite collider angle requested on collider 1. offending triangle: ";
+	diag_log [_pointA, _pointB, _pointC];
+};
+if (_doTriangle2) then {
+	private _triangle2Model = [_triangle2Angle] call FUNC(getTriangleColliderModel);
+	private _vectorDir2 = vectorNormalized (_pointB vectorDiff _pointP);
+	_triangle2 = createSimpleObject  [_triangle2Model, _pointP];
+	_triangle2 setvectordirandup [_vectorDir2, _vectorUp];
+	private _triangle2Scale = (vectorMagnitude _vectorBP) max ((vectorMagnitude (_pointC vectorDiff _pointP))/((_triangle2 selectionPosition ["corner_3", "Memory"]) # 0));
+	_triangle2 setobjectscale _triangle2Scale;
+} else {
+	diag_log "non finite collider angle requested on collider 2. offending triangle: ";
+	diag_log [_pointA, _pointB, _pointC];
+};
 
-private _vectorDir1 = vectorNormalized (_pointA vectorDiff _pointP);
-private _vectorDir2 = vectorNormalized (_pointB vectorDiff _pointP);
-
-private _triangle1 = createSimpleObject  [_triangle1Model, _pointP];
-private _triangle2 = createSimpleObject  [_triangle2Model, _pointP];
-_triangle1 setvectordirandup [_vectorDir1, _vectorUp];
-_triangle2 setvectordirandup [_vectorDir2, _vectorUp];
-
-private _triangle1Scale = (vectorMagnitude _vectorAP) max ((vectorMagnitude _vectorBP)/((_triangle1 selectionPosition ["corner_3", "Memory"]) # 0));
-private _triangle2Scale = (vectorMagnitude _vectorBP) max ((vectorMagnitude (_pointC vectorDiff _pointP))/((_triangle2 selectionPosition ["corner_3", "Memory"]) # 0));
-
-_triangle1 setobjectscale _triangle1Scale;
-_triangle2 setobjectscale _triangle2Scale;
 
 [_triangle1, _triangle2];
 

@@ -1,4 +1,26 @@
 
+
+
+
+
+
+
+{
+	_x hideObject true;
+	
+} forEach flatten ((values ELD_magicTriangle_scripts_terrainPointMap) apply {_x # 2});
+
+
+
+
+{
+	_x setObjectTexture [0, call ELD_magicTriangle_scripts_fnc_randomColor];
+} forEach flatten ((values ELD_magicTriangle_scripts_terrainPointMap) apply {_x # 2});
+
+{
+	_x setPosASL ((getPosASL _x) vectorAdd [0,0,0.05*_foreachindex]);
+} forEach flatten ((values ELD_magicTriangle_scripts_terrainPointMap) apply {_x # 2});
+
 // get all layers
 all3DENEntities # 6
 

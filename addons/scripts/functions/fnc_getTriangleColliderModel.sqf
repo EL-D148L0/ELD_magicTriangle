@@ -1,10 +1,10 @@
 #include "script_component.hpp"
 /*
  * Author: EL_D148L0
- * finds the closest triangle collider in the specified direction
+ * finds the closest triangle collider to the specified angle
  *
  * Arguments:
- * 0: Position of corner in format PositionASL <NUMBER>
+ * 0: angle in degrees, not NaN <NUMBER>
  * 1: round up? <BOOLEAN>
  *
  * Return Value:
