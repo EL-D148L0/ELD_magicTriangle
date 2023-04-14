@@ -22,6 +22,8 @@ PREP(getTrenchCornersFromConfig);
 PREP(getTrenchPolygon);
 PREP(getTriangleColliderModel);
 PREP(getTriangleColliderModelMap);
+PREP(getTriangleCoverClass);
+PREP(getTriangleCoverClassMap);
 PREP(getTTRIntersectedPolygons);
 PREP(initCoreTrench);
 PREP(initTrench);

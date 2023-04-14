@@ -18,6 +18,10 @@
 } forEach flatten ((values ELD_magicTriangle_scripts_terrainPointMap) apply {_x # 2});
 
 {
+	_x setObjectTexture [0, "\x\ELD_magicTriangle\addons\triangles\data\uvcheck.paa"];
+} forEach flatten ((values ELD_magicTriangle_scripts_terrainPointMap) apply {_x # 2});
+
+{
 	_x setPosASL ((getPosASL _x) vectorAdd [0,0,0.05*_foreachindex]);
 } forEach flatten ((values ELD_magicTriangle_scripts_terrainPointMap) apply {_x # 2});
 
@@ -78,6 +82,8 @@ eh = add3DENEventHandler ["OnMissionPreviewEnd", {
 	} forEach ap#0;
 };
 
+
+model = "\x\ELD_magicTriangle\addons\triangles\data\Triangle24OriginMoved.p3d";
 
 "a3\map_data\gdt_strdrygrass_co.paa"
 "a3\map_data\gdt_strconcrete_co.paa"

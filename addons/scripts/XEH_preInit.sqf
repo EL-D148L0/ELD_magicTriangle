@@ -21,6 +21,7 @@ GVAR(cellSize) = getTerrainInfo#2;
 GVAR(defaultTriangleColor) = 0;//0 for ground, 1 for debug
 
 GVAR(colliderModelMap) = call FUNC(getTriangleColliderModelMap);
+GVAR(CoverClassMap) = call FUNC(getTriangleCoverClassMap);
 
 if (!isNil QGVAR(trenchObjectList)) then {
 	systemChat "trenchObjectList was initialized before cba preInit";
