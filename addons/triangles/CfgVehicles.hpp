@@ -93,6 +93,18 @@ class CfgVehicles
 		
 	};
 
+
+    class hsTest: Triangle_base
+	{
+		displayName			= "hiddenselections test";			
+		scope				= public;
+		model				= QPATHTOF(data\test\hs.p3d);	/// simple path to model
+		hiddenSelections[] = {"camo", "camo2", "camo3"}; /// what selection in model could have different textures
+		hiddenSelectionsTextures[] = {QPATHTOF(data\uvcheck.paa), "a3\map_data\gdt_strconcrete_co.paa", "\a3\missions_f_aow\data\img\textures\grass\grass_01_co.paa"}; /// what texture is going to be used
+	
+	};
+
+
 	class TriangleNoCollision24OM: Triangle_base
 	{
 		displayName			= "Magic Triangle (no collision, BBX 24m, origin moved)";			
