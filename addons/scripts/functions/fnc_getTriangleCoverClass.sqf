@@ -19,6 +19,15 @@
 
 params ["_a", "_b", "_c"]; //AC is longest, B is the variable point
 
+if (([_a, [_b vectorAdd [GVAR(cellSize), 0]]] call FUNC(pointInList2d))&& [_c, [_b vectorAdd [0,GVAR(cellSize)]]] call FUNC(pointInList2d)) exitWith {
+	"UnmodifiedCover0"
+};
+
+if (([_a, [_b vectorDiff [GVAR(cellSize), 0]]] call FUNC(pointInList2d))&& [_c, [_b vectorDiff [0,GVAR(cellSize)]]] call FUNC(pointInList2d)) exitWith {
+	"UnmodifiedCover1"
+};
+
+
 private _points = keys GVAR(CoverClassMap);
 
 

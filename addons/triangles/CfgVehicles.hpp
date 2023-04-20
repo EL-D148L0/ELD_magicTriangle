@@ -112,6 +112,14 @@ class CfgVehicles
 		model				= QPATHTOF(data\Triangle24OriginMoved.p3d);	/// simple path to model
 	
 	};
+	class UnmodifiedCover0: Triangle_base {
+        scope = protected;
+        model = QPATHTOF(data\coverUnmodified\cover0.p3d);
+    };
+	class UnmodifiedCover1: Triangle_base {
+        scope = protected;
+        model = QPATHTOF(data\coverUnmodified\cover1.p3d);
+    };
 	class ELD_cover_0P0009438416449404352_0P04343722427630684: Triangle_base {
         scope = protected;
         model = QPATHTOF(data\gen0\cover_0P0009438416449404352_0P04343722427630684.p3d);
