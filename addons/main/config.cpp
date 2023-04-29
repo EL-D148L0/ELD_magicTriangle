@@ -10,7 +10,7 @@ class CfgPatches
 		};
 		weapons[] = {};
 		requiredVersion = REQUIRED_VERSION;
-		requiredAddons[] = {"A3_Data_F_AoW_Loadorder"};
+		requiredAddons[] = {"A3_Data_F_AoW_Loadorder", "cba_main", "TerrainLib_main"};
 		authors[] = AUTHOR;
         VERSION_CONFIG;
 	};

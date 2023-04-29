@@ -37,12 +37,12 @@ _tpList = _tpList arrayIntersect _tpList;
 	if ((abs ((_originalTerrainPosition # 2) - (getTerrainHeight _x))) < 0.005) then {
 		if (_hasTrenches) then {
 			if (!GVAR(hideTerrainMods)) then {
-				[_originalTerrainPosition vectorAdd [0,0,- GVAR(cellSize) * 1.5]] call FUNC(setTerrainPointHeight);
+				[_originalTerrainPosition vectorAdd [0,0,- GVAR(cellSize) * 1.5]] call FUNC(queueTerrainPointHeight);
 			};
 		};
 	} else {
 		if (!_hasTrenches) then {
-			[_originalTerrainPosition] call FUNC(setTerrainPointHeight);
+			[_originalTerrainPosition] call FUNC(queueTerrainPointHeight);
 		};
 	};
 } forEach _tpList;

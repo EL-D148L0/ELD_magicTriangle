@@ -26,7 +26,15 @@
 } forEach flatten ((values ELD_magicTriangle_scripts_terrainPointMap) apply {_x # 2});
 
 // get all layers
-all3DENEntities # 6
+all3DENEntities # 6;
+
+
+id = ["tag_testEvent", {systemChat "event"}] call CBA_fnc_addEventHandler;
+f1 = {[ "tag_testEvent", "test message server"] call CBA_fnc_serverEvent;};
+systemChat "1";
+call f1;
+systemChat "2";
+
 
 // layer transform allowed
 myLayer get3DENAttribute "Transformation";

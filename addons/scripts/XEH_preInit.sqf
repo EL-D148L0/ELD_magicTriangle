@@ -11,6 +11,10 @@ PREP_RECOMPILE_END;
 
 ADDON = true;
 
+GVAR(pendingTerrainModifications) = [];//make sure this reference is never changed 
+private _eventID = [
+    "TerrainLib_terrainHeightChanged", FUNC(terrainHeightChangedEH)
+] call CBA_fnc_addEventHandler;
 
 GVAR(hideTerrainMods) = true; //TODO save/load this value from missionProfileNamespace
 if (!is3DEN) then {
