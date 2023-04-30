@@ -25,8 +25,19 @@ params ["_positionsAndHeights", "_adjustObjects"];
 // quit immediately if the EH was fired because of my own modifications
 if (GVAR(changingTerrain)) exitWith {};
 
-_positionsAndHeightsNew = [];
+private _tpList = [];
+{
+	private _key = [_x#0, _x#1];
+	if (_key in GVAR(terrainPointMap)) then {
+		private _TPMEntry = GVAR(terrainPointMap) get _key;
+		private _delta = (_TPMEntry#0#2) - (getTerrainHeight _key);
+		(_TPMEntry#0) set [2, _x#2 + _delta];
+		_tpList pushBack _key;
+	};
+} forEach _positionsAndHeights;
 
+
+[_tpList] call FUNC(TPGenerateFiller);
 
 
 
