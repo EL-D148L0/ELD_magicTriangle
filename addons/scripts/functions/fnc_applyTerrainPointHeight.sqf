@@ -3,7 +3,7 @@
 /*
  * Author: EL_D148L0
  * applies the terrain modification queue and empties it. 
- * does not change the reference to the terrain modification queue.
+ * 
  *
  * Arguments:
  * none
@@ -21,6 +21,10 @@
 
 
 
+GVAR(changingTerrain) = true;
 [GVAR(pendingTerrainModifications), false] call TerrainLib_fnc_setTerrainHeight;
+GVAR(changingTerrain) = false;
 
-GVAR(pendingTerrainModifications) resize 0;
+
+
+GVAR(pendingTerrainModifications) = [];

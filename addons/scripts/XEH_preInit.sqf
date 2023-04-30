@@ -11,7 +11,9 @@ PREP_RECOMPILE_END;
 
 ADDON = true;
 
-GVAR(pendingTerrainModifications) = [];//make sure this reference is never changed 
+GVAR(pendingTerrainModifications) = [];
+GVAR(changingTerrain) = false;
+
 private _eventID = [
     "TerrainLib_terrainHeightChanged", FUNC(terrainHeightChangedEH)
 ] call CBA_fnc_addEventHandler;

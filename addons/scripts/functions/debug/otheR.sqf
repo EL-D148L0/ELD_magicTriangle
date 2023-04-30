@@ -29,6 +29,35 @@
 all3DENEntities # 6;
 
 
+
+
+private _eventID = [
+    "TerrainLib_terrainHeightChanged", {
+        params ["_positionsAndHeights", "_adjustObjects"];
+		if (GVAR(changingTerrain)) exitWith {systemChat "own change"};
+        //do stuff that reacts to changes that are not your own
+		systemChat "acting";
+    }
+] call CBA_fnc_addEventHandler;
+
+
+GVAR(changingTerrain) = true;
+[[[1000, 1000, 25]]] call TerrainLib_fnc_setTerrainHeight;
+GVAR(changingTerrain) = false;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 id = ["tag_testEvent", {systemChat "event"}] call CBA_fnc_addEventHandler;
 f1 = {[ "tag_testEvent", "test message server"] call CBA_fnc_serverEvent;};
 systemChat "1";

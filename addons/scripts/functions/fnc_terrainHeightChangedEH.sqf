@@ -23,7 +23,10 @@
 params ["_positionsAndHeights", "_adjustObjects"];
 
 // quit immediately if the EH was fired because of my own modifications
-if (GVAR(pendingTerrainModifications) isEqualRef _positionsAndHeights) exitWith {};
+if (GVAR(changingTerrain)) exitWith {};
+
+_positionsAndHeightsNew = [];
+
 
 
 
