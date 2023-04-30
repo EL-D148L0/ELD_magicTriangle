@@ -123,4 +123,7 @@ private _ttrList = [_tpList] call FUNC(getTerrainTrianglesFromLoweredPoints);
 	
 } forEach _ttrList;
 
+
+call FUNC(applyTerrainPointHeight);
+
 diag_log ((str (systemTime # 6)) + " " + "tpUpdate finished");

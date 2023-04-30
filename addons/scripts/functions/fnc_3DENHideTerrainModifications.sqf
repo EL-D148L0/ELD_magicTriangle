@@ -47,6 +47,8 @@ if (_hide) then {
 	};
 };
 
+call FUNC(applyTerrainPointHeight);
+
 {
 	_x hideObject _hide;
 	{
