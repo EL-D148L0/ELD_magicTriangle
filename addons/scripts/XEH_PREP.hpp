@@ -39,5 +39,6 @@ PREP(sortTriangleCorners);
 PREP(splitTriangle);
 PREP(terrainHeightChangedEH);
 PREP(TPAddTrench);
+PREP(TPGenerateFiller);
 PREP(TPRemoveTrench);
 PREP(TPUpdate);
