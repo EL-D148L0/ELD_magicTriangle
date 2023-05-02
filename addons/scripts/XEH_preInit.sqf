@@ -24,7 +24,7 @@ if (!is3DEN) then {
 };
 ((findDisplay 313) displayCtrl HIDE_TOGGLE_IDC) cbSetChecked !GVAR(hideTerrainMods);
 GVAR(cellSize) = getTerrainInfo#2;
-GVAR(defaultTriangleColor) = 0;//0 for ground, 1 for debug
+GVAR(defaultTriangleColor) = 1;//0 for ground, 1 for debug
 
 GVAR(colliderModelMap) = call FUNC(getTriangleColliderModelMap);
 GVAR(CoverClassMap) = call FUNC(getTriangleCoverClassMap);

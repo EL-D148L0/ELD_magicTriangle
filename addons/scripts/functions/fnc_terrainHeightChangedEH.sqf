@@ -37,15 +37,10 @@ private _tpList = [];
 } forEach _positionsAndHeights;
 
 
-[_tpList] call FUNC(TPGenerateFiller);
 
-
-
-
-//if adjustObects is off only borders will be changed
-if (!_adjustObjects) exitWith {
-	//TODO adjust borders (no changes to terrain)
+if (!_adjustObjects) then {
+	[_tpList] call FUNC(TPGenerateFiller);
+} else {
+	[{_this call FUNC(TPGenerateFiller);}, [_tpList]] call CBA_fnc_execNextFrame;
 };
 
-
-//TODO adjust lowered points

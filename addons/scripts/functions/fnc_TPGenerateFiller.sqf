@@ -3,6 +3,8 @@
 /*
  * Author: EL_D148L0
  * updates  filler of the TTR around the passed TP
+ * adds neutral positions to unregistered TP around passed TP
+ *
  * Arguments:
  *	0: array of terrainpoints <ARRAY>
  * 
@@ -35,28 +37,28 @@ diag_log _ttrList;
 	private _trenches = [];
 	if ((_ttrKey # 2) == 0) then {
 		private _temp = [_ttrKey#0, _ttrKey#1];
-		_temp = GVAR(terrainPointMap) getOrDefault [_temp, [_temp + [getTerrainHeight _temp], []]];
+		_temp = GVAR(terrainPointMap) getOrDefault [_temp, [_temp + [getTerrainHeight _temp], [], [[],[]]], true];
 		_trenches append (_temp # 1);
 		_pointA = _temp # 0;
 		_temp = [_ttrKey#0, _ttrKey#1 + GVAR(cellSize)];
-		_temp = GVAR(terrainPointMap) getOrDefault [_temp, [_temp + [getTerrainHeight _temp], []]];
+		_temp = GVAR(terrainPointMap) getOrDefault [_temp, [_temp + [getTerrainHeight _temp], [], [[],[]]], true];
 		_trenches append (_temp # 1);
 		_pointB = _temp # 0;
 		_temp = [_ttrKey#0 + GVAR(cellSize), _ttrKey#1];
-		_temp = GVAR(terrainPointMap) getOrDefault [_temp, [_temp + [getTerrainHeight _temp], []]];
+		_temp = GVAR(terrainPointMap) getOrDefault [_temp, [_temp + [getTerrainHeight _temp], [], [[],[]]], true];
 		_trenches append (_temp # 1);
 		_pointC = _temp # 0;
 	} else {
 		private _temp = [_ttrKey#0 + GVAR(cellSize), _ttrKey#1];
-		_temp = GVAR(terrainPointMap) getOrDefault [_temp, [_temp + [getTerrainHeight _temp], []]];
+		_temp = GVAR(terrainPointMap) getOrDefault [_temp, [_temp + [getTerrainHeight _temp], [], [[],[]]], true];
 		_trenches append (_temp # 1);
 		_pointA = _temp # 0;
 		_temp = [_ttrKey#0, _ttrKey#1 + GVAR(cellSize)];
-		_temp = GVAR(terrainPointMap) getOrDefault [_temp, [_temp + [getTerrainHeight _temp], []]];
+		_temp = GVAR(terrainPointMap) getOrDefault [_temp, [_temp + [getTerrainHeight _temp], [], [[],[]]], true];
 		_trenches append (_temp # 1);
 		_pointB = _temp # 0;
 		_temp = [_ttrKey#0 + GVAR(cellSize), _ttrKey#1 + GVAR(cellSize)];
-		_temp = GVAR(terrainPointMap) getOrDefault [_temp, [_temp + [getTerrainHeight _temp], []]];
+		_temp = GVAR(terrainPointMap) getOrDefault [_temp, [_temp + [getTerrainHeight _temp], [], [[],[]]], true];
 		_trenches append (_temp # 1);
 		_pointC = _temp # 0;
 	};
