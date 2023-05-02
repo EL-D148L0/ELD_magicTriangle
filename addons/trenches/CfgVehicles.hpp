@@ -1,16 +1,17 @@
 
 class CfgVehicles
 {
-	class Rocks_base_F;
+	class Static;
+	class Rocks_base_F : Static
+	{
+	class EventHandlers;
+	};
 	class Trench_base: Rocks_base_F
 	{
 		autocenter = false;
 
 		armor				= 5000;	/// just some protection against missiles, collisions and explosions
 		
-		
-		
-		class EventHandlers;
 		class EventHandlers: EventHandlers {
 			init = "diag_log 'trench init'; _this call (uiNamespace getVariable 'ELD_magicTriangle_scripts_fnc_initTrench');";
 			dragged3DEN = "_this call ELD_magicTriangle_scripts_fnc_3DENUpdateTrench;";
@@ -18,9 +19,6 @@ class CfgVehicles
 			registeredToWorld3DEN = "_this call ELD_magicTriangle_scripts_fnc_3DENReregisterTrench";
 			AttributesChanged3DEN = "[_this#0, true] call ELD_magicTriangle_scripts_fnc_3DENUpdateTrench;";
 		};
-
-		
-		
 	};
 	class Tronch_new_core: Trench_base
 	{
