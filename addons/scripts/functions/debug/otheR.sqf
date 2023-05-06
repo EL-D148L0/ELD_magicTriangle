@@ -21,6 +21,11 @@
 	_x setObjectTexture [0, "\x\ELD_magicTriangle\addons\triangles\data\uvcheck.paa"];
 } forEach flatten ((values ELD_magicTriangle_scripts_terrainPointMap) apply {_x # 2});
 
+
+{
+	_x setObjectTexture [0, surfaceTexture (getpos _x)];
+} forEach flatten ((values ELD_magicTriangle_scripts_terrainPointMap) apply {_x # 2});
+
 {
 	_x setPosASL ((getPosASL _x) vectorAdd [0,0,0.05*_foreachindex]);
 } forEach flatten ((values ELD_magicTriangle_scripts_terrainPointMap) apply {_x # 2});
@@ -29,7 +34,13 @@
 all3DENEntities # 6;
 
 
+aa = createSimpleObject ["magicTriangleCollider\collidergen4\c24,3.p3d", [0,0,0]];
 
+[4767.46,5537.34,8.00144]
+
+diag_codePerformance [{deleteVehicle (createSimpleObject ["magicTriangleCollider\collidergen4\c24,3.p3d", [4767.46,5537.34,8.00144]])}, 0, 1000];
+
+ELD_magicTriangle_scripts_colliderModelMap
 
 private _eventID = [
     "TerrainLib_terrainHeightChanged", {

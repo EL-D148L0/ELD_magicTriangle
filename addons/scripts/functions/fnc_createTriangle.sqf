@@ -34,20 +34,13 @@ private _triangleClass ="TriangleNoCollision24OM";
 _maxsize = 24;
 
 
-private _maxX = _pos1#0;
-private _maxY = _pos1#1;
-private _maxZ = _pos1#2;
-private _minX = _pos1#0;
-private _minY = _pos1#1;
-private _minZ = _pos1#2;
-{
-	_maxX = _maxX max _x#0;
-	_maxY = _maxY max _x#1;
-	_maxZ = _maxZ max _x#2;
-	_minX = _minX min _x#0;
-	_minY = _minY min _x#1;
-	_minZ = _minZ min _x#2;
-} forEach [_pos1, _pos2, _pos3];
+private _minX = (_pos1#0) min (_pos2#0) min (_pos3#0);
+private _minY = (_pos1#1) min (_pos2#1) min (_pos3#1);
+private _minZ = (_pos1#2) min (_pos2#2) min (_pos3#2);
+
+private _maxX = (_pos1#0) max (_pos2#0) max (_pos3#0);
+private _maxY = (_pos1#1) max (_pos2#1) max (_pos3#1);
+private _maxZ = (_pos1#2) max (_pos2#2) max (_pos3#2);
 
 private _scale = (_maxX - _minX) max (_maxY - _minY) max (_maxZ - _minZ);
 if (_scale > _maxsize) exitWith {
@@ -103,7 +96,7 @@ private _pos1Diff = (_triangleObject worldToModel ASLToAGL _pos1) vectorDiff (_t
 private _pos2Diff = (_triangleObject worldToModel ASLToAGL _pos2) vectorDiff (_triangleObject selectionPosition ["Corner_2_Pos", "Memory"]);
 private _pos3Diff = (_triangleObject worldToModel ASLToAGL _pos3) vectorDiff (_triangleObject selectionPosition ["Corner_3_Pos", "Memory"]);
 
-
+//TODO switch to animateSource instead of animate, wiki says it's more efficient.
 _triangleObject animate ["Corner_1_LR", _pos1Diff # 0, true];
 _triangleObject animate ["Corner_1_FB", _pos1Diff # 1, true];
 _triangleObject animate ["Corner_1_UD", _pos1Diff # 2, true];

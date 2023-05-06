@@ -42,3 +42,4 @@ PREP(TPAddTrench);
 PREP(TPGenerateFiller);
 PREP(TPRemoveTrench);
 PREP(TPUpdate);
+PREP(TPUpdateFillerHeight);

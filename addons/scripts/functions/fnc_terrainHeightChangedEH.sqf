@@ -39,8 +39,8 @@ private _tpList = [];
 
 
 if (!_adjustObjects) then {
-	[_tpList] call FUNC(TPGenerateFiller);
+	[_tpList] call FUNC(TPUpdateFillerHeight);
 } else {
-	[{_this call FUNC(TPGenerateFiller);}, [_tpList]] call CBA_fnc_execNextFrame;
+	[{_this call FUNC(TPUpdateFillerHeight);}, [_tpList]] call CBA_fnc_execNextFrame;
 };
 

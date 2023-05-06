@@ -3,7 +3,7 @@
  * Author: EL_D148L0
  * finds the closest triangle cover to the specified triangle
  *
- * Arguments:
+ * Arguments: //TODO fix this documentation
  * 0: angle in degrees, not NaN <NUMBER>
  * 1: round up? <BOOLEAN>
  *
