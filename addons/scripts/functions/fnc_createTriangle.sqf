@@ -92,9 +92,9 @@ _triangleObject setPosASL [_minX, _minY, _minZ];
 
 _triangleObject setvectordirandup [[0,1,0], [0,0,1]];
 
-private _pos1Diff = (_triangleObject worldToModel ASLToAGL _pos1) vectorDiff (_triangleObject selectionPosition ["Corner_1_Pos", "Memory"]);
-private _pos2Diff = (_triangleObject worldToModel ASLToAGL _pos2) vectorDiff (_triangleObject selectionPosition ["Corner_2_Pos", "Memory"]);
-private _pos3Diff = (_triangleObject worldToModel ASLToAGL _pos3) vectorDiff (_triangleObject selectionPosition ["Corner_3_Pos", "Memory"]);
+private _pos1Diff = (_triangleObject worldToModel ASLToAGL _pos1);
+private _pos2Diff = (_triangleObject worldToModel ASLToAGL _pos2);
+private _pos3Diff = (_triangleObject worldToModel ASLToAGL _pos3);
 
 //TODO switch to animateSource instead of animate, wiki says it's more efficient.
 _triangleObject animate ["Corner_1_LR", _pos1Diff # 0, true];

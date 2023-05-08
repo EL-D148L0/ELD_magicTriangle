@@ -3,7 +3,7 @@ list = [[0.0009438416449404352, 0.04343722427630684], [0.04332611957114163, 0.29
 
 for pos in list:
     bpy.data.objects["1"].data.uv_layers.active.data[0].uv.xy = pos
-    directory = "P:\\x\\ELD_magicTriangle\\addons\\triangles\\data\\gen0\\"
+    directory = "P:\\x\\ELD_magicTriangle\\addons\\triangles\\data\\gen1\\"
     name = ("cover_" + str(pos[0]) + "_" + str(pos[1])).replace(".", "P")
     name = directory + name + ".p3d"
     print(name)

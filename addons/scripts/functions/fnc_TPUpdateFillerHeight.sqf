@@ -107,20 +107,16 @@ diag_log _ttrList;
 		_triangleObject setPosASL [_minX, _minY, _minZ];
 
 		
-		/*TODO change triangle models so that the resting positions of the corners are at [0,0,0]. this will allow me to set absolute values witout figuring out the resting pos first. 
-		 *  	while doing that, also fix the missing material file in the model
-		 * 		this will also fix the need to look up the positions again here
+		/*TODO change triangle models to fix the missing material file in the model
+		 * 		
 		*/
-		_pos1 = _triangleObject modelToWorldWorld (_triangleObject selectionPosition ["Corner_1_Pos", "Memory"]);
-		_pos2 = _triangleObject modelToWorldWorld (_triangleObject selectionPosition ["Corner_2_Pos", "Memory"]);
-		_pos3 = _triangleObject modelToWorldWorld (_triangleObject selectionPosition ["Corner_3_Pos", "Memory"]);
 		//TODO switch to animateSource instead of animate, wiki says it's more efficient.
-		_triangleObject animate ["Corner_1_UD", _height1 - _pos1#2 + (_triangleObject animationPhase "Corner_1_UD"), true];
-		_triangleObject animate ["Corner_2_UD", _height2 - _pos2#2 + (_triangleObject animationPhase "Corner_2_UD"), true];
-		_triangleObject animate ["Corner_3_UD", _height3 - _pos3#2 + (_triangleObject animationPhase "Corner_3_UD"), true];
+		_triangleObject animate ["Corner_1_UD", _height1 - _minZ, true];
+		_triangleObject animate ["Corner_2_UD", _height2 - _minZ, true];
+		_triangleObject animate ["Corner_3_UD", _height3 - _minZ, true];
 
 		
-		private _colliders = [_pos1, _pos2, _pos3] call FUNC(createTriangleCollider);
+		private _colliders = [_pos1New, _pos2New, _pos3New] call FUNC(createTriangleCollider);
 		{
 			deleteVehicle _x;
 		} foreach (_triangleObject getVariable "colliders");
