@@ -8,11 +8,11 @@
  * 
  *
  * Return Value:
- * TP that should get the TTR around them updated.  //TODO CHECK IF THIS IS OUTDATED
+ * nothing
  *		
  *
  * Example:
- * [[1624,5328], [1628,5328]] call ELD_magicTriangle_scripts_fnc_TPUpdate;
+ * [[[1624,5328], [1628,5328]]] call ELD_magicTriangle_scripts_fnc_TPUpdate;
  *
  * Public: No
  */
