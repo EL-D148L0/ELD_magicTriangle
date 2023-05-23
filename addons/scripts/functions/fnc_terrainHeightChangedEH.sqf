@@ -36,7 +36,7 @@ private _tpList = [];
 	};
 } forEach _positionsAndHeights;
 
-
+//todo fix covers that are covering unaffected terrain cells but that get moved up/down through adjustObjects
 
 if (!_adjustObjects) then {
 	[_tpList] call FUNC(TPUpdateFillerHeight);

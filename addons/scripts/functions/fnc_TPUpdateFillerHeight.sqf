@@ -27,7 +27,8 @@ params ["_tpList"];
 
 diag_log _tpList;
 
-diag_log ((str (systemTime # 6)) + " TPUpdateFillerHeight start, " + (count _tpList) + "entries in TPList");
+diag_log ((str (systemTime # 6)) + " TPUpdateFillerHeight start, " + (str count _tpList) + " entries in TPList");
+private _start = diag_tickTime;
 
 private _ttrList = [_tpList] call FUNC(getTerrainTrianglesFromLoweredPoints);
 
@@ -131,3 +132,5 @@ diag_log _ttrList;
 	
 } forEach _ttrList;
 
+private _stop = diag_tickTime;
+diag_log format ["TPUpdateFillerHeight finished in %1 seconds",_stop - _start];
