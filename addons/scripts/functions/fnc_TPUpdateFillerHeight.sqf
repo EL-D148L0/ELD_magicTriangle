@@ -22,6 +22,7 @@
 
 
 //TODO this function hangs for 2-4 seconds if supplied with invalid data
+//TODO check if this is still a valid TODO
 params ["_tpList"];
 
 diag_log _tpList;

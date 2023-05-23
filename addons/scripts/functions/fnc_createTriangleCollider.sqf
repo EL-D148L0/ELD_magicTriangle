@@ -25,16 +25,7 @@
 //this procedure sorts the points so the object doesn't get turned inside out
 
 
-params ["_pos1", "_pos2", "_pos3"];
-
-private _posAVG = ((_pos1) vectorAdd ((_pos2) vectorAdd (_pos3))) vectorMultiply (1/3);
-
-
-
-([[_pos1, _pos2, _pos3], [_posAVG], {
-	private _diff = _x vectorDiff _input0;
-	_diff # 1 atan2 _diff # 0
-}, "DESCEND"] call BIS_fnc_sortBy) params ["_pos1", "_pos2", "_pos3"];
+(_this call FUNC(sortTriangleCorners)) params ["_pos1", "_pos2", "_pos3"];
 
 
 

@@ -2,7 +2,6 @@
 /*
  * Author: EL_D148L0
  * finds terrain points that need to be lowered for the passed object to fit into the hole
- * TODO find out of this returns 2d or 3d positions
  *
  * Arguments:
  * 0: trench object <OBJECT>
@@ -10,7 +9,7 @@
  *		how much padding is used. do not use this parameter externally.
  *
  * Return Value:
- * array of positions of points to be lowered in format Position2d <ARRAY>
+ * array of positions of points to be lowered in format Position3d, z is 0 <ARRAY>
  *
  * Example:
  * [_tronch1] call ELD_magicTriangle_scripts_fnc_makeSingleHole;

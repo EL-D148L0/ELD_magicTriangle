@@ -33,4 +33,4 @@ private _posAVG = ((_pos1) vectorAdd ((_pos2) vectorAdd (_pos3))) vectorMultiply
 	_diff # 1 atan2 _diff # 0
 }, "DESCEND"] call BIS_fnc_sortBy)
 
-//TODO use this function
+//TODO see if all usages are necessary

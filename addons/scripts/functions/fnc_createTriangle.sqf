@@ -7,7 +7,7 @@
  * 0: Position of corner in format PositionASL <ARRAY>
  * 1: Position of corner in format PositionASL <ARRAY>
  * 2: Position of corner in format PositionASL <ARRAY>
- * 3: which texture and material to use <NUMBER> (optional, default 1) //TODO change the default
+ * 3: which texture and material to use <NUMBER> (optional, default 1)
  * 		0: ground texture at the center point and zemlia.rvmat
  * 		1: random debug color
  * 		2: default triangle object

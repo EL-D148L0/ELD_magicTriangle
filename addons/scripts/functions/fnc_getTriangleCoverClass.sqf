@@ -1,17 +1,19 @@
 #include "script_component.hpp"
 /*
  * Author: EL_D148L0
- * finds the closest triangle cover to the specified triangle
+ * finds the closest triangle cover to the specified triangle, providing the least UV distortion.
+ * 3 points (A,B,C) are passed. ABC are in clockwise order, AC is the longest side of the triangle.
  *
- * Arguments: //TODO fix this documentation
- * 0: angle in degrees, not NaN <NUMBER>
- * 1: round up? <BOOLEAN>
+ * Arguments:
+ * 0: positionASL of point A <ARRAY>
+ * 1: positionASL of point B <ARRAY>
+ * 2: positionASL of point C <ARRAY>
  *
  * Return Value:
- * triangle collider model path <STRING>
+ * triangle cover class name <STRING>
  *
  * Example:
- * [3, true] call ELD_magicTriangle_scripts_fnc_getTriangleCoverClass;
+ * [_a, _b, _c] call ELD_magicTriangle_scripts_fnc_getTriangleCoverClass;
  *
  * Public: No
  */

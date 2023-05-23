@@ -18,7 +18,7 @@ private _eventID = [
     "TerrainLib_terrainHeightChanged", FUNC(terrainHeightChangedEH)
 ] call CBA_fnc_addEventHandler;
 
-GVAR(hideTerrainMods) = true; //TODO save/load this value from missionProfileNamespace
+GVAR(hideTerrainMods) = true; //TODO save/load this value from missionProfileNamespace... is this really necessary?
 if (!is3DEN) then {
 	GVAR(hideTerrainMods) = false;
 };
