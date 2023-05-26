@@ -7,6 +7,7 @@
  * Arguments:
  *	0: array of positions in format position2d or 3d <ARRAY>
  * 		lowered terrain points
+ *  1: whether to add the northeast triangle that does not touch the TP, used in update Height <BOOLEAN> (optional, default false) 
  * 
  *
  * Return Value:
@@ -25,7 +26,7 @@
 
 
 
-params ["_positions"];
+params ["_positions", ["_ttrForAdjustHeight", false]];
 
 
 
@@ -38,6 +39,9 @@ private _out = [];
 {
 	
 	_out pushbackunique [_x # 0, _x#1, 0];
+	if (_ttrForAdjustHeight) then {
+		_out pushbackunique [_x # 0, _x#1, 1];
+	};
 	private _west = _x vectorAdd (_directions # 4);
 	_out pushbackunique [_west # 0, _west#1, 0];
 	_out pushbackunique [_west # 0, _west#1, 1];

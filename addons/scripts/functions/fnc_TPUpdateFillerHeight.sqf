@@ -30,7 +30,7 @@ diag_log _tpList;
 diag_log ((str (systemTime # 6)) + " TPUpdateFillerHeight start, " + (str count _tpList) + " entries in TPList");
 private _start = diag_tickTime;
 
-private _ttrList = [_tpList] call FUNC(getTerrainTrianglesFromLoweredPoints);
+private _ttrList = [_tpList, true] call FUNC(getTerrainTrianglesFromLoweredPoints);
 
 
 diag_log _ttrList;
