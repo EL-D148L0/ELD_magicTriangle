@@ -1,7 +1,7 @@
 releases/*
 build_keys/*
 keys/*
-.hemtt/local
+#.hemtt/local
 /a3/
 /x/
 CBA_A3/*
@@ -13,3 +13,4 @@ CBA_A3/*
 *.rtm
 *.ogg
 *.wss
+.hemttout/*

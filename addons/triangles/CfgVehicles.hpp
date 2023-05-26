@@ -28,63 +28,63 @@ class CfgVehicles
 		class AnimationSources {
 			class Corner_1_UD_source
 			{
-				source = user; // "user" = custom source = not controlled by some engine value
+				source = "user"; // "user" = custom source = not controlled by some engine value
 				initPhase = 0; // Initial value of animations based on this source
 				animPeriod = 1; // Coefficient for duration of change of this animation
 				sound = "GenericDoorsSound"; /// Selects sound class from CfgAnimationSourceSounds that is going to be used for sounds of doors
 			};
 			class Corner_1_LR_source
 			{
-				source = user; // "user" = custom source = not controlled by some engine value
+				source = "user"; // "user" = custom source = not controlled by some engine value
 				initPhase = 0; // Initial value of animations based on this source
 				animPeriod = 1; // Coefficient for duration of change of this animation
 				sound = "GenericDoorsSound"; /// Selects sound class from CfgAnimationSourceSounds that is going to be used for sounds of doors
 			};
 			class Corner_1_FB_source
 			{
-				source = user; // "user" = custom source = not controlled by some engine value
+				source = "user"; // "user" = custom source = not controlled by some engine value
 				initPhase = 0; // Initial value of animations based on this source
 				animPeriod = 1; // Coefficient for duration of change of this animation
 				sound = "GenericDoorsSound"; /// Selects sound class from CfgAnimationSourceSounds that is going to be used for sounds of doors
 			};
 			class Corner_2_UD_source
 			{
-				source = user; // "user" = custom source = not controlled by some engine value
+				source = "user"; // "user" = custom source = not controlled by some engine value
 				initPhase = 0; // Initial value of animations based on this source
 				animPeriod = 1; // Coefficient for duration of change of this animation
 				sound = "GenericDoorsSound"; /// Selects sound class from CfgAnimationSourceSounds that is going to be used for sounds of doors
 			};
 			class Corner_2_LR_source
 			{
-				source = user; // "user" = custom source = not controlled by some engine value
+				source = "user"; // "user" = custom source = not controlled by some engine value
 				initPhase = 0; // Initial value of animations based on this source
 				animPeriod = 1; // Coefficient for duration of change of this animation
 				sound = "GenericDoorsSound"; /// Selects sound class from CfgAnimationSourceSounds that is going to be used for sounds of doors
 			};
 			class Corner_2_FB_source
 			{
-				source = user; // "user" = custom source = not controlled by some engine value
+				source = "user"; // "user" = custom source = not controlled by some engine value
 				initPhase = 0; // Initial value of animations based on this source
 				animPeriod = 1; // Coefficient for duration of change of this animation
 				sound = "GenericDoorsSound"; /// Selects sound class from CfgAnimationSourceSounds that is going to be used for sounds of doors
 			};
 			class Corner_3_UD_source
 			{
-				source = user; // "user" = custom source = not controlled by some engine value
+				source = "user"; // "user" = custom source = not controlled by some engine value
 				initPhase = 0; // Initial value of animations based on this source
 				animPeriod = 1; // Coefficient for duration of change of this animation
 				sound = "GenericDoorsSound"; /// Selects sound class from CfgAnimationSourceSounds that is going to be used for sounds of doors
 			};
 			class Corner_3_LR_source
 			{
-				source = user; // "user" = custom source = not controlled by some engine value
+				source = "user"; // "user" = custom source = not controlled by some engine value
 				initPhase = 0; // Initial value of animations based on this source
 				animPeriod = 1; // Coefficient for duration of change of this animation
 				sound = "GenericDoorsSound"; /// Selects sound class from CfgAnimationSourceSounds that is going to be used for sounds of doors
 			};
 			class Corner_3_LR_source_FB_source
 			{
-				source = user; // "user" = custom source = not controlled by some engine value
+				source = "user"; // "user" = custom source = not controlled by some engine value
 				initPhase = 0; // Initial value of animations based on this source
 				animPeriod = 1; // Coefficient for duration of change of this animation
 				sound = "GenericDoorsSound"; /// Selects sound class from CfgAnimationSourceSounds that is going to be used for sounds of doors

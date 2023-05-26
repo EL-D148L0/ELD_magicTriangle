@@ -1,0 +1,17 @@
+name = "ELD Magic Triangle"
+mainprefix = "x"
+prefix = "ELD_magicTriangle"
+
+[properties]
+author = "EL_D148L0"
+
+[files]
+include = [
+    "mod.cpp",
+    "logo.paa",
+    "LICENSE",
+    "README.md"
+]
+
+
+

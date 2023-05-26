@@ -1,4 +1,6 @@
 
+#include "basicDefines_A3.hpp"
+
 class CfgVehicles
 {
 	class Static;
