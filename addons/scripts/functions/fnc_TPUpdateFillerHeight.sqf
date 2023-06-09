@@ -107,6 +107,8 @@ diag_log _ttrList;
 		private _maxZ = (_pos1New#2) max (_pos2New#2) max (_pos3New#2);
 		
 		private _scale = (_maxX - _minX) max (_maxY - _minY) max (_maxZ - _minZ);
+
+		//TODO make differently scaled models first
 		//TODO if scale is larger than current model, switch out the model. take care that this doesn't fuck up the loop.
 
 		_triangleObject setPosASL [_minX, _minY, _minZ];
